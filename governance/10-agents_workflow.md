@@ -71,6 +71,47 @@ Implementor MUST NOT:
 
 ---
 
+# Governance Lanes
+
+This workflow has two execution/governance lanes:
+
+- `lightweight`
+- `formal`
+
+## `lightweight` lane
+
+Use `lightweight` when:
+- the work is already covered by the active Product Owner and Architect artifacts
+- public `ops` grammar and externally visible behavior are unchanged
+- secret model and protected-host policy are unchanged
+- destructive semantics are unchanged
+- milestone closure is not being claimed
+
+Typical `lightweight` examples:
+- routine implementation of an approved contract
+- doc sync or clarification that does not change authority boundaries
+- non-controversial tests for already-approved behavior
+- internal refactor inside an already-approved boundary
+
+## `formal` lane
+
+Use `formal` when any of the following are true:
+- protected-host mutable work
+- destructive work or destructive-approval semantics
+- secret-handling or secret-delivery model changes
+- architecture or implementor-contract changes
+- public `ops` contract changes
+- milestone or closure decisions
+
+Typical `formal` examples:
+- takeover-readiness slices
+- recreate/destructive slices
+- secret-delivery changes
+- contract amendments
+- milestone closure review
+
+---
+
 # Artifact Ownership
 
 `product-spec.md`
@@ -153,24 +194,28 @@ Optional when relevant:
 
 # Required Handoff Schema
 
-All inter-role handoffs MUST include:
+All inter-role handoffs MUST include at minimum:
 - `To`
 - `Type` (`proposal` | `decision` | `approval_request` | `status`)
 - `Scope`
+- `Decision requested` (or `none`)
+- `Required evidence refs`
+- `Next actor`
+
+`formal` lane handoffs MUST also include:
 - `Slice status`
 - `Overall milestone/refactor status`
 - `Primary blocker status`
 - `What changed since last handoff`
-- `Decision requested` (or `none`)
-- `Required evidence refs`
 - `Out of scope`
-- `Next actor`
 
-If a mandatory field is missing, the receiving role SHOULD request clarification before proceeding.
+`lightweight` lane handoffs SHOULD include the additional `formal` fields when they materially improve safety or reduce ambiguity, but their omission is not by itself a blocker if the receiving role can act safely from the active authoritative artifacts.
 
-## Execution Warrant (Architect -> Implementor, required per slice)
+If a mandatory field for the selected lane is missing, the receiving role SHOULD request clarification before proceeding.
 
-Architect instructions to Implementor MUST include a fenced `Execution Warrant` block with:
+## Execution Warrant (Architect -> Implementor, required for mutable/destructive execution)
+
+Architect instructions to Implementor MUST include a fenced `Execution Warrant` block for `mutable` or `destructive` execution with:
 - `slice_id`
 - `commands_allowed` (exact command list)
 - `commands_forbidden`
@@ -192,6 +237,12 @@ Architect instructions to Implementor MUST include a fenced `Execution Warrant` 
 6. Implementor reconciles notes and continues execution.
 7. If an amendment changes goals, non-goals, success criteria, or governance invariants, Architect escalates to Product Owner.
 
+If the current Product Owner and Architect artifacts already cover the requested work and the slice remains in the `lightweight` lane:
+1. agree the proposal in chat
+2. obtain explicit approval
+3. implement directly against the existing authoritative artifacts
+4. record evidence and outcomes without creating extra amendment paperwork
+
 ---
 
 # Output Rules
@@ -200,7 +251,7 @@ Implementor output intended for another role MUST be raw Markdown inside fenced 
 
 Architect output intended for another role or for file application by the owner MUST be raw Markdown inside fenced code blocks.
 
-Every review or acceptance statement for a slice MUST explicitly distinguish:
+Every `formal` review or acceptance statement for a slice MUST explicitly distinguish:
 - slice status
 - overall milestone/refactor status
 
@@ -223,6 +274,8 @@ Implementor may escalate to Architect when:
 - package boundaries change
 - lifecycle/state invariants change
 - persistence semantics change
+
+Implementor SHOULD NOT escalate for a `lightweight` slice that is already fully covered by the active implementor-authoritative contracts unless a real ambiguity or contradiction is encountered.
 
 Architect may escalate to Product Owner when:
 - goals or non-goals change
