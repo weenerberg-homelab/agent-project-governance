@@ -5,13 +5,8 @@ Templates in this file are convenience wrappers.
 Authoritative governance and role rules live in:
 - `AGENTS.md`
 - `_docs/shared/governance/10-agents_workflow.md`
-- `_docs/shared/governance/20-development_iteration.md`
 
 If a template and a governance doc diverge, governance docs win.
-
-Default lane guidance:
-- use `lightweight` unless a `formal` trigger applies
-- use `formal` for protected-host mutable work, destructive work, secret-model changes, contract/architecture changes, and milestone closure
 
 All role prompts SHOULD require the first line of each handoff to include:
 - intended recipient (`To`)

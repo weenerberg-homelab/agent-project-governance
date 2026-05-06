@@ -24,37 +24,18 @@ Role authority, ownership, escalation boundaries, and handoff schema are defined
 6. Validate.
 7. Record the next slice.
 
-### Fast path for covered work
-If the active Product Owner and Architect artifacts already cover the requested work and no `formal` lane trigger is present:
-1. treat the slice as `lightweight`
-2. do not create extra amendment paperwork by default
-3. implement directly against the active authoritative artifacts after approval
-4. record evidence and results once
-
-Use the full `formal` path only when:
-- protected-host mutable work is involved
-- destructive work is involved
-- secret model or secret-delivery behavior changes
-- architecture/contracts change
-- milestone closure is being requested
-
 ### Mandatory vs Optional mapping
-For each `formal` slice, acceptance criteria MUST be split into:
+For each slice, acceptance criteria MUST be split into:
 - `mandatory` (blocking)
 - `optional` (non-blocking)
 
-Each mandatory criterion in a `formal` slice MUST map to:
+Each mandatory criterion MUST map to:
 - exact command
 - exact evidence artifact path
 - exact field/value checks
 
-For `lightweight` slices, acceptance MAY instead be captured as:
-- a concise checklist
-- explicit evidence refs
-- a small set of exact commands where needed
-
 ### Review status rule
-Every architect/reviewer acceptance statement for a `formal` refactor or migration slice SHOULD explicitly state:
+Every architect/reviewer acceptance statement for a refactor or migration slice SHOULD explicitly state:
 - slice status
 - overall milestone/refactor status
 
