@@ -7,6 +7,19 @@ Project-specific constraints and tool behavior belong in project overlays and sp
 
 ## Core principles
 
+### 0. Proportionality and useful progress
+Spend process and design effort in proportion to real consequence.
+
+Prefer:
+- the smallest technically coherent step that produces useful behaviour or evidence
+- reversible, operator-selectable deployment while a feature is being proven
+- strict review of delivered code without delaying harmless implementation
+
+Avoid:
+- treating private/local reversible work as formal production certification
+- introducing gates, reports, or abstractions without a concrete defect or risk they address
+- confusing caution with technical quality
+
 ### 1. Separation of concerns
 Design components so each has a clear responsibility and a narrow reason to change.
 
@@ -33,11 +46,12 @@ Avoid:
 - repeated logic that drifts over time
 - “copy and tweak” patterns that silently create forks of truth
 
-### 3. Best practice before quick fixes
-Default to the best-practice design that fits the real problem before accepting expedient local fixes.
+### 3. Clean solutions before incidental complexity
+Default to the simplest sound design that solves the real problem.
 
 Prefer:
-- solutions that improve long-term clarity, maintainability, and correctness
+- solutions that improve clarity, maintainability, and correctness without
+  preventing useful progress
 - root-cause fixes over surface patches
 - explicit tradeoff decisions when choosing a short-term workaround
 
@@ -54,8 +68,11 @@ Prefer:
 - explicit migration plans when contracts must change
 - compatibility layers only as a temporary bridge
 
-### 5. Fail closed on ambiguity
-When scope, targeting, approvals, or state are ambiguous, the governed path should stop and require clarification.
+### 5. Fail closed where consequence requires it
+When destructive targeting, security, irreversible state, or physical-control
+execution is ambiguous, stop and require clarification. For reversible local
+implementation uncertainty, make reasonable explicit assumptions, implement,
+and surface them for review.
 
 Prefer:
 - explicit validation before execution
@@ -70,6 +87,10 @@ Prefer:
 - explicit pass/fail criteria
 - review notes that point to evidence rather than re-explain it
 
+Evidence requirements must be proportional. Focused tests and observable
+runtime comparison are enough for reversible work; do not demand ceremonial
+artifacts without a concrete purpose.
+
 ### 7. Minimize hidden knowledge
 Normal operation should not depend on undocumented operator memory or implicit local context.
 
@@ -77,6 +98,17 @@ Prefer:
 - explicit runbooks, contracts, and evidence fields
 - predictable paths and conventions
 - documented assumptions and exceptions
+
+### 8. Status is not quality
+Deployment status and measured technical quality are different concepts.
+
+Prefer:
+- publish shadow/active/disabled status separately from model confidence or quality
+- judge a model or implementation by evidence, not by whether it has been enabled
+
+Avoid:
+- lowering a quality score because a feature is still operator-disabled
+- using administrative state as a substitute for technical assessment
 
 ## Application rule
 

@@ -4,18 +4,30 @@
 
 Define how Product Owner, Architect, and Implementor collaborate when evolving a spec.
 
-This workflow prevents architectural drift, reduces token usage, and keeps the spec authoritative.
+This workflow keeps design intent clear while allowing useful work to move
+quickly. Governance exists to improve outcomes, not to manufacture gates.
 
 Related generic design guidance:
 - `_docs/shared/governance/30-engineering_guidelines.md`
 
-## Human-in-the-loop collaboration (hard rule)
+## Human-in-the-loop collaboration and approval boundary
 
 All agent activities are performed in collaboration with the User.
 
-Agents must present proposals/plans in chat and wait for explicit approval before:
-- editing any files (specs, notes, or code)
-- running state-changing commands (deploys, installs, formatters, tests that write artifacts)
+Once the User has approved an outcome or directly requested implementation,
+agents may edit, validate, and commit coherent in-scope work without seeking
+new permission for each slice or file.
+
+Agents must request explicit approval before:
+- destructive operations or irreversible migrations
+- credential/security exposure
+- enabling new physical-control behaviour by default
+- removing a working operational fallback
+- deploying or executing consequential behaviour not already specifically authorised
+
+Building diagnostics, dashboards, tests, internal refactors, and
+operator-disabled/selectable control paths does not by itself require
+additional approval after the objective is approved.
 
 ---
 
@@ -45,11 +57,17 @@ Authority: architecture spec package (implementor input)
 
 Responsibilities:
 - Define architecture and technical invariants while satisfying product invariants.
+- Translate the desired operational outcome into the smallest coherent design
+  before introducing phases or abstractions.
+- Enable implementation of reversible work with concise constraints, then
+  review delivered code rigorously for concrete defects.
 - Accept or reject Proposed Spec Amendments.
 - Author the architecture spec package under `_docs/specs/<pack>/20-architect/to_implementor/`.
 - Optionally maintain a Product Owner-facing compliance summary under `_docs/specs/<pack>/10-product/to_architect/`.
 
 Architect MUST NOT:
+- use governance ritual as a substitute for technical judgment
+- impose staged gates, reports, or acceptance work without a concrete risk they reduce
 - Read implementor working notes unless amendments are explicitly forwarded.
 - Edit Product Owner-owned governance/workflow/product docs directly; propose changes via `_docs/specs/<pack>/20-architect/to_product/`.
 
@@ -61,7 +79,7 @@ Authority: implementation notes and code changes
 
 Responsibilities:
 - Review spec for execution gaps.
-- Produce structured feedback.
+- Report material gaps, decisions, failures, or evidence needed for review.
 - Implement only against the approved architecture spec package under `_docs/specs/<pack>/20-architect/to_implementor/`.
 
 Implementor MUST NOT:
@@ -151,34 +169,23 @@ Optional when relevant:
 
 ---
 
-# Required Handoff Schema
+# Handoffs
 
-All inter-role handoffs MUST include:
-- `To`
-- `Type` (`proposal` | `decision` | `approval_request` | `status`)
-- `Scope`
-- `Slice status`
-- `Overall milestone/refactor status`
-- `Primary blocker status`
-- `What changed since last handoff`
-- `Decision requested` (or `none`)
-- `Required evidence refs`
-- `Out of scope`
-- `Next actor`
+Inter-role handoffs should be short and useful. Include:
+- `To`, `Type`, and `Scope`
+- the material change, decision, or blocker
+- validation/evidence relevant to a claim
+- the requested next action, when any
 
-If a mandatory field is missing, the receiving role SHOULD request clarification before proceeding.
+Do not request clarification merely because administrative fields are absent
+when the required technical decision is clear.
 
-## Execution Warrant (Architect -> Implementor, required per slice)
+## High-Consequence Execution Controls
 
-Architect instructions to Implementor MUST include a fenced `Execution Warrant` block with:
-- `slice_id`
-- `commands_allowed` (exact command list)
-- `commands_forbidden`
-- `mutability_class` (`read-only` | `mutable` | `destructive`)
-- `stop_conditions`
-- `required_evidence` (field-level)
-- `optional_evidence`
-- `acceptance_decision_basis`
+An explicit execution warrant or detailed approval record is appropriate only
+for destructive, irreversible, security-sensitive, or actively actuating work
+without an immediate fallback. It is not required per ordinary implementation
+slice.
 
 ---
 
