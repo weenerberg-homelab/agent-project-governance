@@ -34,6 +34,59 @@ A project can be complex without being critical (HomeAssistant: complex codebase
 
 ---
 
+## Universal requirements
+
+These apply at every tier, regardless of complexity or criticality:
+
+- All projects must be under version control.
+- All projects must have an `AGENTS.md` (see tier-specific content requirements below).
+
+---
+
+## Cross-tier conventions
+
+These conventions apply wherever the relevant structure exists, regardless of tier.
+
+### Python tooling configuration
+
+`pyproject.toml` is the sole configuration file for all Python tooling. No separate `pytest.ini`, `.coveragerc`, `setup.cfg`, or per-tool dotfiles. All sections — `[tool.ruff]`, `[tool.mypy]`, `[tool.pytest.ini_options]`, `[tool.coverage.*]`, `[tool.bandit]` etc. — live in `pyproject.toml`.
+
+### Testing output paths
+
+All generated test and quality output goes under `testing/reports/` (always gitignored). Standard paths:
+
+| Artifact | Path |
+|---|---|
+| Coverage data file | `testing/reports/coverage/.coverage` |
+| Coverage HTML | `testing/reports/coverage/htmlcov/` |
+| Coverage XML | `testing/reports/coverage/coverage.xml` |
+| Lint / static analysis | `testing/reports/<tool>/` |
+| CI quality snapshots | `testing/reports/<stamp>/` |
+
+### `testing/` internal structure
+
+`testing/` is the unified testing area. It contains test code, infrastructure scripts, and generated output. Internal layout:
+
+```
+testing/
+├── conftest.py
+├── <domain>/               # one sub-folder per domain; mirrors src/ structure
+│   └── test_*.py
+├── smoke/                  # cross-domain wiring checks (exception to domain rule)
+├── tools/                  # quality scripts used by CI and local runs
+└── reports/                # gitignored; all generated output
+```
+
+Test types (unit, integration, slow, performance) are distinguished by **pytest markers**, not by directory structure. This keeps all tests for a domain co-located while still allowing `pytest -m "not slow"` or `pytest -m smoke`.
+
+At Tier 3 with few test files a flat layout inside `testing/` is acceptable. Domain sub-folders are required at Tier 4.
+
+### `_todos/` is gitignored
+
+`_todos/` contains local working material — agent reminders, analysis notes, deferred tasks. It is always gitignored; its contents are not committed to version control.
+
+---
+
 ## Tier 1 — Trivial
 
 **Characteristics:** No application code or a single script. Changes are infrequent and low-risk. A new agent or developer arriving here should be oriented in one paragraph.
@@ -41,7 +94,6 @@ A project can be complex without being critical (HomeAssistant: complex codebase
 ### Required
 - `AGENTS.md` — one paragraph: what this is, what it does, key files.
 - `.gitignore` — at minimum: secrets (`.env`), OS noise (`.DS_Store`).
-- Version control (`git init`).
 
 ### Required if secrets are present
 - `.env.example` — template for required environment variables; `.env` gitignored.
@@ -61,15 +113,17 @@ Promote to Tier 2 when: the project gains more than one meaningful script or ser
 ### Required
 - Everything from Tier 1.
 - `AGENTS.md` — layout table (path → what it is) and common operations. Still inline, not a pointer index.
-- `docs/specs/` or `docs/` — record non-obvious decisions and operational specs. Even one spec document beats zero when the project has external dependencies or a defined contract.
+- `_docs/specs/` or `_docs/` — record non-obvious decisions and operational specs. Even one spec document beats zero when the project has external dependencies or a defined contract. See `20-docs-layout.md` for the expected internal layout at each tier.
+- `_todos/` — deferred tasks, agent reminders, and working notes that are not authoritative documentation. Always gitignored (see cross-tier conventions). Typical subdirs: `analysis/` (investigation notes), `reports/` (generated snapshots). Files are named `ID_Description.md`.
 
 ### Required if Python code is present
-- `pyproject.toml` with `[tool.ruff]` for linting (or standalone `ruff.toml`).
+- `pyproject.toml` — sole configuration file for all Python tooling (see cross-tier conventions). At this tier: `[tool.ruff]` at minimum.
 - `.gitignore` entries for Python caches: `__pycache__/`, `.mypy_cache/`, `.ruff_cache/`, `.benchmarks/`.
 
 ### Optional
 - `requirements-static.txt` — if static analysis is useful locally.
 - `.vscode/extensions.json` — if the repo is opened in VS Code regularly.
+- `testing/` — add when a custom runner script or shared tooling exists. Contains `run_tests` (runner), `tools/` (helper scripts), `reports/` (generated output, gitignored).
 
 ### Explicitly out of scope
 Formal testing strategy, CI workflows, pyrightconfig, METRICS.md, governance index.
@@ -86,12 +140,12 @@ Promote to Tier 3 when: the project has a non-trivial test suite, external consu
 ### Required
 - Everything from Tier 2.
 - `AGENTS.md` — front door with "Where to look" section pointing to key docs. Inline rules kept to essential constraints; detailed rules live in docs files.
-- `pyproject.toml` — consolidated tool config: `[tool.ruff]`, `[tool.mypy]`.
-- `pytest.ini` — with `--strict-config --strict-markers` and explicit marker taxonomy.
+- `pyproject.toml` — consolidated tool config: `[tool.ruff]`, `[tool.mypy]`, `[tool.pytest.ini_options]` with `--strict-config --strict-markers` and explicit marker taxonomy, `[tool.coverage.*]` with standard output paths (see cross-tier conventions).
 - `requirements-dev.txt` — test and dev dependencies (pytest, coverage).
 - `requirements-static.txt` — static analysis tools (ruff, mypy, bandit).
 - CI workflow — at minimum: lint gate + test gate on push/PR.
 - `.vscode/` — `extensions.json` and `settings.json` committed.
+- `testing/` — unified testing area (see cross-tier conventions). At this tier a flat layout is acceptable; domain sub-folders recommended once test count grows beyond ~20 files.
 
 ### Required if type checking is active
 - `pyrightconfig.json` — LSP type coverage, scoped to source tree.
@@ -99,7 +153,7 @@ Promote to Tier 3 when: the project has a non-trivial test suite, external consu
 ### Optional
 - `METRICS.md` — document quality dimensions and how to run them.
 - `launch.json` — VS Code debug configurations.
-- Architecture docs under `docs/architecture/`.
+- Architecture docs under `_docs/architecture/`.
 
 ### Explicitly out of scope
 Formal spec system with Architect/Implementor roles, arch-guards, supply-chain scanning, governance index. These belong in Tier 4.
@@ -116,20 +170,22 @@ Promote to Tier 4 when: the codebase has multiple agents working on it, architec
 ### Required
 - Everything from Tier 3.
 - `AGENTS.md` — pure front-door pointer index. No inline rules. Every rule has a home in a docs file; AGENTS.md only lists where to look.
-- `docs/rules/` or equivalent — collected agent constraints (testing standards, definition of done, CI guardrails, operational constraints).
-- `docs/specs/` — formal spec system with Architect/Implementor authority model.
-- `docs/specs/invariants.md` — explicit system invariants (`INV-*` catalog).
-- `docs/testing/testing-strategy.md` — behavior contracts that must remain stable under refactor.
-- `docs/governance/INDEX.md` — precedence-ordered index of all authoritative documents.
+- `_docs/rules/` or equivalent — collected agent constraints (testing standards, definition of done, CI guardrails, operational constraints). This requirement is satisfied if a workspace-level `_shared/agent-rules/` directory covers the project's constraints and `AGENTS.md` points to it explicitly.
+- `_docs/specs/` — formal spec system with Architect/Implementor authority model.
+- `_docs/invariants.md` — explicit system invariants (`INV-*` catalog).
+- `_docs/testing/testing-strategy.md` — behavior contracts that must remain stable under refactor.
+- `_docs/governance/INDEX.md` — precedence-ordered index of all authoritative documents.
 - `METRICS.md` — full quality dimensions documentation.
 - CI — comprehensive pipeline: lint, type check, security scan, arch guards, supply chain, build metadata verification, workspace integration smoke.
 - `requirements-static.txt` — separate from `requirements-dev.txt`; includes bandit, pip-audit, pyright, vulture.
 
+### Required (in addition to Tier 3)
+- `testing/` — domain sub-folders required at this tier (see cross-tier conventions). Flat layout is not acceptable for a Tier 4 codebase.
+
 ### Recommended
 - `pyrightconfig.json` with strict paths matching mypy per-module strict overrides.
-- `.coveragerc` — explicit coverage configuration.
-- Architecture docs (`docs/architecture/`) covering system context, runtime flows, state transitions.
-- Operations docs (`docs/operations/`) covering failure modes and rollout policy.
+- Architecture docs (`_docs/architecture/`) covering system context, runtime flows, state transitions.
+- Operations docs (`_docs/operations/`) covering failure modes and rollout policy.
 
 ### Notes on the pointer-index AGENTS.md
 The front-door pattern matters most at this tier because multiple agents arrive with different context and different tasks. A wall of rules slows orientation and creates maintenance drift. A pointer index stays stable even as individual rule files evolve.
@@ -194,38 +250,20 @@ This is distinct from both the server-level `.codex/AGENTS.md` (global rules app
 The full hierarchy:
 
 ```
-.codex/AGENTS.md                   Server-wide rules (all workspaces)
-<workspace>/AGENTS.md              Workspace orientation (layout, relations, ops)
-<workspace>/<project>/AGENTS.md    Project front door (Tier 2–5 pointer index or inline)
-<project>/docs/rules/              Detailed project rules (Tier 3–5)
-_docs/shared/agent-rules/          Cross-workspace shared rules (referenced by pointer)
+.codex/AGENTS.md                        Server-wide rules (all workspaces)
+<workspace>/AGENTS.md                   Workspace orientation (layout, relations, ops)
+<workspace>/_docs/governance/           Workspace-specific governance docs (see below)
+<workspace>/<project>/AGENTS.md         Project front door (Tier 2–5 pointer index or inline)
+<project>/_docs/rules/                  Detailed project rules (Tier 3–5)
+_shared/agent-rules/                    Cross-workspace shared rules (referenced by pointer)
 ```
 
----
+### Workspace project inventory
 
-## Projects in this ecosystem — tier assignments
+Tier assignments for the projects in a workspace are workspace-specific and do not belong in this shared document. Each workspace that adopts this framework must maintain its own inventory at:
 
-| Project | Tier | Rationale |
-|---|---|---|
-| `scripts/` (docker root) | 1 | Single diagnostic shell script |
-| `vantage_monitor/` | 1 | Two compose services, one config file, no code |
-| `photos/shared/immich_common` | 1 → 2 | One Python file today; shared dependency — promote when it grows |
-| `backups/` | 2 | Compose + shell scripts + small Python exporter; no tests |
-| `homeautomation/` (workspace) | 2 | Workspace-level AGENTS.md and compose orchestration only |
-| `photos/` (umbrella) | 2 | Orchestration layer; Makefile targets; no application code |
-| `photos/immich-smart-albums` | 3 | Real Python service with tests and CI; governance depth still shallow |
-| `photos/media_ingest` | 4 | Spec system, arch guards, supply-chain, comprehensive CI, full governance |
-| `homeautomation/homeassistant` | 4 | Most mature; shared agent-rules; full quality pipeline |
-| `stugan-iac` | 5 | IaC mutations affect real infrastructure; credential management; multi-role governance; execution evidence |
+```
+<workspace>/_docs/governance/project-inventory.md
+```
 
-### Why `photos/media_ingest` is Tier 4, not Tier 5
-The photos library is sensitive but recoverable. A bad deployment does not destroy infrastructure or expose credentials. Failures are expensive and painful but reversible. Execution governance is not warranted.
-
-### Why `homeautomation/homeassistant` is Tier 4, not Tier 5
-HomeAssistant controls physical devices and takes a long time to rebuild, but failures don't cause irreversible harm. The codebase is the most complex in the ecosystem, but complexity alone does not warrant Tier 5.
-
-### Why `backups/` is Tier 2, not Tier 1
-It has operational scripts with non-trivial behaviour (Kopia bootstrap phases, Prometheus exporter), a spec in `docs/specs/`, and a dependency on an external backup system where errors are hard to reverse. The spec and AGENTS.md are appropriate overhead.
-
-### Why `immich-smart-albums` is Tier 3, not Tier 4
-Real tests and CI, but no formal spec system, invariant catalog, arch guards, or governance index. The domain logic is contained enough that informal governance is adequate for now. Promote to Tier 4 if a phased architectural refactor becomes necessary.
+That file contains the assignments table and the rationale for non-obvious tier choices. It references this document for tier definitions. This separation keeps the shared framework reusable across workspaces without embedding workspace-specific content here.
