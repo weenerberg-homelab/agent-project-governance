@@ -81,9 +81,25 @@ Test types (unit, integration, slow, performance) are distinguished by **pytest 
 
 At Tier 3 with few test files a flat layout inside `testing/` is acceptable. Domain sub-folders are required at Tier 4.
 
-### `_todos/` is gitignored
+### `_todos/` — task tracking
 
-`_todos/` contains local working material — agent reminders, analysis notes, deferred tasks. It is always gitignored; its contents are not committed to version control.
+Required at Tier 2 and above. **Committed** to version control.
+
+Structure:
+```
+_todos/
+├── ID_Description.md   # open items (flat, one file per task)
+└── _done/              # completed items archived here
+    └── ID_Description.md
+```
+
+An open item either:
+- Gets resolved directly → move to `_done/`
+- Grows complex enough to need a spec → promote to `_docs/specs/`
+
+Files are named `ID_Description.md` (e.g. `DOCS-001_Testing_Strategy.md`).
+
+This replaces GitHub Issues for agent-assisted work. Agents read open items directly from the working tree without needing external tooling.
 
 ---
 
@@ -114,7 +130,7 @@ Promote to Tier 2 when: the project gains more than one meaningful script or ser
 - Everything from Tier 1.
 - `AGENTS.md` — layout table (path → what it is) and common operations. Still inline, not a pointer index.
 - `_docs/specs/` or `_docs/` — record non-obvious decisions and operational specs. Even one spec document beats zero when the project has external dependencies or a defined contract. See `20-docs-layout.md` for the expected internal layout at each tier.
-- `_todos/` — deferred tasks, agent reminders, and working notes that are not authoritative documentation. Always gitignored (see cross-tier conventions). Typical subdirs: `analysis/` (investigation notes), `reports/` (generated snapshots). Files are named `ID_Description.md`.
+- `_todos/` — open task tracking (see cross-tier conventions). Files named `ID_Description.md`; completed items in `_done/`.
 
 ### Required if Python code is present
 - `pyproject.toml` — sole configuration file for all Python tooling (see cross-tier conventions). At this tier: `[tool.ruff]` at minimum.

@@ -14,7 +14,7 @@ this document governs *what goes inside them*.
 - `_docs/INDEX.md` is required at Tier 3 and above. At Tier 2 it is recommended once more than one spec exists.
 - Spec packs live under `_docs/specs/`. Each pack is a directory named `YYYY-MM-DD_<slug>/`.
 - Completed or superseded packs move to `_docs/specs/done/` rather than being deleted.
-- Do not put working notes, scratch files, or agent-session output in `_docs/`. Those belong in `_todos/`.
+- Do not put working notes, scratch files, or agent-session output in `_docs/`. Those belong in `_todos/` (open items) or `_todos/_done/` (completed).
 
 ---
 
