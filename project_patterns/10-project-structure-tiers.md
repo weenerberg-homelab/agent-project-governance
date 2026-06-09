@@ -47,6 +47,10 @@ These apply at every tier, regardless of complexity or criticality:
 
 These conventions apply wherever the relevant structure exists, regardless of tier.
 
+### Documentation directory naming
+
+The project documentation root is always `_docs/` — never `docs/`. See `20-docs-layout.md` for the required internal layout at each tier.
+
 ### Python tooling configuration
 
 `pyproject.toml` is the sole configuration file for all Python tooling. No separate `pytest.ini`, `.coveragerc`, `setup.cfg`, or per-tool dotfiles. All sections — `[tool.ruff]`, `[tool.mypy]`, `[tool.pytest.ini_options]`, `[tool.coverage.*]`, `[tool.bandit]` etc. — live in `pyproject.toml`.
