@@ -87,8 +87,9 @@ _docs/
 │   └── agent-constraints.md
 ├── testing/                          # behavior contracts, coverage map
 │   └── testing-strategy.md
-├── governance/                       # precedence-ordered governance index
-│   └── INDEX.md
+├── governance/                       # precedence-ordered governance index + workspace inventory
+│   ├── INDEX.md                      # Tier 4+ required: precedence-ordered doc index
+│   └── project-inventory.md          # all tiers: repo map, remote URLs, tier assignments
 └── operations/                       # failure modes, rollout policy
     └── failure-modes.md
 ```

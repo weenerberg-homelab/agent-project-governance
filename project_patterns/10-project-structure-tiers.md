@@ -266,4 +266,11 @@ Tier assignments for the projects in a workspace are workspace-specific and do n
 <workspace>/_docs/governance/project-inventory.md
 ```
 
-That file contains the assignments table and the rationale for non-obvious tier choices. It references this document for tier definitions. This separation keeps the shared framework reusable across workspaces without embedding workspace-specific content here.
+That file must contain:
+
+1. **Repository map** — a tree diagram showing all projects in the workspace, their nesting depth, and which are independent git repos vs. inline content.
+2. **Remote URL table** — one row per independent git repo: local path and remote URL.
+3. **Tier assignments table** — columns: project path, tier, one-line rationale.
+4. **Rationale notes** — prose explanation for any non-obvious tier choice.
+
+It references this document for tier definitions. This separation keeps the shared framework reusable across workspaces without embedding workspace-specific content here.
