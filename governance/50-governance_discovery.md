@@ -13,6 +13,12 @@ Purpose: establish the minimum governance needed to ship safely and avoid proces
 ### Governance decisions to make early
 - collaboration model and approval rule
 - change-control path
+- gate-decision authority and the separation of author status, reviewer
+  disposition, and gate decision
+- whether path-level self-assessments are needed and how reviewer independence
+  is protected
+- handoff persistence and delivery-state semantics when the User vets and
+  forwards agent artifacts
 - secret-handling ownership
 - environment classes and approval thresholds
 - release semantics

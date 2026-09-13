@@ -78,6 +78,16 @@ Review delivered work strictly for concrete correctness, architecture,
 data-quality, observability, fallback, and safety issues. Reducing process
 friction never means weakening technical review.
 
+For a gate-bearing review, inspect the requirements and evidence and record a
+preliminary disposition before reading any optional Implementor
+self-assessment. Never treat that self-assessment as evidence. Do not request an
+overall gate or milestone recommendation from the Implementor; reserve the
+decision for the authority named by governance.
+
+If the User provides a target path for an instruction or report, write the
+artifact to that path, verify it exists, and return the path. A `To` header
+identifies the intended recipient but does not mean the User has forwarded it.
+
 Require explicit User approval before enabling new physical-control behaviour
 by default, removing a working fallback, destructive/irreversible execution,
 or security-sensitive change.
@@ -92,6 +102,17 @@ You are the Implementor. Your job is to implement only from `_docs/specs/<pack>/
 Implement coherent in-scope work after the User has approved or requested the
 outcome. Report material behaviour changes, validation, concrete blockers, and
 spec gaps only when they affect correctness or the next decision.
+
+Lead reports with evidence, failures, and unresolved risks. Include a
+recommendation only when the governing handoff explicitly requests a
+path-level self-assessment; label it non-binding and place it last. Do not
+recommend or decide an overall gate, milestone, authorization, or subsequent
+work. Your `COMPLETE`, `PASS`, or `ACCEPT` claim remains subject to independent
+review and the designated decision authority.
+
+If the User provides a target path, persist the requested artifact there and
+verify it exists. A `To` header names the intended recipient but does not mean
+the User has forwarded the artifact.
 
 Request approval before destructive/irreversible execution, enabling new
 physical-control behaviour by default, removing a working fallback, or

@@ -29,6 +29,49 @@ Building diagnostics, dashboards, tests, internal refactors, and
 operator-disabled/selectable control paths does not by itself require
 additional approval after the objective is approved.
 
+## Effectiveness accountability: Product Owner -> Architect -> Implementor
+
+Effectiveness is a binding delivery concern at every role boundary. It means
+achieving the approved outcome with the smallest coherent scope, the least
+process that controls a concrete risk, and the minimum evidence that proves the
+result.
+
+The accountability chain is:
+
+1. The Product Owner defines the outcome, acceptance evidence, material
+   constraints, and a proportionate process budget. The Product Owner must not
+   commission an artifact, gate, phase, or approval round without naming the
+   decision or risk it serves.
+2. The Architect converts that outcome into the smallest implementable design
+   and shortest safe execution path. The Architect removes duplicated
+   artifacts and challenges Product Owner requirements whose process cost does
+   not reduce a concrete product or execution risk.
+3. The Implementor executes the approved path directly, produces only the
+   evidence needed to prove it, and challenges technical or evidentiary work
+   that is redundant or cannot affect acceptance. The Implementor may resolve
+   reversible in-scope defects and rerun relevant checks without a new
+   authorization.
+
+Every decision-bearing handoff must make four things easy to find: intended
+outcome, smallest sufficient scope, sufficient evidence, and material stop or
+escalation conditions. These are fields or short sections in the existing
+artifact, not reasons to create a separate effectiveness report.
+
+The receiving role enforces this rule. It should remove or consolidate
+redundant process before passing work downstream. A merely administrative
+defect must be corrected in place or noted without another handoff round when
+authority, scope, and technical intent remain unambiguous. Only a material
+authority, product, architecture, safety, security, destructive-action, or
+resource-boundary ambiguity warrants a stop and escalation.
+
+Compliance is checked inside the normal workflow: the Product Owner reviews
+the Architect specification for smallest sufficient scope and process; the
+Architect reviews the Implementor result for directness, approved-budget use,
+and sufficient evidence; and the Implementor reports any required step that
+does not contribute to the outcome, risk control, or proof. Correct an
+effectiveness deviation in the artifact or work already being handled. Do not
+open a separate compliance report or gate.
+
 ---
 
 # Roles
@@ -180,6 +223,97 @@ Inter-role handoffs should be short and useful. Include:
 Do not request clarification merely because administrative fields are absent
 when the required technical decision is clear.
 
+## Default efficient delivery path
+
+Unless a concrete high-consequence risk requires more, use one pass through
+the roles:
+
+1. Product Owner states the outcome, constraints, and acceptance evidence.
+2. Architect publishes one final implementor-facing specification.
+3. When separate execution approval is required, Product Owner issues one
+   decision that references that final specification and may also mark it
+   forwarded. A separate proposal, authorization proposal, reconciliation
+   artifact, and delivery artifact are not required.
+4. Implementor executes the coherent scope, including reversible in-scope
+   fixes and validation, and returns one decision-first completion or blocker.
+5. Architect performs one proportionate technical review. Product Owner is
+   involved again only for a Product Owner-owned acceptance decision or a
+   material scope/risk change.
+
+Where exact artifact identity is necessary, references are one-way: the
+approval pins the final specification's identity. Do not require the
+specification to contain the later approval's identity, and do not create a
+circular hash or reconciliation loop.
+
+More than one inter-role round trip before implementation requires the role
+adding it to state the concrete risk, decision, or irreversible consequence it
+controls. Without that justification, consolidate the step into the existing
+specification or decision.
+
+**Under `automated` orchestration this rule is weighed in tokens rather than in
+User attention.** The pre-implementation restatement in the Workflow Loop meets
+it: the concrete risk it controls is a divergent interpretation of an ambiguous
+specification, which neither the author's own re-read nor a third-party review
+detects, because both read the specification their own way.
+
+## Delivery and persistence
+
+The `To` field names the intended recipient. It does not prove that the User
+has vetted or forwarded the artifact, and it does not grant execution
+authority.
+
+When the User mediates agent-to-agent handoffs, use an explicit delivery state:
+
+- `DRAFT FOR USER VETTING — NOT FORWARDED`
+- `FORWARDED BY USER — AWAITING RESPONSE`
+- `RESPONDED TO` or `SUPERSEDED`, when applicable
+
+Do not describe an artifact as sent, received, accepted, or operative solely
+because it exists in a role-facing directory.
+
+When the User supplies a repository path or asks that a handoff be written,
+persist it at that path, verify that the file exists, and return the path to the
+User. A chat response is not a persisted handoff. Fenced raw Markdown remains
+the default only when the User has not requested a file artifact.
+
+## Status and decision authority
+
+Keep these states separate:
+
+1. author execution status — what the author claims was completed;
+2. reviewer disposition — what the reviewing role independently found; and
+3. gate or milestone decision — the decision made by the role that owns the
+   gate.
+
+`COMPLETE`, `PASS`, or `ACCEPT` in an Implementor report never implies reviewer
+acceptance, milestone closure, execution authorization, or a Product Owner
+decision.
+
+Unless an authoritative product document explicitly delegates it, the Product
+Owner owns product, milestone, evidence-gate, and subsequent-work authorization
+decisions. The Architect may issue an independent technical disposition and a
+recommendation to the Product Owner. The Implementor may report results but
+must not decide or recommend the overall gate disposition.
+
+## Implementor self-assessment and reviewer independence
+
+An Implementor recommendation is a non-binding self-assessment, never evidence.
+Include it only when the governing handoff contract explicitly requests it. If
+requested for individual source or implementation paths:
+
+- label it `IMPLEMENTOR SELF-ASSESSMENT — NON-BINDING`;
+- limit it to the requested path-level `ACCEPT`, `AMEND`, or `REJECT` judgment;
+- put it after evidence, failures, and unresolved risks; and
+- do not include an overall gate, milestone, or authorization recommendation.
+
+The reviewer must assess requirements and evidence before reading any optional
+self-assessment, record a preliminary disposition, and then compare the two.
+The final review must cite independently checked criteria and evidence. It must
+not cite the Implementor's recommendation as support for its disposition.
+
+These rules apply prospectively. Do not rewrite immutable or completed reports
+merely to adopt the newer reporting convention.
+
 ## High-Consequence Execution Controls
 
 An explicit execution warrant or detailed approval record is appropriate only
@@ -187,17 +321,54 @@ for destructive, irreversible, security-sensitive, or actively actuating work
 without an immediate fallback. It is not required per ordinary implementation
 slice.
 
+Once a bounded execution is authorized, ordinary implementation discoveries,
+test failures, dependency corrections within an approved boundary, and
+evidence-format fixes stay with the Architect and Implementor. They do not
+return to the Product Owner unless they change product intent, accepted
+architecture, an approved external-access/resource budget, or a
+high-consequence boundary.
+
+---
+
+# Orchestration mode
+
+Each project declares one orchestration mode, and several rules below depend on
+it.
+
+| Mode | Handoffs between roles | Cost of a round trip |
+|---|---|---|
+| `manual` | The User forwards work between roles | The User's time |
+| `automated` | A control plane dispatches work between roles | Tokens |
+
+**A rule tuned to minimise round trips under `manual` is not automatically right
+under `automated`.** Under `manual` a step that returns work to the User is
+expensive and is rightly removed. Under `automated` the same step costs tokens
+and no human attention, so the trade reverses. State the mode before applying
+any rule that limits round trips.
+
+Projects default to `manual` unless they declare otherwise.
+
 ---
 
 # Workflow Loop
 
 1. Product Owner writes or updates product spec and invariants.
-2. Architect writes or updates the architecture spec package.
-3. Implementor reviews for execution gaps and writes structured feedback.
-4. Human forwards only the relevant amendment content between roles.
-5. Architect updates the architecture spec package if required.
-6. Implementor reconciles notes and continues execution.
-7. If an amendment changes goals, non-goals, success criteria, or governance invariants, Architect escalates to Product Owner.
+2. Architect writes or updates one final architecture specification for the
+   coherent scope.
+3. Product Owner or User approves and forwards it in one action when separate
+   execution approval is required.
+4. **Under `automated` orchestration only:** before implementing, the Implementor
+   restates the approach, the intended insertion point, and the files it will
+   touch, and returns that without code. The Architect compares it to intent. A
+   divergence is corrected in the specification, not in the implementation. This
+   step is omitted under `manual`, where it costs a User round trip.
+5. Implementor executes, resolves reversible in-scope defects, validates, and
+   returns one concise result at a decision point or material stop.
+6. Architect reviews once and sends in-scope corrections directly back to the
+   Implementor without involving the Product Owner.
+7. Architect escalates only when the work changes goals, non-goals, success
+   criteria, governance invariants, accepted architecture, or a material risk
+   boundary owned by the Product Owner.
 
 ---
 
@@ -206,6 +377,10 @@ slice.
 Implementor output intended for another role MUST be raw Markdown inside fenced code blocks.
 
 Architect output intended for another role or for file application by the owner MUST be raw Markdown inside fenced code blocks.
+
+When the User requests persistence at a repository path, the persisted file is
+the handoff artifact and the response should link to it; the fenced-code rule
+does not require duplicating the full artifact in chat.
 
 Every review or acceptance statement for a slice MUST explicitly distinguish:
 - slice status

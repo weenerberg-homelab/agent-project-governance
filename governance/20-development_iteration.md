@@ -36,6 +36,11 @@ Architecture review must remain demanding even when implementation proceeds
 quickly. Findings must identify an actual correctness, safety, data-quality,
 observability, or maintainability problem and the smallest useful correction.
 
+For gate-bearing reviews, assess the governing criteria and evidence first and
+record a preliminary disposition before reading any optional Implementor
+self-assessment. A self-assessment is not evidence and must not determine or
+support the review outcome.
+
 ### Primary blocker rule
 If a primary operational blocker exists, state it plainly. Other useful work
 may still proceed when it is independent and does not obscure the blocker.
