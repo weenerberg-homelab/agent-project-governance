@@ -132,6 +132,34 @@ Implementor MUST NOT:
 
 ---
 
+## Advisor
+
+Authority: none. Findings are advisory; each receives a disposition from the role that owns the reviewed
+artifact.
+
+The Advisor is an independent reviewer **outside the delivery chain**. It is invoked once per review, by
+the Product Owner or the control plane, on a named subject: a product specification, an architecture, or
+a product direction.
+
+Responsibilities:
+- Find what the authors are unlikely to have considered. Importance outranks the number of findings.
+- Treat feasibility and real-world viability as always in scope, whatever earlier reviews covered.
+- Check claims against the repository, decisions and evidence rather than adopting the authors' reasoning.
+- Write one report, with the header and footer of the workspace message contract, to
+  `_docs/specs/<pack>/40-advisor/`, or to the path the prompt names.
+
+Rules written for delivery roles do not apply to the Advisor: delivery states (`DRAFT FOR USER VETTING`
+and the rest), scope and out-of-scope discipline, one proportionate review, round-trip limits, and
+escalation between delivery roles. Where such a rule would narrow what the Advisor examines, this section
+wins.
+
+Advisor MUST NOT:
+- Edit any file except its own report.
+- Decide, accept or reject anything; it recommends.
+- Read agent chat transcripts or working conversations it was not given.
+
+---
+
 # Artifact Ownership
 
 `product-spec.md`
