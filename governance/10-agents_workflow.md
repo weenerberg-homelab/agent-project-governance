@@ -132,14 +132,53 @@ Implementor MUST NOT:
 
 ---
 
-## Advisor
+## Product Strategist
+
+Authority: none; recommends to the Product Owner. Its findings block the gate they were raised against
+until addressed.
+
+Works with the Product Owner on what the product should be, from the first idea through inception of
+the product spec. Owns, for the Product Owner's decision: product spec readiness, dispositions of
+findings, the release check of the release summary, and commissioning and analysing advisor reviews.
+
+Product Strategist MUST NOT:
+- Write code, tests, architecture or instructions.
+- Decide, accept or release anything.
+
+---
+
+## Product Assistant
+
+Authority: executes Product Owner decisions exactly as approved, and actions the Product Owner has
+pre-approved in the project's decision log.
+
+Prepares decision cards, checks delivered outcomes against the accepted product spec, prepares product
+milestone acceptance evidence, keeps decision records, and carries out approved decisions such as
+merging a product-route pull request.
+
+Product Assistant MUST NOT:
+- Write code, tests, architecture, instructions or product specs.
+- Settle a product question the accepted spec does not settle.
+
+---
+
+## Advisors
+
+Two templates share this section:
+
+| Template | Subjects |
+|---|---|
+| Product Advisor | A product specification or a product direction |
+| Architecture Advisor | An architecture, its milestones and its release summary |
+
+The Product Strategist commissions both, on the Product Owner's call or, for the Architecture Advisor,
+when architecture artifacts changed since the last review. An author never commissions its own review.
 
 Authority: none. Findings are advisory; each receives a disposition from the role that owns the reviewed
 artifact.
 
-The Advisor is an independent reviewer **outside the delivery chain**. It is invoked once per review, by
-the Product Owner or the control plane, on a named subject: a product specification, an architecture, or
-a product direction.
+An Advisor is an independent reviewer **outside the delivery chain**. It is invoked once per review on
+a named subject within its template.
 
 Responsibilities:
 - Find what the authors are unlikely to have considered. Importance outranks the number of findings.
@@ -148,12 +187,12 @@ Responsibilities:
 - Write one report, with the header and footer of the workspace message contract, to
   `_docs/specs/<pack>/40-advisor/`, or to the path the prompt names.
 
-Rules written for delivery roles do not apply to the Advisor: delivery states (`DRAFT FOR USER VETTING`
+Rules written for delivery roles do not apply to Advisors: delivery states (`DRAFT FOR USER VETTING`
 and the rest), scope and out-of-scope discipline, one proportionate review, round-trip limits, and
-escalation between delivery roles. Where such a rule would narrow what the Advisor examines, this section
+escalation between delivery roles. Where such a rule would narrow what an Advisor examines, this section
 wins.
 
-Advisor MUST NOT:
+Advisors MUST NOT:
 - Edit any file except its own report.
 - Decide, accept or reject anything; it recommends.
 - Read agent chat transcripts or working conversations it was not given.

@@ -12,7 +12,7 @@
 
 **The Architect raises findings. It never edits the product spec.**
 
-Every finding receives a disposition on the record from the Product Owner and Assistant before the
+Every finding receives a disposition on the record from the Product Owner and Product Strategist before the
 spec returns to the Architect:
 
 | Disposition | Effect |
@@ -29,6 +29,9 @@ caused by a mechanism and a counting unit written into dispositions, not by uncl
 
 ## Advisor review
 
+Applies to the Product Advisor (product specification, product direction) and the Architecture
+Advisor (architecture, milestones, release summary). Both are commissioned by the Product Strategist.
+
 ### What the Advisor receives
 
 | Receives | Why |
@@ -37,7 +40,7 @@ caused by a mechanism and a counting unit written into dispositions, not by uncl
 | The product spec as it now stands | The subject |
 | The feasibility findings with their dispositions | So it can challenge a rejection rather than re-find the issue |
 | Read access to decisions, invariants and the deployed store | Independence comes from checking claims |
-| **Not** the Product Owner–Assistant conversation | A reviewer who reads the reasoning tends to adopt it. Verified: an Advisor attempt to read a provider transcript fails. Mechanism belongs to the Architecture pass (M7, R-M7) |
+| **Not** the Product Owner–Product Strategist conversation | A reviewer who reads the reasoning tends to adopt it. Verified: an Advisor attempt to read a provider transcript fails. Mechanism belongs to the Architecture pass (M7, R-M7) |
 
 ### One unsteered review
 
@@ -68,7 +71,7 @@ footer from `workspace-document-contract.md` §2a.
 | **Premise** | Could invalidate the outcome, a constraint, or the approach |
 | **Material** | Needs a spec change before the Architecture pass |
 
-**The Advisor reports no Minor findings** (decided 2026-09-14). The Architect and Assistant cover them,
+**The Advisor reports no Minor findings** (decided 2026-09-14). The Architect and Product Strategist cover them,
 and Advisor tokens are the most expensive in the flow.
 
 Premise findings are listed first. Each finding carries:
@@ -84,7 +87,7 @@ Premise findings are listed first. Each finding carries:
 
 The report ends with the answer to the prospective postmortem question.
 
-Every finding receives a disposition from the Product Owner and Assistant, as in checkpoint 1.
+Every finding receives a disposition from the Product Owner and Product Strategist, as in checkpoint 1.
 
 Guardrails: one invocation at this checkpoint, never inside a loop, and a per-invocation budget.
 
@@ -95,16 +98,16 @@ Guardrails: one invocation at this checkpoint, never inside a loop, and a per-in
 | Finding | Decided by |
 |---|---|
 | Material or Minor, technical only | Architect |
-| Premise, or any finding that changes outcome, non-goals, budget or acceptance | Product Owner, with the Assistant |
+| Premise, or any finding that changes outcome, non-goals, budget or acceptance | Product Owner, with the Product Strategist |
 
 Dispositions as in checkpoint 1: accepted, rejected with reason, deferred.
 
 ### Release summary — what the Product Owner approves
 
-The Product Owner approves a one-page release summary, not the architecture artifacts. The Assistant
+The Product Owner approves a one-page release summary, not the architecture artifacts. The Product Strategist
 checks it before it reaches the Product Owner.
 
-| Section | Assistant check |
+| Section | Product Strategist check |
 |---|---|
 | Coverage map: each product acceptance criterion → the technical milestone that delivers it | No criterion without a milestone; no milestone that serves no criterion |
 | Effort and token estimate compared with the spec's budget constraint | Within budget, or the gap is stated |
@@ -115,7 +118,7 @@ checks it before it reaches the Product Owner.
 | Product Owner option | Effect |
 |---|---|
 | Release | First technical milestone starts |
-| Send back, with reason | Architect revises; reason recorded. After two send-backs: working session, Product Owner and Assistant, as in checkpoint 2 (M5) |
+| Send back, with reason | Architect revises; reason recorded. After two send-backs: working session, Product Owner and Product Strategist, as in checkpoint 2 (M5) |
 | Re-scope | Returns to checkpoint 1 as an amendment |
 
 Under `manual` orchestration the release summary is the same artifact, presented in the same conversation.
@@ -189,8 +192,8 @@ cost rework across several instructions.
 | Step | Who |
 |---|---|
 | Every instruction accepted; independent check run on the milestone's final commit | Orchestrator |
-| Coverage: the milestone delivers the product criteria the release summary mapped to it | Assistant |
-| Advisor review, only if architecture artifacts changed after the last Advisor architecture review (checkpoint 4 trigger rule). Planned changes already reviewed are not reviewed again | Advisor, once, budgeted |
+| Coverage: the milestone delivers the product criteria the release summary mapped to it | Product Assistant |
+| Architecture Advisor review, only if architecture artifacts changed after the last architecture review (checkpoint 4 trigger rule). Planned changes already reviewed are not reviewed again | Architecture Advisor, once, budgeted; commissioned by the Product Strategist |
 | Accept, accept-with-conditions, or reject | Architect |
 
 Each condition becomes a work item assigned to the next milestone. After two `reject` verdicts on a
@@ -198,7 +201,7 @@ technical milestone, it escalates to the Product Owner (M5).
 
 ### Product milestone acceptance
 
-The Assistant prepares one row per checkpoint 1 acceptance criterion: evidence, location, holds or not.
+The Product Assistant prepares one row per checkpoint 1 acceptance criterion: evidence, location, holds or not.
 The Product Owner accepts, accepts with conditions (each a work item), or rejects with reason. No cycle
 limit: the Product Owner drives this loop (M5).
 

@@ -36,11 +36,12 @@ SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
     ),
     (
         "advisor-review",
-        "Use when performing or commissioning an independent Advisor review of a product "
-        "specification, an architecture or a product direction: the Advisor's authority, "
-        "stance, what it receives, the Premise and Material tiers and the finding fields.",
+        "Use when performing or commissioning an independent Product Advisor review (product "
+        "specification, product direction) or Architecture Advisor review (architecture, milestones, "
+        "release summary): the advisors' authority, stance, what they receive, the Premise and "
+        "Material tiers and the finding fields.",
         [
-            ("governance/10-agents_workflow.md", "## Advisor"),
+            ("governance/10-agents_workflow.md", "## Advisors"),
             ("governance/70-review-and-release.md", "## Advisor review"),
         ],
     ),

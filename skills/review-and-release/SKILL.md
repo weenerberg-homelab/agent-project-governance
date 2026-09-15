@@ -12,7 +12,7 @@ description: >
 
 **The Architect raises findings. It never edits the product spec.**
 
-Every finding receives a disposition on the record from the Product Owner and Assistant before the
+Every finding receives a disposition on the record from the Product Owner and Product Strategist before the
 spec returns to the Architect:
 
 | Disposition | Effect |
@@ -34,16 +34,16 @@ caused by a mechanism and a counting unit written into dispositions, not by uncl
 | Finding | Decided by |
 |---|---|
 | Material or Minor, technical only | Architect |
-| Premise, or any finding that changes outcome, non-goals, budget or acceptance | Product Owner, with the Assistant |
+| Premise, or any finding that changes outcome, non-goals, budget or acceptance | Product Owner, with the Product Strategist |
 
 Dispositions as in checkpoint 1: accepted, rejected with reason, deferred.
 
 ### Release summary — what the Product Owner approves
 
-The Product Owner approves a one-page release summary, not the architecture artifacts. The Assistant
+The Product Owner approves a one-page release summary, not the architecture artifacts. The Product Strategist
 checks it before it reaches the Product Owner.
 
-| Section | Assistant check |
+| Section | Product Strategist check |
 |---|---|
 | Coverage map: each product acceptance criterion → the technical milestone that delivers it | No criterion without a milestone; no milestone that serves no criterion |
 | Effort and token estimate compared with the spec's budget constraint | Within budget, or the gap is stated |
@@ -54,7 +54,7 @@ checks it before it reaches the Product Owner.
 | Product Owner option | Effect |
 |---|---|
 | Release | First technical milestone starts |
-| Send back, with reason | Architect revises; reason recorded. After two send-backs: working session, Product Owner and Assistant, as in checkpoint 2 (M5) |
+| Send back, with reason | Architect revises; reason recorded. After two send-backs: working session, Product Owner and Product Strategist, as in checkpoint 2 (M5) |
 | Re-scope | Returns to checkpoint 1 as an amendment |
 
 Under `manual` orchestration the release summary is the same artifact, presented in the same conversation.
@@ -128,8 +128,8 @@ cost rework across several instructions.
 | Step | Who |
 |---|---|
 | Every instruction accepted; independent check run on the milestone's final commit | Orchestrator |
-| Coverage: the milestone delivers the product criteria the release summary mapped to it | Assistant |
-| Advisor review, only if architecture artifacts changed after the last Advisor architecture review (checkpoint 4 trigger rule). Planned changes already reviewed are not reviewed again | Advisor, once, budgeted |
+| Coverage: the milestone delivers the product criteria the release summary mapped to it | Product Assistant |
+| Architecture Advisor review, only if architecture artifacts changed after the last architecture review (checkpoint 4 trigger rule). Planned changes already reviewed are not reviewed again | Architecture Advisor, once, budgeted; commissioned by the Product Strategist |
 | Accept, accept-with-conditions, or reject | Architect |
 
 Each condition becomes a work item assigned to the next milestone. After two `reject` verdicts on a
@@ -137,7 +137,7 @@ technical milestone, it escalates to the Product Owner (M5).
 
 ### Product milestone acceptance
 
-The Assistant prepares one row per checkpoint 1 acceptance criterion: evidence, location, holds or not.
+The Product Assistant prepares one row per checkpoint 1 acceptance criterion: evidence, location, holds or not.
 The Product Owner accepts, accepts with conditions (each a work item), or rejects with reason. No cycle
 limit: the Product Owner drives this loop (M5).
 

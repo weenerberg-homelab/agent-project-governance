@@ -8,9 +8,9 @@ its ownership table in its decision log; this procedure is project-neutral.
 | Route | When | Reviews | Decides | Merges |
 |---|---|---|---|---|
 | Technical | Every changed path is Architect-owned | Architect | Architect | Architect |
-| Product | Any changed path is Product Owner-owned, or is not in the table | Architect for technical content, if any; PO Assistant compiles | Product Owner | PO Assistant |
+| Product | Any changed path is Product Owner-owned, or is not in the table | Architect for technical content, if any; Product Assistant compiles | Product Owner | Product Assistant |
 
-A path missing from the table takes the product route, and the PO Assistant's card proposes a table row.
+A path missing from the table takes the product route, and the Product Assistant's card proposes a table row.
 
 ## Procedure
 
@@ -20,7 +20,7 @@ A path missing from the table takes the product route, and the PO Assistant's ca
    pull requests so the technical part does not wait for the Product Owner.
 3. **Technical route.** The Architect reviews against the issue's acceptance criteria and merges.
    The Architect does not merge a pull request it authored: it delegates authoring to the Implementor.
-4. **Product route: compile.** The PO Assistant posts one confirmation card to the Product Owner:
+4. **Product route: compile.** The Product Assistant posts one confirmation card to the Product Owner:
    - what changes, in product terms;
    - the path list and a short diff summary;
    - the Architect's review verdict when technical paths are included;
