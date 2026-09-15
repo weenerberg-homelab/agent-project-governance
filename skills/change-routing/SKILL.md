@@ -20,6 +20,17 @@ its ownership table in its decision log; this procedure is project-neutral.
 
 A path missing from the table takes the product route, and the Product Assistant's card proposes a table row.
 
+## Who authors a change
+
+The role that owns the changed paths writes the change itself; ownership is authority over the content,
+not only over the decision. The Implementor writes code, tests and configuration from an instruction.
+A change to a governance, policy, product or architecture document is never delegated to the
+Implementor, and the Product Owner's own documents are changed only through the product route.
+
+A pull request is opened by the agent that wrote it, under its own git identity: before its first
+commit in a run, an agent sets `user.name` to its agent name and `user.email` to an address that
+identifies the agent, so history shows which agent made the change.
+
 ## Procedure
 
 1. **Classify.** List changed paths with `git diff --name-status <base>...<head>`. Look up each path in

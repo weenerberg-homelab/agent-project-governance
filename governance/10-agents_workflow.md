@@ -252,6 +252,9 @@ Optional when relevant:
 
 ## Typical Architect documents
 
+The Architect writes changes to the documents it owns itself, and specifies rather than writes changes
+to code. Document work is never handed to the Implementor.
+
 The Architect typically authors or owns these documents under:
 - `_docs/specs/<pack>/20-architect/to_implementor/`
 
