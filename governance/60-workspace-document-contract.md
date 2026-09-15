@@ -90,12 +90,17 @@ contract, so messages use the same header schema, never a separate one.
 | Field | Prompt | Report |
 |---|---|---|
 | `Id`, `Type` | yes | yes |
+| `Project`: the project directory name (see Project identity) | yes | yes |
 | `From role`, `To role` | yes | yes |
+| `To agent`: the receiving agent's name, `<Project> - <Template>` where agents are named; omitted when the recipient is a human | yes | yes |
 | `Responds to` | yes | yes |
 | `Work item`, `Milestone` | yes | yes |
 | `Session type`: specify · implement · acknowledge · rework · review-gating · review-advisory · document | yes | — |
 | `Expected output type` | yes | — |
 | `Contract version`, `Orchestration mode` | yes | yes |
+
+**A receiver checks `Project` and `To role` or `To agent` before acting.** On a mismatch it does nothing
+and replies with one line naming the mismatch. A pasted message without `Project` is treated as before.
 
 `Session type` on a prompt is what makes the activity cost category known at spawn, as
 `activity-cost-accounting.md` requires. Values map one-to-one to its categories; `acknowledge` counts as
