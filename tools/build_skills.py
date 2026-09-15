@@ -61,6 +61,13 @@ SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
         "which files, tests, CI and documentation a tier requires.",
         [("project_patterns/10-project-structure-tiers.md", None)],
     ),
+    (
+        "change-routing",
+        "Use when a pull request is opened, is ready for review, or is about to be merged: classify it "
+        "by path ownership into the technical or product route, split mixed pull requests, compile the "
+        "Product Owner card, and merge only the approved head commit.",
+        [("governance/80-change-routing.md", None)],
+    ),
 ]
 
 HEADING = re.compile(r"^(#{1,6}) ")
