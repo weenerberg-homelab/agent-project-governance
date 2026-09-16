@@ -12,6 +12,14 @@ description: >
 
 **The Architect raises findings. It never edits the product spec.**
 
+**Feasibility comes before architecture, in its own run.** The Architect's first run on a spec produces
+findings only — questions the spec leaves open, contradictions, and anything it would otherwise have to
+guess — and hands the issue to the Product Strategist. It designs nothing until those findings have
+dispositions. A finding that arrives with the finished architecture is worth less: the design is already
+built on the guess, and the Product Owner is dispositioning it under pressure to release.
+(Decided 2026-09-16, after the V1a architecture pass raised three spec-level findings at the release
+gate instead of before the design.)
+
 Every finding receives a disposition on the record from the Product Owner and Product Strategist before the
 spec returns to the Architect:
 
