@@ -189,6 +189,31 @@ A Review with `Verdict: reject` or `accept-with-conditions` carries one row per 
 | Any `instruction` | New version with a revision block: version, change, finding answered |
 | Revision changes `Allowed paths` or `Acceptance checks` | Implementor acknowledges the delta before rework |
 
+### Only blockers justify another round
+
+A finding sends work back for another round only when it is a **blocker**: it breaks an acceptance
+criterion, safety or data integrity, or it leaves debt that would clog the next work item. Every other
+finding is fixed in the same rework if it is trivial, or deferred to a backlog follow-up (see "Follow-ups
+found in review"). Chances are a deferred finding never matters: the part is rewritten or dropped before
+it bites. A review that finds only non-blockers accepts.
+(Decided 2026-09-16, with cost as the primary constraint: an agent has no stake in its own rounds, so the
+rule, not the agent's diligence, decides what a round is worth.)
+
+### Review-round ladder
+
+| Round | Who may send the work back |
+|---|---|
+| 1-2 | The reviewer (Architect) on its own judgement |
+| 3 | Only with the Architecture Advisor's second opinion agreeing that the blocker is real and worth the round. Advisor disagrees, cannot tell, or is unavailable: the board decides |
+| After 3 | The board |
+
+The tracker's review limit is set to 3 so the Advisor-gated round does not reach the board first. A
+blocker that repeats one an earlier round already raised is a loop and goes to the board at once. A
+board escalation is one card compiled by the Product Assistant: rounds so far, cost so far, the
+blocker, the Advisor's verdict, the reviewer's recommendation, and the options (another round, accept
+with a follow-up, stop). The ladder is revisited if board or Advisor load grows.
+(Decided 2026-09-16.)
+
 ### Open questions block the work that depends on them
 
 An instruction whose design depends on a question the Product Owner has not answered is blocked by
