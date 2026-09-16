@@ -58,5 +58,7 @@ identifies the agent, so history shows which agent made the change.
 ## Rules
 
 - Nobody pushes to the default branch. Implementors never merge.
+- A run never closes an issue while an action it names still has no issue and no owner: create and
+  assign that work first, or leave the issue open with the outstanding part stated.
 - Review requires green CI once CI exists.
 - Re-classify when a pull request gains commits that add paths.
