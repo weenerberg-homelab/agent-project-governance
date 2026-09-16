@@ -169,6 +169,14 @@ A Review with `Verdict: reject` or `accept-with-conditions` carries one row per 
 | Any `instruction` | New version with a revision block: version, change, finding answered |
 | Revision changes `Allowed paths` or `Acceptance checks` | Implementor acknowledges the delta before rework |
 
+### Open questions block the work that depends on them
+
+An instruction whose design depends on a question the Product Owner has not answered is blocked by
+that question; it is not started on an assumption. Making a *value* configurable (a path, a host name)
+is enough to proceed; making a *mechanism* configurable is not, because the assumed mechanism is then
+built, reviewed and paid for before the answer arrives. (Decided 2026-09-16, after a backup job was
+built for a mounted folder while the Product Owner's transport answer was still pending.)
+
 ### Follow-ups found in review
 
 A reviewer that finds defects outside the instruction under review raises **one** follow-up per family
