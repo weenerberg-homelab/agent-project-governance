@@ -169,6 +169,15 @@ A Review with `Verdict: reject` or `accept-with-conditions` carries one row per 
 | Any `instruction` | New version with a revision block: version, change, finding answered |
 | Revision changes `Allowed paths` or `Acceptance checks` | Implementor acknowledges the delta before rework |
 
+### Follow-ups found in review
+
+A reviewer that finds defects outside the instruction under review raises **one** follow-up per family
+of related defects, covering the whole family and the checks that would have caught it — never one
+defect per issue, found one review at a time. A follow-up that no acceptance criterion of the current
+milestone requires goes to the backlog for the Product Owner's ordering, not straight into work.
+(Decided 2026-09-16, after three consecutive static-asset fixes each spawned the next from its own
+review.)
+
 ### Rework report
 
 A Report with `Responds to: <review id>`, one row per finding:
