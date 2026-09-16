@@ -199,6 +199,13 @@ The Implementor attaches screenshots or a recording per check. The Product Owner
 `human-visual` checks of a technical milestone in one pass. Accepted risk: a late visual defect can
 cost rework across several instructions.
 
+### Enforce the gates in the tracker, not by memory
+
+Where the tracker supports review and approval stages, every instruction issue carries a review stage
+naming the reviewer, and product milestone acceptance carries an approval stage naming the Product
+Owner. A gate that exists only as a rule is skipped the first time a run ends early; a gate the runtime
+holds cannot be.
+
 ### Technical milestone acceptance
 
 | Step | Who |
