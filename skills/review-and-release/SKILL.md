@@ -118,6 +118,18 @@ milestone requires goes to the backlog for the Product Owner's ordering, not str
 (Decided 2026-09-16, after three consecutive static-asset fixes each spawned the next from its own
 review.)
 
+### Failing checks: show the cause, then stop after two
+
+When a check fails and its output does not show why, the next push adds output that shows the cause
+(the server-side log, the refused request, the full command output) before it changes the fix. A fix
+tried without that evidence is a guess and costs a full check cycle.
+
+When two consecutive pushes fail a check with the same error, the Implementor stops, sets the issue
+blocked and hands it to the Architect with the failing output and what each push changed. The
+Architect diagnoses or changes the instruction; the Implementor does not try a third variant.
+(Decided 2026-09-16, after a CI job was pushed four times against an SFTP login refusal whose cause
+only the server log named.)
+
 ### Rework report
 
 A Report with `Responds to: <review id>`, one row per finding:
