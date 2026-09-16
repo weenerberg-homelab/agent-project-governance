@@ -19,6 +19,15 @@ the Architect's defect, not the Implementor's.
 (Decided 2026-09-16, after backup work against an SFTP server was issued to a sandbox with no SFTP
 server and no CI log access, and the Implementor iterated blind in CI.)
 
+The same holds for the **target** environment. A milestone whose outcome is "runs on X" carries an
+acceptance criterion and an instruction that put it on X: a deployment package (install and update
+procedure, preflight checks that fail loudly, scheduled jobs) built and reviewed like any other code.
+An operator runbook starts only from a state that a delivered step produces; "with the stack already
+up" is not a precondition anyone may assume. Where agents cannot reach X, only the final command is
+run outside the tracker, by the operator the Product Owner names.
+(Decided 2026-09-16, after M1 promised "runs on the homelab", no issue deployed it, and the operator
+card asked for checks against a stack that did not exist.)
+
 ### Architect feasibility feedback
 
 **The Architect raises findings. It never edits the product spec.**
