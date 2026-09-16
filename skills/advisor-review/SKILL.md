@@ -105,4 +105,8 @@ The report ends with the answer to the prospective postmortem question.
 
 Every finding receives a disposition from the Product Owner and Product Strategist, as in checkpoint 1.
 
+**Technical findings go to the Architect in the same run that analyses the report**, by reassigning the
+issue, not by naming the Architect in a routing table. A finding that is Material or Minor and technical
+only is the Architect's to dispose; it must not wait on a board card that does not ask about it.
+
 Guardrails: one invocation at this checkpoint, never inside a loop, and a per-invocation budget.
