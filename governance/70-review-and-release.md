@@ -8,6 +8,17 @@
 
 ## Dispositions of findings
 
+### The Architect owns the Implementor's environment
+
+Before an instruction goes to the Implementor, the Architect checks that every acceptance check and
+every external system the work touches can be exercised where the Implementor works: tools, test
+services, network access, credentials, and readable CI logs. The instruction lists each gap as a named
+risk with its mitigation — a test double, a sandbox change requested from the Product Owner first, or
+an explicit "CI only" with the extra cost that brings. A gap discovered by the Implementor mid-work is
+the Architect's defect, not the Implementor's.
+(Decided 2026-09-16, after backup work against an SFTP server was issued to a sandbox with no SFTP
+server and no CI log access, and the Implementor iterated blind in CI.)
+
 ### Architect feasibility feedback
 
 **The Architect raises findings. It never edits the product spec.**
@@ -192,11 +203,14 @@ When a check fails and its output does not show why, the next push adds output t
 (the server-side log, the refused request, the full command output) before it changes the fix. A fix
 tried without that evidence is a guess and costs a full check cycle.
 
-When two consecutive pushes fail a check with the same error, the Implementor stops, sets the issue
-blocked and hands it to the Architect with the failing output and what each push changed. The
-Architect diagnoses or changes the instruction; the Implementor does not try a third variant.
+When two consecutive pushes fail a check with the same error, the Implementor stops and hands the
+issue to the Architect (reassign, not the board) with the failing output and what each push changed.
+The Architect diagnoses, fixes the environment or changes the instruction; the Implementor does not try
+a third variant. The Product Owner is the fallback: the Architect raises a board card only when the
+Implementor still fails after the Architect's fix, or when the fix needs a Product Owner decision
+(for example a sandbox or egress change). Automated brakes follow the same order.
 (Decided 2026-09-16, after a CI job was pushed four times against an SFTP login refusal whose cause
-only the server log named.)
+only the server log named, and the spend brake escalated to the Product Owner instead of the Architect.)
 
 ### Rework report
 

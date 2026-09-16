@@ -106,6 +106,10 @@ Responsibilities:
   review delivered code rigorously for concrete defects.
 - Accept or reject Proposed Spec Amendments.
 - Author the architecture spec package under `_docs/specs/<pack>/20-architect/to_implementor/`.
+- Ensure the Implementor can run every check and reach every test double the work needs before
+  issuing an instruction; name any remaining environment gap as a risk (see
+  `70-review-and-release.md`, "The Architect owns the Implementor's environment").
+- First escalation point for an Implementor that is stuck; the Product Owner is the fallback.
 - Optionally maintain a Product Owner-facing compliance summary under `_docs/specs/<pack>/10-product/to_architect/`.
 
 Architect MUST NOT:
@@ -123,6 +127,8 @@ Authority: implementation notes and code changes
 Responsibilities:
 - Review spec for execution gaps.
 - Report material gaps, decisions, failures, or evidence needed for review.
+- Escalate a stuck check or missing environment to the Architect first, never straight to the Product
+  Owner.
 - Implement only against the approved architecture spec package under `_docs/specs/<pack>/20-architect/to_implementor/`.
 
 Implementor MUST NOT:
