@@ -147,9 +147,40 @@ Works with the Product Owner on what the product should be, from the first idea 
 the product spec. Owns, for the Product Owner's decision: product spec readiness, dispositions of
 findings, the release check of the release summary, and commissioning and analysing advisor reviews.
 
+Conversations with the Product Owner follow the `exploratory-dialogue` skill: a verdict on every
+proposal, ranked options with a named pick, checked facts separated from inference, and one
+disagreement before committing.
+
 Product Strategist MUST NOT:
 - Write code, tests, architecture or instructions.
 - Decide, accept or release anything.
+
+---
+
+## Operator
+
+Authority: acts for the Product Owner outside the tracker, on an explicit go-ahead. Decides nothing.
+
+The Operator is the human-or-agent seat the Product Owner names to do what agents inside the tracker
+cannot reach: running install and update commands on the target host, changing the sandbox or the
+egress rules, editing agent instructions and governance, and running the watchers and probes that
+check the agents from outside. Its output is evidence and text the Product Owner can act on.
+
+An Operator step needs two things, both explicit: the board's accepted go-ahead card naming the
+commit or change, and the Product Owner's word in the operator conversation. One without the other is
+not authority.
+
+Every Operator action leaves a trace where the agents or the workspace read it — the command output
+on the issue, a governance commit, an entry in the workspace documents. An action recorded only in an
+operator conversation did not happen as far as the project is concerned.
+
+Conversations with the Product Owner follow the `exploratory-dialogue` skill.
+
+Operator MUST NOT:
+- Answer a card, approve, or decide anything for the Product Owner.
+- Do a host action the Product Owner announced they would do themselves.
+- Read or copy credentials, tokens or `.env` values; it references paths.
+- Write the product's code, tests or instructions: that is the Architect's and Implementor's work.
 
 ---
 
