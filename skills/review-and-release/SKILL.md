@@ -154,6 +154,17 @@ is enough to proceed; making a *mechanism* configurable is not, because the assu
 built, reviewed and paid for before the answer arrives. (Decided 2026-09-16, after a backup job was
 built for a mounted folder while the Product Owner's transport answer was still pending.)
 
+### The demo card is answered after an operator probe
+
+A demo card is answered from two trials, not one. The Product Owner tries the milestone by hand and
+reports what looks wrong. The operator then reproduces it against a throwaway copy of the live
+database and adds what a rough trial cannot give: the exception and its source line, the
+reproduction, row counts, and page timings. Both go into the same card answer, so the first rework
+round is a fix rather than a diagnosis. The deliverable therefore owes a supported way to copy live
+state into a scratch database (or a separate test environment): without it the probe is hand work
+that the milestone's own tooling should carry. (Decided 2026-09-17, after the M2 demo, where the
+Product Owner's "state change errors" became `Coach.objects.get()` with five coaches, in one round.)
+
 ### Waiting on a person costs nothing
 
 Work that waits on the Product Owner or the operator waits on something that cannot wake the agent:
