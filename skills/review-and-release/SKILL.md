@@ -154,6 +154,14 @@ is enough to proceed; making a *mechanism* configurable is not, because the assu
 built, reviewed and paid for before the answer arrives. (Decided 2026-09-16, after a backup job was
 built for a mounted folder while the Product Owner's transport answer was still pending.)
 
+### Who turns demo feedback into work
+
+The board's answer to a demo card is split by severity, not by who read it first. Blockers stay with
+the Architect, which is acting on them anyway. Non-blocking feedback goes to the Product Assistant,
+which raises one backlog issue per item, quoting the board's words and the screen they saw it on, and
+replies with one line naming the issues. No brief of the demo is written: a card short enough to
+decide from needs no summary, and a summary of a summary costs a run. (Decided 2026-09-17.)
+
 ### The demo card is answered after an operator probe
 
 A demo card is answered from two trials, not one. The Product Owner tries the milestone by hand and
