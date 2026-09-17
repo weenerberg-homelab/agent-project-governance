@@ -154,6 +154,16 @@ is enough to proceed; making a *mechanism* configurable is not, because the assu
 built, reviewed and paid for before the answer arrives. (Decided 2026-09-16, after a backup job was
 built for a mounted folder while the Product Owner's transport answer was still pending.)
 
+### Waiting on a person costs nothing
+
+Work that waits on the Product Owner or the operator waits on something that cannot wake the agent:
+`in_review` on a board card, or `blocked` with the board named as the one to unblock it. An agent never
+names itself as the unblocker of its own wait, because the tracker wakes the named agent at once and
+every run ends by blocking again. While waiting, an agent does no side work (rehearsals, document
+edits, pull requests); it records ideas as one comment and stops. The host watcher moves a
+self-named block to the board and notifies the board. (Decided 2026-09-17, after four self-wakes
+while a deploy waited on the operator cost about $9 and merged an unrequested plan edit.)
+
 ### Follow-ups found in review
 
 A reviewer that finds defects outside the instruction under review raises **one** follow-up per family
