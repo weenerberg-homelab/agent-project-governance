@@ -222,20 +222,34 @@ holds cannot be.
 | Every instruction accepted; independent check run on the milestone's final commit | Orchestrator |
 | Coverage: the milestone delivers the product criteria the release summary mapped to it | Product Assistant |
 | Architecture Advisor review, only if architecture artifacts changed after the last architecture review (checkpoint 4 trigger rule). Planned changes already reviewed are not reviewed again | Architecture Advisor, once, budgeted; commissioned by the Product Strategist |
-| Accept, accept-with-conditions, or reject | Architect |
+| Demo to the Product Owner: approve, amend, or reject (see "Continuing to the next technical milestone") | Product Owner, on the Architect's demo card |
 
 Each condition becomes a work item assigned to the next milestone. After two `reject` verdicts on a
 technical milestone, it escalates to the Product Owner (M5).
 
 ### Continuing to the next technical milestone
 
-Technical milestones are the Architect's to run, as long as functional acceptance and budget hold. An
-agent has no stake and no memory, so the conditions are checked, not trusted:
+Technical milestones are the Architect's to run, as long as functional acceptance and budget hold.
+Functional acceptance is the Product Owner's, from a demo; budget is checked by rule. An agent has no
+stake and no memory, so the conditions are checked, not trusted.
+
+**Demo.** When every instruction of a technical milestone is done and its automated criteria are
+evidenced, the Architect posts one demo card: what to try and where, the human-visual criteria, the
+evidence for the rest, and the cost against budget. The Product Owner answers:
+
+| Answer | Effect |
+|---|---|
+| Approve | The milestone is accepted. The continuation gates below decide what happens next |
+| Amend, only this milestone | Each amendment becomes a work item. Small ones are carried into the next milestone; others are finished before it starts |
+| Amend, touching later milestones (scope, order, acceptance criteria) | No automatic continuation: the Product Assistant's next-step card |
+| Reject, with reason | Rework in the same milestone; the next one does not start |
+
+**Continuation gates**, all checked after an approval:
 
 | Gate | Check |
 |---|---|
-| Accepted | Every criterion evidenced, human-visual ones by the Product Owner; no open cards or blockers on the milestone |
-| Budget held | Actual cost of the milestone, its instruction issues included, at most 150 % of its budget (host watcher figures) |
+| Demo approved | The Product Owner's answer on the demo card; no other open cards or blockers on the milestone |
+| Budget held | Actual cost of the milestone, its instruction issues included, at most 150 % of its budget (host watcher figures). An approved demo does not waive this |
 | Plan unchanged | Since the milestone started, the sections for later milestones in the milestone set have not changed, and no architecture artifact needs a new release (`git diff` against the milestone's start commit) |
 | Agents available | The roles the next milestone needs can run |
 
