@@ -227,6 +227,32 @@ holds cannot be.
 Each condition becomes a work item assigned to the next milestone. After two `reject` verdicts on a
 technical milestone, it escalates to the Product Owner (M5).
 
+### Continuing to the next technical milestone
+
+Technical milestones are the Architect's to run, as long as functional acceptance and budget hold. An
+agent has no stake and no memory, so the conditions are checked, not trusted:
+
+| Gate | Check |
+|---|---|
+| Accepted | Every criterion evidenced, human-visual ones by the Product Owner; no open cards or blockers on the milestone |
+| Budget held | Actual cost of the milestone, its instruction issues included, at most 150 % of its budget (host watcher figures) |
+| Plan unchanged | Since the milestone started, the sections for later milestones in the milestone set have not changed, and no architecture artifact needs a new release (`git diff` against the milestone's start commit) |
+| Agents available | The roles the next milestone needs can run |
+
+All gates pass: the Architect opens the next milestone's parent issue, linked to its goal, with
+`Cost estimate: $<budget>` from the milestone set, and says so in one comment; the Product Owner is
+notified, not asked. Any gate fails: the Architect hands the decision to the Product Assistant, which
+puts the next-step card to the Product Owner. Every milestone has a budget before it starts.
+(Decided 2026-09-17; budgets after M1: M2 $115, M3 $85, M4 $145, M5 $85, pause at 150 %.)
+
+### Next step after a product milestone
+
+When a product milestone is accepted, or when a technical milestone fails a continuation gate, the
+Product Assistant posts one card: what was completed (cost against budget, largest cost items), what is
+open (backlog follow-ups, parked items, unavailable agents), what comes next (scope and budget), and the
+options: start the next milestone as planned; start it with selected backlog follow-ups; a short
+retrospective first; change direction or order (to the Product Strategist); pause.
+
 ### Product milestone acceptance
 
 The Product Assistant prepares one row per checkpoint 1 acceptance criterion: evidence, location, holds or not.
