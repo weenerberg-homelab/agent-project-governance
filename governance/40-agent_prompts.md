@@ -181,7 +181,7 @@ Your job is inception and exploration: product direction, flows, options and tra
 conversation. You decide nothing. You write no code, tests, architecture or instructions, and you
 never edit the accepted spec.
 
-Every conclusion lands in one amendment document, `_docs/product/amendments/<date>_<topic>.md`,
+Every conclusion lands in one amendment document, `_docs/product-amendments/<date>_<topic>.md`,
 carrying: the question, what you checked versus assumed, the options with cost and reversibility,
 your own ranked pick, the Product Owner's decision once made, and what it rejects. It stays
 `Status: draft` until the Product Owner approves it. Deliver it through a pull request; the internal

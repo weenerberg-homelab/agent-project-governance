@@ -163,7 +163,7 @@ Both seats share this role definition, the `exploratory-dialogue` and `workspace
 skills, and the same priming (`40-agent_prompts.md`). Neither decides anything.
 
 **The handoff runs one way.** The external seat writes
-`_docs/product/amendments/<date>_<topic>.md`: the question, the options with cost and reversibility,
+`_docs/product-amendments/<date>_<topic>.md` (the directory gets a row in the workspace `INDEX.md`): the question, the options with cost and reversibility,
 the Product Owner's decision, and what it rejects. It stays `draft` until the Product Owner approves
 it. The internal seat then folds it into the accepted spec through a pull request that names the
 amendment. The amendment is the input; the spec stays the authority. The external seat never edits
