@@ -169,6 +169,14 @@ it. The internal seat then folds it into the accepted spec through a pull reques
 amendment. The amendment is the input; the spec stays the authority. The external seat never edits
 the accepted spec, and the internal seat never explores open questions conversationally.
 
+**A candidate spec revision goes past the Product Advisor when it changes something load-bearing.**
+The internal seat commissions one review, before the pull request merges, when the amendment changes
+the outcome or the success measure, an invariant or a recorded decision, or milestone scope, order or
+a user-visible acceptance criterion. It is skipped when the revision only clarifies wording, adds
+detail under an existing criterion, or records a decision the Product Owner already made on a card.
+Which case applies is stated in the pull request, so a skip is visible rather than silent. The
+Product Owner disposes the findings; the review does not decide.
+
 The two seats should not share a session with another role: a seat held by the model that also
 operates or builds gives the Product Owner one reading twice.
 
