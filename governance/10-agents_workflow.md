@@ -151,6 +151,27 @@ Conversations with the Product Owner follow the `exploratory-dialogue` skill: a 
 proposal, ranked options with a named pick, checked facts separated from inference, and one
 disagreement before committing.
 
+**The seat runs in two places.** Inception is a conversation; a tracker turns every turn into a paid
+run with minutes of latency, which is the wrong shape for it. So:
+
+| Seat | Where | Does | Output |
+|---|---|---|---|
+| **External Product Strategist** | A session outside the tracker, like the Operator | Inception and exploration with the Product Owner: direction, flows, options, trade-offs | One **amendment document** per topic, committed through a pull request |
+| **Internal Product Strategist** | In the tracker | Dispositions of feasibility, review and advisor findings; the release check; commissioning advisor reviews | Revisions to the accepted spec, on the board's approval |
+
+Both seats share this role definition, the `exploratory-dialogue` and `workspace-document-contract`
+skills, and the same priming (`40-agent_prompts.md`). Neither decides anything.
+
+**The handoff runs one way.** The external seat writes
+`_docs/product/amendments/<date>_<topic>.md`: the question, the options with cost and reversibility,
+the Product Owner's decision, and what it rejects. It stays `draft` until the Product Owner approves
+it. The internal seat then folds it into the accepted spec through a pull request that names the
+amendment. The amendment is the input; the spec stays the authority. The external seat never edits
+the accepted spec, and the internal seat never explores open questions conversationally.
+
+The two seats should not share a session with another role: a seat held by the model that also
+operates or builds gives the Product Owner one reading twice.
+
 Product Strategist MUST NOT:
 - Write code, tests, architecture or instructions.
 - Decide, accept or release anything.
