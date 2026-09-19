@@ -177,6 +177,27 @@ detail under an existing criterion, or records a decision the Product Owner alre
 Which case applies is stated in the pull request, so a skip is visible rather than silent. The
 Product Owner disposes the findings; the review does not decide.
 
+**The external seat delivers one thing: the amendment document, in a pull request.** It does not write
+operator prompts, does not specify or create tracker issues, does not assign roles, and does not state
+how work is routed — routing is this document's, and the seat has no authority to restate or vary it.
+Where it believes tracker work should follow, it says so in one line under *What happens next* in the
+amendment and stops there.
+
+**It delivers when the work is finished, not when the document reads finished.** Before handing over,
+every one of these is true, and the amendment says so:
+
+| Check | Meaning |
+|---|---|
+| Decisions recorded | Each carries the Product Owner's decision in the Product Owner's terms, with the date |
+| Open questions listed | Each names an owner and whether it blocks the fold-in |
+| Facts verified | Milestone state, pull request numbers, file paths and dates checked against the repository and the board, not remembered |
+| Options priced | Cost and reversibility per option, as `exploratory-dialogue` requires |
+| Not checked, named | Anything it did not verify is listed as not verified, rather than left to look verified |
+
+A seat that hands over early costs the Product Owner more than one that takes another turn: the work
+comes back, and the board has to referee. Pressing for delivery — "ready to merge", "just needs
+approval" — is a defect in the same way agreeing to be agreeable is.
+
 The two seats should not share a session with another role: a seat held by the model that also
 operates or builds gives the Product Owner one reading twice.
 
