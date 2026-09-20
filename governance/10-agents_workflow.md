@@ -29,6 +29,43 @@ Building diagnostics, dashboards, tests, internal refactors, and
 operator-disabled/selectable control paths does not by itself require
 additional approval after the objective is approved.
 
+## Who a question goes to
+
+Asking the Product Owner is not free. Every question spends the one resource
+the project cannot make more of, and a question he was never the right person
+to answer spends it for nothing.
+
+**Goes to the Product Owner.** Product scope; what the user sees; cost; a rule
+he owns; anything in the approval list above; and any decision where two
+reasonable answers would produce different products.
+
+**Goes to the Architect, not the Product Owner.** Mechanism, tooling, CI,
+dependency choice, workspace layout, file placement, test strategy, and any
+question whose answer is settled by evidence rather than by preference. The
+Architect decides these; that is what the seat is for.
+
+**The override, which wins over both.** If a technical choice changes what the
+product does, what it costs to run, or what the user sees, it goes to the
+Product Owner however technical it looks. A runtime version that makes the
+tested build differ from the shipped one is a product question wearing a
+technical costume.
+
+Two rules that follow:
+
+- **One audience per card.** If any question on a card belongs to the Product
+  Owner, the whole card goes to him. Do not mix a technical question with a
+  product one and make him answer both.
+- **State who could have answered it.** When a question goes to the Product
+  Owner and another seat could plausibly have answered it, say so in one line
+  and say why it went to him anyway.
+
+In Paperclip: address a technical card to the Architect with `addresseeAgentId`
+and leave `resolverPolicy` unset, which defaults to `anyone`. Request
+`human_only` only for the first list. An agent cannot be addressed on its own
+card — when the Architect is the one asking, and no second technical seat
+exists, the question goes to the Product Owner and the one-line note above
+explains that it had nowhere else to go.
+
 ## Effectiveness accountability: Product Owner -> Architect -> Implementor
 
 Effectiveness is a binding delivery concern at every role boundary. It means
