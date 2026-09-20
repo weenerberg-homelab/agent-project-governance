@@ -543,6 +543,27 @@ Every review or acceptance statement for a slice MUST explicitly distinguish:
 - slice status
 - overall milestone/refactor status
 
+## Everything that asks for an answer carries a reference
+
+Every item an agent puts to a human that expects a response MUST carry a **short, unique identifier**,
+placed at the start of the item. This covers questions, options, proposals, requests, recommendations,
+findings and actions awaiting a decision — anything the reader could answer, accept, reject or defer.
+
+`Q1`, `Q2` for questions. `A1`, `A2` for actions awaiting a go-ahead. `F1`, `F2` for findings.
+Options within one question are `(a)`, `(b)`, `(c)`. Any consistent scheme is acceptable; having none
+is not.
+
+**Identifiers are unique for the whole conversation, never reused.** Starting again at `Q1` in a later
+message makes `Q1` ambiguous, and the reader's one-word answer then lands on the wrong question. If
+three questions have been asked, the next is `Q4`.
+
+**Without this the human has to quote the agent back to itself** to be understood — retyping a sentence
+to identify which of four things is being answered. That cost falls on the human on every exchange,
+it grows with the length of the reply, and it is entirely avoidable.
+
+**A reply is not finished until every open item in it is referenced.** An agent that ends with an
+unlabelled question has asked the reader to do its indexing.
+
 ## Every clock time carries its timezone
 
 Every time of day an agent writes MUST name its timezone, in the same sentence or the same table
