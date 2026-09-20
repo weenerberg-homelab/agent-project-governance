@@ -543,6 +543,22 @@ Every review or acceptance statement for a slice MUST explicitly distinguish:
 - slice status
 - overall milestone/refactor status
 
+## Every clock time carries its timezone
+
+Every time of day an agent writes MUST name its timezone, in the same sentence or the same table
+cell as the time: `14:29 UTC`, `16:39 CEST`. This binds every surface — chat, cards, comments, issue
+descriptions, commit messages, documents and report files.
+
+A bare time is read as local time by whoever reads it. When it was not local, the reader draws a
+wrong conclusion about ordering, about how long something has been stalled, or about whether a
+deadline has passed, and nothing on the page tells them they are wrong.
+
+A timezone on a column header does not cover a time written in prose elsewhere. Repeat it.
+
+Dates alone do not need a timezone. A date plus a time does. Prefer UTC for anything machine-derived
+— run timestamps, log lines, API fields — and state the local zone only when the time is something
+a human observed or must act at.
+
 ---
 
 # Invariants
