@@ -67,5 +67,11 @@ identifies the agent, so history shows which agent made the change.
 - Nobody pushes to the default branch. Implementors never merge.
 - A run never closes an issue while an action it names still has no issue and no owner: create and
   assign that work first, or leave the issue open with the outstanding part stated.
-- Review requires green CI once CI exists.
+- **Review requires green CI once CI exists, read from the check runs.** A repository whose results come
+  from GitHub Actions publishes them as **check runs**, not as legacy commit statuses, so
+  `/commits/<sha>/status` answers `pending` with an empty list forever and no token changes that. Read
+  `gh pr view <n> --json statusCheckRollup` or `/commits/<sha>/check-runs`. A job reported `skipped`
+  because the diff does not need it is not a failure. When the check cannot be read at all, say which
+  call was refused and hand it to the operator; do not schedule repeated rechecks of the same call,
+  because an endpoint that cannot answer will not answer the twelfth time either.
 - Re-classify when a pull request gains commits that add paths.
