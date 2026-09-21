@@ -54,11 +54,12 @@ SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
     ),
     (
         "review-and-release",
-        "Use when dispositioning findings, checking or approving a release summary, writing a "
-        "review with findings, answering review findings in a rework report, or accepting a "
-        "technical or product milestone.",
+        "Use when dispositioning findings, compiling or posting a board card, checking or "
+        "approving a release summary, writing a review with findings, answering review "
+        "findings in a rework report, or accepting a technical or product milestone.",
         [
             ("governance/70-review-and-release.md", "## Dispositions of findings"),
+            ("governance/70-review-and-release.md", "## Board cards"),
             ("governance/70-review-and-release.md", "## Release"),
             ("governance/70-review-and-release.md", "## Reviews, rework and acceptance"),
         ],
