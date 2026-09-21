@@ -49,6 +49,13 @@ identifies the agent, so history shows which agent made the change.
 
 ## Rules
 
+- **The Product Owner decides on a card, not in the hosting provider.** Approving the card is his act;
+  an agent then merges. He is not asked to press merge, and no artifact, notification or message tells
+  him a pull request is his to merge. This is the normal flow and everything is written to assume it:
+  a routing table that gives him a path names the agent that merges after he approves.
+- **The exception is a repository with no agent seat**, where there is nobody to delegate the merge to —
+  the governance repository itself is one. There he merges directly, and whoever hands him such a pull
+  request says plainly that this is the exception and why. An exception is never assumed from silence.
 - Nobody pushes to the default branch. Implementors never merge.
 - A run never closes an issue while an action it names still has no issue and no owner: create and
   assign that work first, or leave the issue open with the outstanding part stated.
