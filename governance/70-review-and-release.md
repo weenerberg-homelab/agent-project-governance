@@ -222,6 +222,35 @@ is enough to proceed; making a *mechanism* configurable is not, because the assu
 built, reviewed and paid for before the answer arrives. (Decided 2026-09-16, after a backup job was
 built for a mounted folder while the Product Owner's transport answer was still pending.)
 
+### Who turns demo feedback into work
+
+The board's answer to a demo card is split by severity, not by who read it first. Blockers stay with
+the Architect, which is acting on them anyway. Non-blocking feedback goes to the Product Assistant,
+which raises one backlog issue per item, quoting the board's words and the screen they saw it on, and
+replies with one line naming the issues. No brief of the demo is written: a card short enough to
+decide from needs no summary, and a summary of a summary costs a run. (Decided 2026-09-17.)
+
+### The demo card is answered after an operator probe
+
+A demo card is answered from two trials, not one. The Product Owner tries the milestone by hand and
+reports what looks wrong. The operator then reproduces it against a throwaway copy of the live
+database and adds what a rough trial cannot give: the exception and its source line, the
+reproduction, row counts, and page timings. Both go into the same card answer, so the first rework
+round is a fix rather than a diagnosis. The deliverable therefore owes a supported way to copy live
+state into a scratch database (or a separate test environment): without it the probe is hand work
+that the milestone's own tooling should carry. (Decided 2026-09-17, after the M2 demo, where the
+Product Owner's "state change errors" became `Coach.objects.get()` with five coaches, in one round.)
+
+### Waiting on a person costs nothing
+
+Work that waits on the Product Owner or the operator waits on something that cannot wake the agent:
+`in_review` on a board card, or `blocked` with the board named as the one to unblock it. An agent never
+names itself as the unblocker of its own wait, because the tracker wakes the named agent at once and
+every run ends by blocking again. While waiting, an agent does no side work (rehearsals, document
+edits, pull requests); it records ideas as one comment and stops. The host watcher moves a
+self-named block to the board and notifies the board. (Decided 2026-09-17, after four self-wakes
+while a deploy waited on the operator cost about $9 and merged an unrequested plan edit.)
+
 ### Follow-ups found in review
 
 A reviewer that finds defects outside the instruction under review raises **one** follow-up per family
