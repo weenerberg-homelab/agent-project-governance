@@ -199,6 +199,31 @@ run with minutes of latency, which is the wrong shape for it. So:
 Both seats share this role definition, the `exploratory-dialogue` and `workspace-document-contract`
 skills, and the same priming (`40-agent_prompts.md`). Neither decides anything.
 
+### Design delivery, where a project runs it
+
+Where a project runs the design delivery process (`90-design-delivery.md`), the seat carries two further
+duties. They are additions to the remit above and nothing else changes.
+
+**The external seat may produce a design package.** For a design package only: the page brief, the
+generation prompts, the requirement coverage table, the assumption audit, the page specification and the
+acceptance criteria. It still writes no code, no tests, no architecture, no instructions, no view model
+and no data binding — those remain the Architect's under the project's change-routing decision — and it
+still creates nothing in the tracker.
+
+**The internal seat acts on a handoff.** A pull request carrying a product amendment or a design package
+is the handoff; nobody carries it by hand. On one, the internal seat reads it against the accepted spec,
+orders the scrutiny the artifact asks for, puts the pending decisions to the board as **one** card, and
+folds in only what the board decides.
+
+**The guard on design-originated work.** An amendment that originated inside a design round is reviewed
+by an advisor before the board decides. The advisor receives the accepted sources, the original
+assumptions, the alternatives and the incremental scope, and may reject the premise rather than only
+weigh the options. The amendment must stand on product reasoning alone: *"the design needs it"* is not a
+reason, and an option that exists only to make a screen easier to draw is named as such and rejected.
+
+**Approving an amendment does not establish that the fold-in was faithful.** The existing independent
+review of a load-bearing specification revision stands.
+
 **The handoff runs one way.** The external seat writes
 `_docs/product-amendments/<date>_<topic>.md` (the directory gets a row in the workspace `INDEX.md`): the question, the options with cost and reversibility,
 the Product Owner's decision, and what it rejects. It stays `draft` until the Product Owner approves
