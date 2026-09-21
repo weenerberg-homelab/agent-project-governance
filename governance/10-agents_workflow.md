@@ -217,8 +217,9 @@ folds in only what the board decides.
 
 **The handoff pull request is opened as a draft, and leaving draft is what hands it to the Product
 Owner.** The pull request does two jobs: it carries the artifact from a seat that cannot write to the
-tracker, and it is the record the Product Owner merges. Those happen at opposite ends of the chain. A
-draft cannot be merged, so while the decisions are open the artifact itself says it is not his yet. The
+tracker, and it is the record that goes to the Product Owner for approval. Those happen at opposite ends
+of the chain. A draft cannot be merged, so while the decisions are open the artifact itself says it is
+not his to decide on yet. The
 internal seat writes the board's answers back into the amendment, marks it accepted, and only then marks
 the pull request ready for review. Nobody takes it out of draft before the board has decided, and the
 Product Owner is never asked to work out which state it is in.
