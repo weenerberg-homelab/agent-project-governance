@@ -501,6 +501,11 @@ A merged amendment is **not** authority. The chain is: a draft amendment, then P
 then the fold-in that produces an accepted specification revision. **Only the folded accepted
 specification is citable by a coverage table**, and implementation waits for it.
 
+The amendment's pull request is opened as a **draft** pull request and stays one until the board has
+decided and the answers are written back into the amendment. The document's `Status:` field and the pull
+request's draft state say the same thing, and the draft state is the one a tool and a person can both
+read without opening the file.
+
 ### 13.2 The guard
 
 The coordinator both runs the design round and drafts any amendment it produces.

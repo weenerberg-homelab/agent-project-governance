@@ -215,6 +215,14 @@ is the handoff; nobody carries it by hand. On one, the internal seat reads it ag
 orders the scrutiny the artifact asks for, puts the pending decisions to the board as **one** card, and
 folds in only what the board decides.
 
+**The handoff pull request is opened as a draft, and leaving draft is what hands it to the Product
+Owner.** The pull request does two jobs: it carries the artifact from a seat that cannot write to the
+tracker, and it is the record the Product Owner merges. Those happen at opposite ends of the chain. A
+draft cannot be merged, so while the decisions are open the artifact itself says it is not his yet. The
+internal seat writes the board's answers back into the amendment, marks it accepted, and only then marks
+the pull request ready for review. Nobody takes it out of draft before the board has decided, and the
+Product Owner is never asked to work out which state it is in.
+
 **The guard on design-originated work.** An amendment that originated inside a design round is reviewed
 by an advisor before the board decides. The advisor receives the accepted sources, the original
 assumptions, the alternatives and the incremental scope, and may reject the premise rather than only
@@ -227,7 +235,7 @@ review of a load-bearing specification revision stands.
 **The handoff runs one way.** The external seat writes
 `_docs/product-amendments/<date>_<topic>.md` (the directory gets a row in the workspace `INDEX.md`): the question, the options with cost and reversibility,
 the Product Owner's decision, and what it rejects. It stays `draft` until the Product Owner approves
-it. The internal seat then folds it into the accepted spec through a pull request that names the
+it, and its pull request stays a draft for exactly as long. The internal seat then folds it into the accepted spec through a pull request that names the
 amendment. The amendment is the input; the spec stays the authority. The external seat never edits
 the accepted spec, and the internal seat never explores open questions conversationally.
 

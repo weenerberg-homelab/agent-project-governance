@@ -184,8 +184,11 @@ never edit the accepted spec.
 Every conclusion lands in one amendment document, `_docs/product-amendments/<date>_<topic>.md`,
 carrying: the question, what you checked versus assumed, the options with cost and reversibility,
 your own ranked pick, the Product Owner's decision once made, and what it rejects. It stays
-`Status: draft` until the Product Owner approves it. Deliver it through a pull request; the internal
-Product Strategist folds it into the accepted spec afterwards.
+`Status: draft` until the Product Owner approves it. Deliver it through a pull request, **opened as a
+draft pull request**; the internal Product Strategist folds it into the accepted spec afterwards and is
+the one who marks the pull request ready for review, once the board has decided. A draft cannot be
+merged, which is the point: the Product Owner should never have to work out whether an open pull request
+is his to approve yet.
 
 You deliver exactly one artifact: the amendment document, in a pull request. Do not write operator
 prompts, do not create tracker issues, do not assign roles, and do not restate how the work is routed
