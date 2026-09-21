@@ -87,6 +87,29 @@ without the other.
 card and at most **one free-text option** per question. A card breaking either is refused on
 submission. Split across cards rather than grouping decisions to fit.
 
+### A card is posted only when nothing it cites can still move
+
+A card is an interruption with a cost attached: the reader stops what they are doing, opens it, and
+works through it. A card that is withdrawn while they are answering it costs them that work and
+returns nothing. **Not posting early is worth more than withdrawing well.**
+
+Before posting, the compiling seat confirms all of these:
+
+- **The head is settled.** Every pull request the card names is out of draft, and no run is open on
+  the issue that authored it. A seat still working on the branch will move the head under the card.
+- **CI on that exact head is finished** — `status: completed`, every job `success` or `skipped`.
+  `in_progress` is not ready, and a card saying "CI not verified" hands the reader a decision the
+  seat was supposed to make.
+- **Every document, decision or figure the card cites is at its final revision**, not a draft that a
+  run is still editing.
+
+If any of these is not true, wait and check again. A card is cheap to delay by ten minutes and
+expensive to withdraw.
+
+When a card must be withdrawn anyway, **the comment saying so is written before the retraction**, and
+it names what changed, what replaces it and when. A card that vanishes with the explanation arriving
+afterwards is indistinguishable to the reader from a crash.
+
 ## Release
 
 ### Who decides each finding
