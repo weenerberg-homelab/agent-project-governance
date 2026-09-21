@@ -123,6 +123,38 @@ only is the Architect's to dispose; it must not wait on a board card that does n
 
 Guardrails: one invocation at this checkpoint, never inside a loop, and a per-invocation budget.
 
+## Board cards
+
+A board card put to a human is the whole of what that human sees. The instruction behind it, the
+document it was compiled from and the amendment it serves are all off screen when the buttons are
+pressed. The card carries its own meaning or it carries none.
+
+**Every option label begins with its identifier**, exactly as the card instruction numbers it:
+`a — The decision stands, and §8.3 names the cost`. That identifier is what the answer, the
+write-back, the amendment and the pull request are all keyed on. A button that omits it asks the
+reader to match three sentences to three letters they cannot see. Never renumber: the instruction's
+`a` is the card's `a`.
+
+**Every question title begins with its item identifier** — `F-P1 — the recommended order at 7v7`.
+The same reason one level up. The reader answers `F-P1: a`, and a title without the identifier makes
+that answer a guess.
+
+**Every option states the choice in product terms and stands on its own.** `No modals this round
+(DA-6)`, never `Q5 — DA-6`. An internal tag may appear in parentheses; it may not be the whole
+label. An option that cannot be understood without the source document open is not finished.
+
+**Single-select only, recommendation first and marked as such.** A grouped multi-select returns one
+tick and silently drops the rest, and answers have been lost that way. One decision per question,
+the recommended option first, so the ordinary answer is one press.
+
+These rules bind both seats. The seat that writes the card instruction numbers the items and the
+options; the seat that renders the card carries those numbers onto the labels. Neither half works
+without the other.
+
+**Paperclip's own limits, so they are not rediscovered by rejection:** at most **10 questions** per
+card and at most **one free-text option** per question. A card breaking either is refused on
+submission. Split across cards rather than grouping decisions to fit.
+
 ## Release
 
 ### Who decides each finding
