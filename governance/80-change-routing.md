@@ -59,11 +59,27 @@ identifies the agent, so history shows which agent made the change.
 - Nobody pushes to the default branch. Implementors never merge.
 - A run never closes an issue while an action it names still has no issue and no owner: create and
   assign that work first, or leave the issue open with the outstanding part stated.
-- **Review requires green CI once CI exists, read from the check runs.** A repository whose results come
-  from GitHub Actions publishes them as **check runs**, not as legacy commit statuses, so
-  `/commits/<sha>/status` answers `pending` with an empty list forever and no token changes that. Read
-  `gh pr view <n> --json statusCheckRollup` or `/commits/<sha>/check-runs`. A job reported `skipped`
-  because the diff does not need it is not a failure. When the check cannot be read at all, say which
-  call was refused and hand it to the operator; do not schedule repeated rechecks of the same call,
-  because an endpoint that cannot answer will not answer the twelfth time either.
+- **Review requires green CI once CI exists, read from the workflow run.** A repository whose results
+  come from GitHub Actions publishes them as **check runs**, not as legacy commit statuses, so
+  `/commits/<sha>/status` answers `pending` with an empty list forever and no token changes that.
+
+  **Read the workflow run, not the check runs.** An agent token carries `Actions: Read-only`; the
+  check-runs endpoint and `statusCheckRollup` need `Checks`, which a fine-grained personal access
+  token does not offer, so both answer `HTTP 403` however green the build is. Two calls give the same
+  verdict under the permission the token has:
+
+  ```
+  GET /repos/<owner>/<repo>/actions/runs?head_sha=<head>   -> the run, its status and conclusion
+  GET /repos/<owner>/<repo>/actions/runs/<id>/jobs         -> each job's status and conclusion
+  ```
+
+  `status: completed` with `conclusion: success` is green. A job `skipped` because the diff does not
+  need it is not a failure. `status: in_progress` with a null conclusion means wait, not fail — say so
+  and come back, rather than reporting an unknown as a refusal. `statusCheckRollup` stays the path for
+  a person reading the same thing by hand.
+
+  When the verdict cannot be read at all, say which call was refused and hand it to the operator; do
+  not schedule repeated rechecks of the same call, because an endpoint that cannot answer will not
+  answer the twelfth time either, and do not raise an issue asking another seat to read a number this
+  call would have returned.
 - Re-classify when a pull request gains commits that add paths.
