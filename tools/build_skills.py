@@ -24,6 +24,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SKILLS_DIR = ROOT / "skills"
 
+# Skills written by hand rather than generated from a governance document. They are part of the
+# manifest — this tool must not offer to delete them — but it does not write them either, so editing
+# one of these files is editing the source. A generated skill's own header says the opposite.
+HAND_AUTHORED: set[str] = {
+    "exploratory-dialogue",
+}
+
 # name, description, sources: (path relative to ROOT, heading or None for the whole file)
 SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
     (
@@ -118,7 +125,8 @@ def main() -> int:
         if not check:
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(content)
-    extra = sorted(p.name for p in SKILLS_DIR.iterdir() if p.is_dir() and p.name not in expected) if SKILLS_DIR.exists() else []
+    known = set(expected) | HAND_AUTHORED
+    extra = sorted(p.name for p in SKILLS_DIR.iterdir() if p.is_dir() and p.name not in known) if SKILLS_DIR.exists() else []
     if check:
         if stale or extra:
             print(f"skills out of date: {', '.join(stale + extra)}; run python3 tools/build_skills.py")
@@ -126,7 +134,8 @@ def main() -> int:
         print("skills up to date")
         return 0
     for name in extra:
-        print(f"warning: skills/{name} is not in the manifest; remove it by hand")
+        print(f"warning: skills/{name} is in neither SKILLS nor HAND_AUTHORED; add it to one or "
+              f"remove it by hand")
     print(f"wrote {len(stale)} skill(s)" if stale else "skills already up to date")
     return 0
 
