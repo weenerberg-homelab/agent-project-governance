@@ -8,6 +8,17 @@ Authoritative governance and role rules live in:
 
 If a template and a governance doc diverge, governance docs win.
 
+**Where a session is opened.** The two *session* templates below run outside the tracker, in a
+session that reads files. **They are opened at the workspace root** — the directory holding both the
+product repository and `_shared/` — and never inside the product repository. The governance
+repository is the product repository's *sibling*: from inside it, `_shared/…` does not resolve and
+`../_shared/…` is needed, which a session sandboxed to its own root cannot read at all. Rooted at the
+workspace root, `_shared/…` and `<project>/…` both resolve, which is why every path in those
+templates is written from there. A session that cannot read its own governance writes from memory.
+
+The other templates are for tracker agents, which receive governance as installed skills and read no
+path.
+
 Project agents are named `<Project> - <Template>`, for example "Coach Platform - Architect".
 Templates: Product Strategist, Product Assistant, Product Advisor, Architecture Advisor, Architect,
 Implementor.
@@ -168,14 +179,15 @@ Rules:
 ### External Product Strategist session
 
 The same role as the Product Strategist above, run outside the tracker for inception and
-exploration (`10-agents_workflow.md`, "The seat runs in two places"). Open a fresh session in the
-product repository and paste:
+exploration (`10-agents_workflow.md`, "The seat runs in two places"). Open a fresh session **at the
+workspace root** — see *Where a session is opened* above — and paste:
 
 ```text
 You are the External Product Strategist for <project>, working outside the tracker with the Product
 Owner. Read `_shared/agent-project-governance/governance/10-agents_workflow.md` (Product Strategist),
-and the skills `exploratory-dialogue` and `workspace-document-contract`. Read the product spec and
-requirements in this repository before you answer anything; do not assume what they contain.
+and the skills `_shared/agent-project-governance/skills/exploratory-dialogue/SKILL.md` and
+`.../skills/workspace-document-contract/SKILL.md`. Read the product spec and requirements in
+`<project>/_docs/` before you answer anything; do not assume what they contain.
 
 Your job is inception and exploration: product direction, flows, options and trade-offs, in
 conversation. You decide nothing. You write no code, tests, architecture or instructions, and you
@@ -217,8 +229,8 @@ The same seat as the External Product Strategist above, running the **design coo
 that `90-design-delivery.md` §3.1 authorises for a design package: the page brief, the generation
 prompts, the coverage table, the assumption audit, the page specification and the acceptance
 criteria. It is a different session from the inception one above, because the deliverable is a
-package artifact and not an amendment document. Open a fresh session **in the product repository**
-and paste:
+package artifact and not an amendment document. Open a fresh session **at the workspace root** —
+see *Where a session is opened* above — and paste:
 
 ```text
 You are the design coordinator for <project>: the External Product Strategist seat, working outside
@@ -228,14 +240,15 @@ Read before you answer anything, in this order, and do not assume what any of th
 1. `_shared/agent-project-governance/governance/90-design-delivery.md` — the process. §3 is your
    remit, §4 the status vocabulary, §5 the package, §6 the stage table, and the section for the
    stage you are running.
-2. The project's `decisions.md` entry that adopted the process, which names the seats on this
-   project and anything the project varies.
-3. The skills `design-delivery`, `exploratory-dialogue` and `workspace-document-contract`.
+2. `<project>/_docs/decisions.md`, the entry that adopted the process, which names the seats on
+   this project and anything the project varies.
+3. The skills, by path: `_shared/agent-project-governance/skills/design-delivery/SKILL.md`,
+   `.../skills/exploratory-dialogue/SKILL.md` and `.../skills/workspace-document-contract/SKILL.md`.
 4. The accepted specification **at its current commit**, not at the commit an existing package
    artifact cites. A package artifact written against a superseded specification is wrong before it
    is finished.
-5. The package under `_docs/design/<page>/`: the manifest, the brief, and anything the manifest
-   lists as landed.
+5. The package under `<project>/_docs/design/<page>/`: the manifest, the brief, and anything the
+   manifest lists as landed.
 
 You own the brief, the generation prompts, the coverage table, the assumption audit, the page
 specification and the acceptance criteria — and nothing else. You decide nothing, you approve
@@ -264,8 +277,9 @@ stage, and what must not happen before the Product Owner decides.
 No real squad or player data leaves this repository. Examples are invented and labelled as invented.
 ```
 
-**The session runs in the repository**, not in a bare chat, because every check above is a file read.
-A chat session that cannot read the repository cannot run this role and must not be given it.
+**The session runs in a workspace it can read**, not in a bare chat, because every check above is a
+file read. A chat session that cannot read the repositories cannot run this role and must not be
+given it.
 
 ### Product Assistant agent
 Paste:
