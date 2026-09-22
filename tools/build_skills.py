@@ -38,7 +38,7 @@ SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
         "Use when writing or checking a work item, instruction, report, review, decision or "
         "milestone document, or a prompt or report between roles: required header fields, "
         "vocabularies, the Blocked on shape, the execution envelope, the header and footer, "
-        "and the handoff block.",
+        "the handoff block, and where each field lives on a board-backed project.",
         [("governance/60-workspace-document-contract.md", None)],
     ),
     (
@@ -56,10 +56,12 @@ SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
         "review-and-release",
         "Use when dispositioning findings, compiling or posting a board card, checking or "
         "approving a release summary, writing a review with findings, answering review "
-        "findings in a rework report, or accepting a technical or product milestone.",
+        "findings in a rework report, accepting a technical or product milestone, or "
+        "keeping the current and next milestones groomed on an idle board.",
         [
             ("governance/70-review-and-release.md", "## Dispositions of findings"),
             ("governance/70-review-and-release.md", "## Board cards"),
+            ("governance/70-review-and-release.md", "## Milestone maintenance"),
             ("governance/70-review-and-release.md", "## Release"),
             ("governance/70-review-and-release.md", "## Reviews, rework and acceptance"),
         ],
@@ -69,6 +71,14 @@ SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
         "Use when creating a project, assigning or changing its governance tier, or checking "
         "which files, tests, CI and documentation a tier requires.",
         [("project_patterns/10-project-structure-tiers.md", None)],
+    ),
+    (
+        "design-delivery",
+        "Use when running any stage of the design delivery process for a page package: the brief "
+        "and design space, generating or evaluating alternatives, the assumption audit, requirement "
+        "coverage verification, visual refinement, the freeze, the page specification and "
+        "acceptance criteria, and the S10 gate.",
+        [("governance/90-design-delivery.md", None)],
     ),
     (
         "change-routing",

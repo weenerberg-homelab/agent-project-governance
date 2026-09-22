@@ -178,6 +178,84 @@ When a card must be withdrawn anyway, **the comment saying so is written before 
 it names what changed, what replaces it and when. A card that vanishes with the explanation arriving
 afterwards is indistinguishable to the reader from a crash.
 
+## Milestone maintenance
+
+Acceptance is not the only thing a milestone needs from the Architect. A milestone decays between
+its opening and its acceptance: items are raised without being placed, prerequisites land and are
+never cleared, and priorities stop reflecting what is left. A decayed milestone cannot be worked
+from, and nothing on the board reports the decay.
+
+**The Architect keeps three horizons, at three different depths.**
+
+| Horizon | What is required |
+|---|---|
+| **Current technical milestone** | Complete and maintained. Every open item placed in it, prerequisites current, priorities meaningful, nothing in it that has already been delivered |
+| **Next technical milestone** | Prepared. Items placed and roughly ordered; prerequisites recorded where they are known |
+| **Later milestones** | Coarse. A title and a scope line. Detail written this far ahead rots before it is used, and rewriting it is waste |
+
+Depth is deliberate. Planning every milestone to the same detail is not thoroughness; it is work
+done twice, because the later plan is written against assumptions the earlier milestones will
+change.
+
+### Grooming on an idle wake
+
+A board with nothing running is not a board with nothing to do. Where an Architect is woken because
+the board is idle, that wake is a grooming turn:
+
+1. **Check the current technical milestone for decay** against the three horizons above.
+2. **Then select at most one item** — the top of §3.5's ranking within the current technical
+   milestone, with every prerequisite satisfied — assign it, and move it to `todo`.
+3. **Where readiness or placement is unclear, post a card instead of guessing.** An idle board is
+   not a licence to start work the Product Owner has not scheduled, and an item started in the wrong
+   milestone costs more than an hour of idleness.
+4. **Where nothing is ready, say so and stop.** "Nothing is ready" is a complete and useful answer;
+   it says the next thing needed is a decision, not a run.
+
+### Who owns which part
+
+Grooming is not one seat's work. §3.4 already says who owns each field, and the grooming turn
+follows it rather than inventing a shortcut.
+
+| Part | Seat |
+|---|---|
+| `Milestone` (`goalId`), prerequisites (`blockedBy`), parent and child, `Effort`, `Verification` | **Architect.** Technical placement and dependency |
+| `Value` (`priority`), and whether an overtaken item is cancelled or kept | **Product Owner**, compiled by the seat that compiles board cards |
+| The card, where readiness or placement needs a decision | **The card-compiling seat**, to its own card rules |
+| Selecting the one item and starting it | **Architect** |
+
+An Architect that fills `Value` across a backlog has decided business value by typing, which is the
+Product Owner's call and is exactly the kind of quiet decision this contract exists to prevent. It
+sets the value an item plainly has — a defect that breaks the current milestone is not a judgement
+call — and routes the rest to a card.
+
+### The triage pass comes first
+
+The Architect does not read the whole board. The seat that compiles board cards runs a **triage
+pass** and hands over a short list, which is how this works wherever people do it: someone who
+watches the board continuously narrows it, and the person who decides placement reads the shortlist.
+
+The triage pass names, with one line of reason each:
+
+| Candidate | Why it surfaces |
+|---|---|
+| No `goalId` | Not schedulable, and invisible to every selection |
+| A `blockedBy` whose blocker is `done` or `cancelled` | The prerequisite is gone and nothing re-read it |
+| In the current technical milestone but already delivered, superseded or duplicated | The milestone reports work that does not exist |
+| Raised more than one milestone ago and never placed | Either it belongs somewhere or it should be cancelled |
+| `priority` unset, or uniform across the milestone | §3.5 then ranks by age, which is a fallback rather than an order |
+| The top three by §3.5 that are ready to start | So the Architect confirms a selection rather than deriving one |
+
+It proposes nothing and changes nothing. Placement, prerequisites and the selection stay the
+Architect's, and `Value` stays the Product Owner's. **Triage decides what is looked at, never what is
+decided** — a shortlist that quietly omits an item has made the decision it claims not to make, so
+the pass states its own coverage: how many issues it read and how many it surfaced.
+
+**One item, not a queue.** Filling the board on one wake produces parallel work nobody ordered and
+hides which item was chosen and why. The next wake takes the next one.
+
+**The selection is stated with its reason**, in one line, naming the rule from §3.5 that put the
+item at the top. A selection that cannot be explained in one line was not made by the ranking.
+
 ## Release
 
 ### Who decides each finding
