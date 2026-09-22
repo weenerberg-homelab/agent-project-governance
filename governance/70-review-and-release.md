@@ -178,6 +178,19 @@ When a card must be withdrawn anyway, **the comment saying so is written before 
 it names what changed, what replaces it and when. A card that vanishes with the explanation arriving
 afterwards is indistinguishable to the reader from a crash.
 
+### A delivery card is not a question
+
+Most cards ask the Product Owner to decide something, and `supersedeOnUserComment: true` is right
+for them: a comment means the question moved and the card is stale.
+
+**A card that delivers something is different.** Its two answers are *taken* and *send it back*, and
+a comment on the issue — from any seat, about anything — must not retract it. Set
+`supersedeOnUserComment: false` on a delivery card, and `continuationPolicy: wake_assignee` so the
+press is the wake.
+
+The test for which kind a card is: **if answering it changes what gets built, it is a question. If
+answering it only records that a handoff arrived, it is a delivery.**
+
 ## Milestone maintenance
 
 Acceptance is not the only thing a milestone needs from the Architect. A milestone decays between
