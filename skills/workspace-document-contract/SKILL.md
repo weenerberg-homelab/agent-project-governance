@@ -386,7 +386,10 @@ technical milestone*, which is the distinction the board draws and this contract
 2. **`blockedBy`** for every prerequisite known at the time. A prerequisite in prose is not a
    prerequisite; it stops nothing and nothing can read it.
 3. **`priority`**, which is `Value`. A board whose items are all `medium` has no order, and §3.5
-   then ranks by age — which §3.5 itself calls a fallback, not a priority signal.
+   then ranks by age — which §3.5 itself calls a fallback, not a priority signal. **`Value` is the
+   Product Owner's field (§3.4)**, so the raiser sets the value it plainly has and the seat that
+   compiles board cards carries the rest to the Product Owner. An agent does not decide business
+   value by filling a field.
 
 **An issue raised in the middle of a milestone obeys this too.** Defects, follow-ups and findings
 raised while work is in flight are where the omission accumulates, because the rule that links an

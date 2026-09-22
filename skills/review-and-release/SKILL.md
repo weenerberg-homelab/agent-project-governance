@@ -143,6 +143,23 @@ the board is idle, that wake is a grooming turn:
 4. **Where nothing is ready, say so and stop.** "Nothing is ready" is a complete and useful answer;
    it says the next thing needed is a decision, not a run.
 
+### Who owns which part
+
+Grooming is not one seat's work. §3.4 already says who owns each field, and the grooming turn
+follows it rather than inventing a shortcut.
+
+| Part | Seat |
+|---|---|
+| `Milestone` (`goalId`), prerequisites (`blockedBy`), parent and child, `Effort`, `Verification` | **Architect.** Technical placement and dependency |
+| `Value` (`priority`), and whether an overtaken item is cancelled or kept | **Product Owner**, compiled by the seat that compiles board cards |
+| The card, where readiness or placement needs a decision | **The card-compiling seat**, to its own card rules |
+| Selecting the one item and starting it | **Architect** |
+
+An Architect that fills `Value` across a backlog has decided business value by typing, which is the
+Product Owner's call and is exactly the kind of quiet decision this contract exists to prevent. It
+sets the value an item plainly has — a defect that breaks the current milestone is not a judgement
+call — and routes the rest to a card.
+
 **One item, not a queue.** Filling the board on one wake produces parallel work nobody ordered and
 hides which item was chosen and why. The next wake takes the next one.
 
