@@ -176,6 +176,35 @@ Rules:
 - Hand decision cards, evidence tables, records and merges to the Product Assistant.
 ```
 
+### Delivering a prompt to an outside-the-tracker session
+
+A session that runs outside the tracker cannot be given work by the board: it has no tracker access,
+it is never assigned an issue, and it cannot read a comment addressed to it. **The prompt is carried
+by a person.** The seat that has the material writes it; the Product Owner pastes it.
+
+**The seat that holds the material writes the prompt.** It is the seat that knows what the session
+must read, in what order, and what it must not do. A prompt written by anyone else is a summary of
+that seat's work, and what a summary loses is exactly what the session is judged on.
+
+**The prompt is a document, and the document is delivered by a card.**
+
+| | |
+|---|---|
+| **The prompt** | One issue document, class `Prompt` (§2a of the workspace document contract). Self-sufficient: role priming, the project, the task, and every path the session must read. It assumes no memory and no tracker access, because the session has neither |
+| **The card** | A `request_confirmation` on the same issue, whose `target` is that document — a link, not a copy. `detailsMarkdown` says what the prompt is for and which session to open it in, in a few lines. **The prompt text is not duplicated into the card**: two copies drift, and a rendered card is a bad place to copy sixty lines from |
+| **The wake** | `continuationPolicy: wake_assignee`. The Product Owner's press wakes the seat, so the handoff needs no monitor and no poll |
+| **The rejection** | `rejectRequiresReason: true`. The second button is *"this prompt is not usable"* with the reason, and the seat rewrites it. That is what makes the card a decision rather than an acknowledgement |
+| **Not superseded** | `supersedeOnUserComment: false`. A delivery is not a question, and a comment on the issue must not retract it |
+
+**Never a monitor.** A seat that delivers a prompt and then schedules itself to poll for the result
+has made the wait invisible: nothing is on the board, `reviewAttention` reads as covered, and the
+first time anyone looks is the next scheduled check. On 2026-09-22 two issues sat this way, one for
+five hours and one for twenty-four, and in both cases the thing being waited for was a person who
+had not been told.
+
+**Never a comment alone.** A comment is not a queue. It scrolls, it carries no state, and nothing
+records whether the handoff was taken.
+
 ### External Product Strategist session
 
 The same role as the Product Strategist above, run outside the tracker for inception and
