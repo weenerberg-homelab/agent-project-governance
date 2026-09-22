@@ -73,6 +73,14 @@ SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
         [("project_patterns/10-project-structure-tiers.md", None)],
     ),
     (
+        "design-delivery",
+        "Use when running any stage of the design delivery process for a page package: the brief "
+        "and design space, generating or evaluating alternatives, the assumption audit, requirement "
+        "coverage verification, visual refinement, the freeze, the page specification and "
+        "acceptance criteria, and the S10 gate.",
+        [("governance/90-design-delivery.md", None)],
+    ),
+    (
         "change-routing",
         "Use when a pull request is opened, is ready for review, or is about to be merged: classify it "
         "by path ownership into the technical or product route, split mixed pull requests, compile the "

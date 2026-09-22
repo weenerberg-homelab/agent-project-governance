@@ -160,6 +160,28 @@ Product Owner's call and is exactly the kind of quiet decision this contract exi
 sets the value an item plainly has — a defect that breaks the current milestone is not a judgement
 call — and routes the rest to a card.
 
+### The triage pass comes first
+
+The Architect does not read the whole board. The seat that compiles board cards runs a **triage
+pass** and hands over a short list, which is how this works wherever people do it: someone who
+watches the board continuously narrows it, and the person who decides placement reads the shortlist.
+
+The triage pass names, with one line of reason each:
+
+| Candidate | Why it surfaces |
+|---|---|
+| No `goalId` | Not schedulable, and invisible to every selection |
+| A `blockedBy` whose blocker is `done` or `cancelled` | The prerequisite is gone and nothing re-read it |
+| In the current technical milestone but already delivered, superseded or duplicated | The milestone reports work that does not exist |
+| Raised more than one milestone ago and never placed | Either it belongs somewhere or it should be cancelled |
+| `priority` unset, or uniform across the milestone | §3.5 then ranks by age, which is a fallback rather than an order |
+| The top three by §3.5 that are ready to start | So the Architect confirms a selection rather than deriving one |
+
+It proposes nothing and changes nothing. Placement, prerequisites and the selection stay the
+Architect's, and `Value` stays the Product Owner's. **Triage decides what is looked at, never what is
+decided** — a shortlist that quietly omits an item has made the decision it claims not to make, so
+the pass states its own coverage: how many issues it read and how many it surfaced.
+
 **One item, not a queue.** Filling the board on one wake produces parallel work nobody ordered and
 hides which item was chosen and why. The next wake takes the next one.
 
