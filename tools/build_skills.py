@@ -38,7 +38,7 @@ SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
         "Use when writing or checking a work item, instruction, report, review, decision or "
         "milestone document, or a prompt or report between roles: required header fields, "
         "vocabularies, the Blocked on shape, the execution envelope, the header and footer, "
-        "and the handoff block.",
+        "the handoff block, and where each field lives on a board-backed project.",
         [("governance/60-workspace-document-contract.md", None)],
     ),
     (
@@ -56,10 +56,12 @@ SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
         "review-and-release",
         "Use when dispositioning findings, compiling or posting a board card, checking or "
         "approving a release summary, writing a review with findings, answering review "
-        "findings in a rework report, or accepting a technical or product milestone.",
+        "findings in a rework report, accepting a technical or product milestone, or "
+        "keeping the current and next milestones groomed on an idle board.",
         [
             ("governance/70-review-and-release.md", "## Dispositions of findings"),
             ("governance/70-review-and-release.md", "## Board cards"),
+            ("governance/70-review-and-release.md", "## Milestone maintenance"),
             ("governance/70-review-and-release.md", "## Release"),
             ("governance/70-review-and-release.md", "## Reviews, rework and acceptance"),
         ],
