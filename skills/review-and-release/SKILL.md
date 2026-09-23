@@ -79,6 +79,13 @@ label. An option that cannot be understood without the source document open is n
 tick and silently drops the rest, and answers have been lost that way. One decision per question,
 the recommended option first, so the ordinary answer is one press.
 
+**Every option says what accepting it writes, and what it forecloses.** Stating the choice is not
+the same as stating its consequence. *"Approve — merge now"* is a clear choice and does not say that
+the merge happens at a commit that does not exist yet, or that the decision is reversible only by an
+amendment after the screen is built. The reader is deciding the consequence, not the phrasing, so
+the consequence belongs in the option and not in the instruction behind it. Where an option is hard
+to undo, say what undoing it would cost.
+
 These rules bind both seats. The seat that writes the card instruction numbers the items and the
 options; the seat that renders the card carries those numbers onto the labels. Neither half works
 without the other.
@@ -86,6 +93,42 @@ without the other.
 **Paperclip's own limits, so they are not rediscovered by rejection:** at most **10 questions** per
 card and at most **one free-text option** per question. A card breaking either is refused on
 submission. Split across cards rather than grouping decisions to fit.
+
+### What may be applied instead of asked
+
+A card costs the reader a stop, a read and a decision, and it costs the board a wake, a fold-in and a
+review of the fold-in. Most of what reaches a card does not need one.
+
+**A finding is applied and listed, not carded, when all four of these hold:**
+
+1. **A reviewer raised it and the seat that owns the work agrees.** Two seats agreeing is not a
+   product decision; it is the review working.
+2. **It reopens no decision the Product Owner has made.** Restoring text he already decided — a
+   narrowed condition, a dropped scope, a word deleted from a heading — is a correction, not a new
+   question. Changing what he decided is a card, however small the change looks.
+3. **It is reversible at the cost of the same edit.** A word, a row, an enumeration, a citation. A
+   generated artifact, an accepted document, a merge, or anything downstream has already consumed is
+   not.
+4. **It settles on evidence rather than on judgement.** A figure that does not reproduce, a reference
+   to a section that is out of scope, a count that disagrees with the table it counts — the
+   repository answers these, and a person adding *"yes, fix it"* adds nothing.
+
+Applying them is not silent. **They are listed where the work lands** — what was found, what was
+changed, and by whose agreement — so the Product Owner reads them once, afterwards, in a list, rather
+than answering them one at a time beforehand. He can reverse any of them; that is what condition 3 is
+for.
+
+**Card it when any one of the four fails.** Disagreement between the reviewer and the owner, a
+reopened decision, an irreversible change, or a judgement call the evidence cannot settle. Those are
+the three things `90-design-delivery.md` §3.2 already names — exceptions, unresolved product choices,
+and the visual judgement — stated as a test a seat can apply to one finding.
+
+**What this is not.** It is not a licence to skip a card because the answer is predictable. A product
+rule the specification never settled has to be asked however obvious the recommendation is, and
+agreement rates are not evidence that a card was unnecessary — on Coach Platform, eleven of fifteen
+answered cards took every recommendation, and several of those settled rules that had no answer
+anywhere in the accepted documents. The test is what the item **is**, never how the reader was going
+to answer it.
 
 ### A card is posted only when nothing it cites can still move
 
@@ -97,6 +140,14 @@ Before posting, the compiling seat confirms all of these:
 
 - **The head is settled.** Every pull request the card names is out of draft, and no run is open on
   the issue that authored it. A seat still working on the branch will move the head under the card.
+
+  **A card whose purpose is to authorise leaving draft is the exception**, and it is not a licence to
+  skip the check. A design or amendment package is opened as a draft on purpose — draft is the signal
+  that the decisions are open — so a card asking *"approve this for merge"* can never name a pull
+  request that is already out of draft, and a seat reading the rule literally could never post one.
+  For that card the requirement is that **the head is frozen** — no run open on the branch, no
+  finding outstanding against it — and that CI is green at that exact head. Draft status is then the
+  thing being decided, not a precondition.
 - **CI on that exact head is finished** — `status: completed`, every job `success` or `skipped`.
   `in_progress` is not ready, and a card saying "CI not verified" hands the reader a decision the
   seat was supposed to make.
@@ -105,6 +156,17 @@ Before posting, the compiling seat confirms all of these:
 
 If any of these is not true, wait and check again. A card is cheap to delay by ten minutes and
 expensive to withdraw.
+
+**A card must not move the artifact it approves.** The checks above are about other seats moving the
+head. A card can move it by itself: an option that edits a file inside the pull request, answered on
+the same card that approves that pull request at a named commit, produces an approval of a commit
+that does not exist. Either split them — the change question on one card, the approval on the next,
+once the answer is folded and CI is green — or word the approval so it binds to **the head after
+these answers are folded**, never to a literal SHA. An approval recorded against a commit that was
+never merged is worse than no record: it reads as evidence and is not.
+
+The seat compiling the card is the one that knows which options touch the branch. Check each option
+against the pull request's own file list before putting an approval beside it.
 
 When a card must be withdrawn anyway, **the comment saying so is written before the retraction**, and
 it names what changed, what replaces it and when. A card that vanishes with the explanation arriving
