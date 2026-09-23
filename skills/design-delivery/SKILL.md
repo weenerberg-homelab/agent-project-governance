@@ -103,7 +103,34 @@ are recorded as evidence and are not presented one at a time for acceptance.
 The brief sets the round's scope, the number of alternatives, and an iteration budget with a stop rule.
 None of those is fixed by this document.
 
-### 3.3 The board round is the expensive unit, and it is budgeted
+### 3.3 A board answer is recorded inside the tracker and folded in outside it
+
+§3 gives the brief, the generation prompts and the page specification to the **coordinator**, which
+runs outside the tracker and cannot read a board answer. The **internal seat** reads the board and
+owns none of those artifacts. Nothing said who carries an answer from one to the other, so the
+internal seat filled the gap by editing the coordinator's artifacts itself.
+
+That is the expensive path. The coordinator holds the package in one session; the internal seat
+re-reads it from the tracker every time it folds anything in. On the S1 selection package the two
+costliest runs of the whole day — **$18.71 and $12.95 of reference price** — were both the internal
+seat folding board answers into the brief.
+
+**The internal seat records the answer. The coordinator folds it in.**
+
+- The internal seat writes the answer **on the issue**, verbatim, with the card and the timestamp,
+  and says which artifacts it bears on. It edits no coordinator artifact to do this.
+- The coordinator folds it into the brief, the prompts and the specification in its next session,
+  reading the answer from the issue as delivered.
+- **Where an answer blocks the round and the coordinator will not run before it is needed**, the
+  internal seat may fold it in, and **says on the issue that it did and why**. The exception exists
+  because a package must not wait on a session nobody has opened; naming it is what stops it becoming
+  the rule again.
+
+This costs one handoff per round. It is worth it when the round is expensive and not when it is
+cheap, which is why the exception above is written as a judgement the internal seat makes and
+records rather than as a threshold.
+
+### 3.4 The board round is the expensive unit, and it is budgeted
 
 A **board round** is one card to the Product Owner plus everything that follows from it: the
 Advisor review that produced the questions, the coordinator's fold-in of the answers, and the
