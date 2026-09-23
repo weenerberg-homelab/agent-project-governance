@@ -147,6 +147,13 @@ label. An option that cannot be understood without the source document open is n
 tick and silently drops the rest, and answers have been lost that way. One decision per question,
 the recommended option first, so the ordinary answer is one press.
 
+**Every option says what accepting it writes, and what it forecloses.** Stating the choice is not
+the same as stating its consequence. *"Approve — merge now"* is a clear choice and does not say that
+the merge happens at a commit that does not exist yet, or that the decision is reversible only by an
+amendment after the screen is built. The reader is deciding the consequence, not the phrasing, so
+the consequence belongs in the option and not in the instruction behind it. Where an option is hard
+to undo, say what undoing it would cost.
+
 These rules bind both seats. The seat that writes the card instruction numbers the items and the
 options; the seat that renders the card carries those numbers onto the labels. Neither half works
 without the other.
@@ -165,6 +172,14 @@ Before posting, the compiling seat confirms all of these:
 
 - **The head is settled.** Every pull request the card names is out of draft, and no run is open on
   the issue that authored it. A seat still working on the branch will move the head under the card.
+
+  **A card whose purpose is to authorise leaving draft is the exception**, and it is not a licence to
+  skip the check. A design or amendment package is opened as a draft on purpose — draft is the signal
+  that the decisions are open — so a card asking *"approve this for merge"* can never name a pull
+  request that is already out of draft, and a seat reading the rule literally could never post one.
+  For that card the requirement is that **the head is frozen** — no run open on the branch, no
+  finding outstanding against it — and that CI is green at that exact head. Draft status is then the
+  thing being decided, not a precondition.
 - **CI on that exact head is finished** — `status: completed`, every job `success` or `skipped`.
   `in_progress` is not ready, and a card saying "CI not verified" hands the reader a decision the
   seat was supposed to make.
@@ -173,6 +188,17 @@ Before posting, the compiling seat confirms all of these:
 
 If any of these is not true, wait and check again. A card is cheap to delay by ten minutes and
 expensive to withdraw.
+
+**A card must not move the artifact it approves.** The checks above are about other seats moving the
+head. A card can move it by itself: an option that edits a file inside the pull request, answered on
+the same card that approves that pull request at a named commit, produces an approval of a commit
+that does not exist. Either split them — the change question on one card, the approval on the next,
+once the answer is folded and CI is green — or word the approval so it binds to **the head after
+these answers are folded**, never to a literal SHA. An approval recorded against a commit that was
+never merged is worse than no record: it reads as evidence and is not.
+
+The seat compiling the card is the one that knows which options touch the branch. Check each option
+against the pull request's own file list before putting an approval beside it.
 
 When a card must be withdrawn anyway, **the comment saying so is written before the retraction**, and
 it names what changed, what replaces it and when. A card that vanishes with the explanation arriving
