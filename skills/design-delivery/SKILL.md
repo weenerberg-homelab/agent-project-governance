@@ -661,6 +661,42 @@ is large, contested, or the first of its archetype. The reviewer is told: **do n
 contradictions, ambiguity, missing interactions, missing states, missing data, unclear component
 boundaries, untestable criteria, and any place an implementer would have to invent behaviour.
 
+### 14.5 How the delivered-screen checks bind to the package
+
+No second gate is added; the checks that already accept a built screen are made to check **it against
+the package** rather than against a paraphrase of it. Without this, the implementation instruction can
+restate the criteria in its own words, the screenshots can show whatever data the build happened to have,
+and the whole comparison rests on the Product Owner's eye in one batched pass — which is the one check
+that cannot tell a figure computed wrongly from a figure computed right.
+
+**The criteria are transcribed, not re-authored.** The Architect's implementation instruction carries
+the package's `acceptance-criteria.md` as its `human-visual` criteria, quoted with the package revision
+they came from. A criterion the Architect believes is wrong goes back through §13, not into a rewording.
+
+**The arithmetic is checked by a machine.** `fixture-expected.md` holds the exact figure for every cell
+of the pinned fixture, computed before generation and rebuilt independently at S10. The built screen,
+loaded with the package's `fixture.json`, must show every one of those figures — each cover status and
+depth, each versatility and breadth ratio, each priority and tie group. That is an **automated** test
+the Implementor writes and CI runs; no human is needed to find a number that is wrong, and no human can
+be relied on to find one in a dense screen. A figure that differs is a defect, not a judgement.
+
+**The screenshots are comparable.** `human-visual` evidence for a packaged screen is taken with the
+pinned fixture loaded, at the package's pinned viewport, and set beside the frozen S8 artifact at its
+named commit. A screenshot of different data at a different size cannot be compared with anything.
+
+**A difference routes by what it changes:**
+
+| The built screen differs in | Goes to |
+|---|---|
+| What a figure means, or which rule computes it | §13 — it is a product change, and the package or the specification moves first |
+| A figure's value, with the rule unchanged | The Architect, as a defect. The automated test above fails on it |
+| Layout, spacing, emphasis, density | The Product Owner, by eye, the same owner as S7 |
+| Something the package did not specify | The Product Owner — the package had a gap, and S9 should have caught it; recorded as `rework`, origin `design_drift` |
+
+**The checker is not the builder.** Whoever judges the built screen against the package gets the package
+and the built screen, not the implementer's account of what it did. The same seat that built it
+confirming it matches is the check the process already has, and it is the weakest one.
+
 ---
 
 ## 15. Mid-project entry
