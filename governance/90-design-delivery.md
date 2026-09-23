@@ -95,6 +95,31 @@ are recorded as evidence and are not presented one at a time for acceptance.
 The brief sets the round's scope, the number of alternatives, and an iteration budget with a stop rule.
 None of those is fixed by this document.
 
+### 3.3 The board round is the expensive unit, and it is budgeted
+
+A **board round** is one card to the Product Owner plus everything that follows from it: the
+Advisor review that produced the questions, the coordinator's fold-in of the answers, and the
+revision review of that fold-in. It is the most expensive thing this process does. On the S1
+selection package, five board rounds — Q18–Q20, Q21–Q23, Q24, Q26–Q27, Q28–Q29 — cost about $90 of
+reference price in one day, 63% of everything the project spent, on a single screen.
+
+**Two board rounds is the budget for a design package.** The first settles the questions the design
+space raises. The second settles what the alternatives and the Advisor's review raise against the
+answers to the first.
+
+**A third round is allowed and is not free.** The coordinator states, in one line on the issue, what
+the first two rounds failed to settle and why it could not have been asked earlier. That line is the
+whole cost of the exception, and it exists so that a package that genuinely needs four rounds can
+have them while a package that is drifting says so in the record.
+
+**Within a round, every open decision goes on one card.** Splitting three decisions across three
+cards is three rounds wearing one round's name: each one wakes a seat, re-reads the package and
+produces a fold-in. The 10-question limit is the real bound, not the tidiness of the grouping.
+
+A question that arrives after its round has closed — because a review found it, or because an answer
+created it — is held for the next round unless it blocks the work outright. Holding it is what keeps
+the budget meaningful.
+
 ---
 
 ## 4. Status vocabulary
@@ -519,6 +544,25 @@ The coordinator both runs the design round and drafts any amendment it produces.
   an amendment does not establish that the fold-in was faithful — a previous fold-in omitted two rows
   from a figure table and left an incoherent calculation, and the revision review is what caught it.
 
+### 13.3 What each review reads
+
+A package grows across its rounds. The S1 selection package reached roughly three thousand lines, and
+it was read in full four times, once per review, at a cost that rose with every round.
+
+**The first review of a package and the last one before the gate read it whole.** Everything between
+them reads the diff since the previous review, plus every document that diff reaches — a figure table
+the diff changes is read with the text that cites it, and an amendment is read with the accepted
+section it would change.
+
+The reason for the two full reads is the failure a diff cannot show: an inconsistency between two
+documents where only one of them changed. The first full read establishes that the package is
+coherent; the last one establishes that it still is after everything the rounds did to it. A middle
+review that suspects it has stopped being coherent says so and reads whole — **a reviewer is never
+refused the full package**, and the scope here is a default, not a permission.
+
+**A review states which of the two it did**, so a later reader knows what was looked at. A review
+that read a diff and does not say so reads like a full review and is not one.
+
 ---
 
 ## 14. S10 — the gate
@@ -543,6 +587,19 @@ The internal strategist builds the forward coverage table **from the accepted sp
 the brief's copy of it, and compares. This catches a brief whose requirement list was stale when it was
 written. The round-2 brief was checked this way once, by hand, and the check found 26 things; the
 round-3 brief was not, and that is the difference this step removes.
+
+**Independently twice, and a third time only on disagreement.** A derived figure in a fixture is
+rebuilt from the accepted specification by a second seat that has not read the first seat's working.
+That second rebuild earns its cost: on the S1 selection package it found that an answer about
+precision moved three figures and created a tie group nobody had noticed. A **third** rebuild of
+figures two independent seats already agree on confirms what is settled and finds nothing — it
+happened on the same package, is recorded in the package's own words as *"three calculators written
+by three seats now agree"*, and it produced no finding.
+
+So: rebuild independently **twice**. Where the two disagree, a third rebuild settles which is right,
+and the disagreement is recorded with it. Where they agree, the agreement is the evidence and the
+round moves on. This does not weaken the rule above — the first rebuild still comes from the
+accepted specification rather than from the brief, which is what the check is for.
 
 ### 14.2 Severity
 
