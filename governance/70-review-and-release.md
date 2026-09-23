@@ -162,6 +162,42 @@ without the other.
 card and at most **one free-text option** per question. A card breaking either is refused on
 submission. Split across cards rather than grouping decisions to fit.
 
+### What may be applied instead of asked
+
+A card costs the reader a stop, a read and a decision, and it costs the board a wake, a fold-in and a
+review of the fold-in. Most of what reaches a card does not need one.
+
+**A finding is applied and listed, not carded, when all four of these hold:**
+
+1. **A reviewer raised it and the seat that owns the work agrees.** Two seats agreeing is not a
+   product decision; it is the review working.
+2. **It reopens no decision the Product Owner has made.** Restoring text he already decided — a
+   narrowed condition, a dropped scope, a word deleted from a heading — is a correction, not a new
+   question. Changing what he decided is a card, however small the change looks.
+3. **It is reversible at the cost of the same edit.** A word, a row, an enumeration, a citation. A
+   generated artifact, an accepted document, a merge, or anything downstream has already consumed is
+   not.
+4. **It settles on evidence rather than on judgement.** A figure that does not reproduce, a reference
+   to a section that is out of scope, a count that disagrees with the table it counts — the
+   repository answers these, and a person adding *"yes, fix it"* adds nothing.
+
+Applying them is not silent. **They are listed where the work lands** — what was found, what was
+changed, and by whose agreement — so the Product Owner reads them once, afterwards, in a list, rather
+than answering them one at a time beforehand. He can reverse any of them; that is what condition 3 is
+for.
+
+**Card it when any one of the four fails.** Disagreement between the reviewer and the owner, a
+reopened decision, an irreversible change, or a judgement call the evidence cannot settle. Those are
+the three things `90-design-delivery.md` §3.2 already names — exceptions, unresolved product choices,
+and the visual judgement — stated as a test a seat can apply to one finding.
+
+**What this is not.** It is not a licence to skip a card because the answer is predictable. A product
+rule the specification never settled has to be asked however obvious the recommendation is, and
+agreement rates are not evidence that a card was unnecessary — on Coach Platform, eleven of fifteen
+answered cards took every recommendation, and several of those settled rules that had no answer
+anywhere in the accepted documents. The test is what the item **is**, never how the reader was going
+to answer it.
+
 ### A card is posted only when nothing it cites can still move
 
 A card is an interruption with a cost attached: the reader stops what they are doing, opens it, and
