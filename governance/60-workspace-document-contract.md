@@ -365,12 +365,13 @@ prose cannot.
 | Parent and children | `parentId` |
 | A non-blocking relation | `relatedWork`, never a prose "see also" |
 | `Kind`, `Effort`, `Verification`, `Due`, `Budget` | A `·`-separated header line at the top of the description, in the §2 form: `**Kind:** defect · **Effort:** low · **Verification:** automated` |
+| The cost estimate | `Cost estimate: $40` in the description. Paperclip has no field for it, and automation reads this exact form |
 
 **Status mapping.** The seven values of §3.1 map to the board's statuses one to one, except that
 `backlog` and `todo` are both `Status: ready` — `todo` means ready *and scheduled into the current
 technical milestone*, which is the distinction the board draws and this contract did not.
 
-**Three fields are required when the issue is created, not later:**
+**Four fields are required when the issue is created, not later:**
 
 1. **`goalId`.** An issue with no goal is not schedulable: nothing will ever select it, and no
    milestone report counts it. Where the work genuinely belongs to no milestone, the issue says so
@@ -382,6 +383,21 @@ technical milestone*, which is the distinction the board draws and this contract
    Product Owner's field (§3.4)**, so the raiser sets the value it plainly has and the seat that
    compiles board cards carries the rest to the Product Owner. An agent does not decide business
    value by filling a field.
+4. **A cost estimate**, in the description, in the form `Cost estimate: $40`. It is what makes an
+   overrun detectable: the only relative measure of whether an issue is costing more than it is
+   worth is its own estimate, and an issue without one can only be judged against a fixed figure
+   that is meaningless across issues of different sizes. On Coach Platform 22 of 34 open issues
+   carried no estimate, including the one that reached $46 in a day, so the overrun check did not
+   cover the work most likely to overrun.
+
+   **A rough estimate is the point.** It is an order of magnitude, not a forecast — $10, $40, $200 —
+   and it is allowed to be wrong. What it may not be is absent, because a missing estimate is not a
+   cautious estimate; it removes the issue from the check entirely. Where the size genuinely cannot
+   be guessed, the raiser writes `Cost estimate: unknown` and the reason, which is a statement a
+   reader can act on and a blank is not.
+
+   An estimate is revised on the issue when the work is understood better, with the old figure and
+   the reason kept. Revising it is not an overrun; it is what makes the next overrun mean something.
 
 **An issue raised in the middle of a milestone obeys this too.** Defects, follow-ups and findings
 raised while work is in flight are where the omission accumulates, because the rule that links an
