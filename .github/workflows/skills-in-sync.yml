@@ -1,0 +1,34 @@
+# The seats read skills/, not governance/. build_skills.py generates one from the other and
+# nothing ran it, so four pull requests merged on 2026-09-23 changed the documents and changed
+# nothing about what any agent does. This job is the only thing that makes that impossible.
+#
+# It is a text check on one repository of Markdown: no services, no database, no matrix. It runs
+# on a GitHub-hosted runner because there is nothing here worth a self-hosted one.
+name: Skills match their sources
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: skills-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: build_skills.py --check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # --check exits 1 and names the stale skills. It reads the repository and writes nothing,
+      # so a red job here is always "run the generator and commit", never a flake to re-run.
+      - name: Skills are generated from the governance documents
+        run: python3 tools/build_skills.py --check
