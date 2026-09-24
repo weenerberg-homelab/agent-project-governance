@@ -147,6 +147,29 @@ A question that arrives after its round has closed — because a review found it
 created it — is held for the next round unless it blocks the work outright. Holding it is what keeps
 the budget meaningful.
 
+
+### 3.5 A finding about the record of the process is applied, not carded and not re-reviewed
+
+Some findings are about the record of the process rather than the package: which head or commit
+range a review covered, a commit count, a tally of corrections, a pointer to a card, issue or finding
+id that has gone stale. They change no figure, rule, requirement, board answer or acceptance
+criterion. **The owner applies them and lists them on the issue.** They do not go on a card, and a
+commit made only of them does **not** reopen a revision review: the last review's verdict stands for
+the head it named, and the list states what changed after it.
+
+**If any line of the fix moves a figure, a rule, a requirement, a board answer or an acceptance
+criterion, it is not this kind of finding**, and §3.4 applies. Anything uncertain is treated as not
+this kind.
+
+Why: on the S1 selection package on 2026-09-24, pull request #108 opened as two count corrections and
+closed at seven commits and twenty-one recorded corrections. Its last five findings were all about the
+review record. They cost one extra board card and one more review round, and a third round was argued
+about for a commit that changed no number.
+
+Where the project's routing decision pre-approves a class of merge — Coach Platform's DEC-002 — a pull
+request made only of such fixes merges under that class; this section does not create a card where the
+project's routing decision removes one.
+
 ---
 
 ## 4. Status vocabulary
