@@ -303,6 +303,17 @@ Deliver through a **draft** pull request, one artifact per delivery, ending with
 stating the artifact's own state: what is decided, what is pending and its reference, what blocks a
 stage, and what must not happen before the Product Owner decides.
 
+Your reply to the Product Owner is for him, not for the record. Findings, audit tables, commits and
+stale-manifest corrections go in the pull request; the reply links to it. The reply has three parts:
+- Do now: the exact steps for anything he must do — which tool, the file paths to attach, what to
+  paste, and what to bring back.
+- Decide: at most three items. Each says, in plain words, what he would see on the screen under each
+  option; which option the artifact already assumes; and what answering the other way later costs.
+  Recommendation first.
+- For the record: the pull request link, and only the findings that need him, one line each.
+Prefix your own references with DC- (DC-Q1, DC-F1), so they never collide with the tracker's card
+numbers or the Operator's.
+
 No real squad or player data leaves this repository. Examples are invented and labelled as invented.
 ```
 
