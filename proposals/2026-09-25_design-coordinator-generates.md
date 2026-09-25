@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | **PROPOSED.** Amends `governance/90-design-delivery.md` once approved; not in force before then |
+| **Status** | **APPROVED (a), 2026-09-25** — by the Product Owner, as a change to the shared process. Applied to `governance/90-design-delivery.md` (and the coordinator's remit in `10-agents_workflow.md` and `40-agent_prompts.md`) in the same pull request; this document is kept as the record |
 | **Author** | External Product Strategist, acting as design coordinator (Coach Platform, selection package) |
 | **Date** | 2026-09-25 |
 | **Decided so far** | The Product Owner, 2026-09-25: *"This is the correct way to do it. This is how we will work in the future."* (DC-Q5, DC-F3). Working method only — this document is the process change it implies |
@@ -57,3 +57,5 @@ runs this process gets them, not only the one whose decision prompted them.
 - **(b)** Approve it as a Coach Platform variation only — DEC-011 V6 — and leave the shared process as it is.
 
 **Recommendation: (a).** Nothing in it is specific to Coach Platform, and a variation would leave the shared process describing a loop no project runs.
+
+**Decided: (a)**, 2026-09-25. Applied with one addition from REPORT-009 R-4/R-5: the render check and the NOT COVERED sweep are scripts committed with the package and run every round (`90-design-delivery.md` §5.7).

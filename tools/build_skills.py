@@ -75,9 +75,10 @@ SKILLS: list[tuple[str, str, list[tuple[str, str | None]]]] = [
     (
         "design-delivery",
         "Use when running any stage of the design delivery process for a page package: the brief "
-        "and design space, generating or evaluating alternatives, the assumption audit, requirement "
-        "coverage verification, visual refinement, the freeze, the page specification and "
-        "acceptance criteria, and the S10 gate.",
+        "and design space, the design loop (generating the design on a canvas, the render check, "
+        "the NOT COVERED sweep, the reconciliation list, alternatives on demand), the second-seat "
+        "rebuild request, requirement coverage verification, the freeze, the page specification "
+        "and acceptance criteria, and the S10 gate.",
         [("governance/90-design-delivery.md", None)],
     ),
     (

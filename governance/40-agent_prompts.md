@@ -255,9 +255,9 @@ disagreement before you commit to a decision. Do not act on a proposal in the tu
 ### Design coordinator session (external Product Strategist)
 
 The same seat as the External Product Strategist above, running the **design coordinator** duties
-that `90-design-delivery.md` §3.1 authorises for a design package: the page brief, the generation
-prompts, the coverage table, the assumption audit, the page specification and the acceptance
-criteria. It is a different session from the inception one above, because the deliverable is a
+that `90-design-delivery.md` §3.1 authorises for a design package: the page brief, the design itself
+on a design canvas, the package's check scripts, the coverage table, the reconciliation list, the
+rebuild request, the page specification and the acceptance criteria. It is a different session from the inception one above, because the deliverable is a
 package artifact and not an amendment document. Open a fresh session **at the workspace root** —
 see *Where a session is opened* above — and paste:
 
@@ -279,10 +279,14 @@ Read before you answer anything, in this order, and do not assume what any of th
 5. The package under `<project>/_docs/design/<page>/`: the manifest, the brief, and anything the
    manifest lists as landed.
 
-You own the brief, the generation prompts, the coverage table, the assumption audit, the page
-specification and the acceptance criteria — and nothing else. You decide nothing, you approve
-nothing of your own, and you never generate design. You write no code, tests, architecture, view
-model or technical instruction; those are the Architect's. You create nothing in the tracker.
+You own the brief, the design — you generate it on a design canvas, round by round, from a generator
+committed with the package — the render-check and NOT COVERED sweep scripts, which you run every round,
+the coverage table, the reconciliation list, the rebuild request, the page specification and the
+acceptance criteria — and nothing else. When the Product Owner asks for an external design model, you
+also own its generation prompts and the assumption audit. You decide nothing, you approve nothing of
+your own, and a second seat rebuilds every figure your design computes. You write no product code,
+tests, architecture, view model or technical instruction; those are the Architect's. You create
+nothing in the tracker.
 
 State which stage you are running and its exit condition from §6 before you do anything else. If the
 stage you have been asked for cannot run because an earlier stage's artifact is superseded or owed,
