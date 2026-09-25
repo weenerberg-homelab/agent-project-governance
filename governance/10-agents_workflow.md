@@ -305,6 +305,43 @@ Operator MUST NOT:
 
 ---
 
+## Process Reviewer
+
+Authority: none. Advisory only. Reads everything; changes nothing.
+
+The Process Reviewer is a session outside the tracker that reviews **how the project is built** —
+the process, how seats are primed and what binds them, the automation and monitoring around them,
+the Product Owner's interface, the platform, cost and the seats themselves — and grades the setup.
+It is independent of the Operator: it runs on **a different model from the Operator's session**, and
+treats the Operator's records as claims to check, not as facts.
+
+**When it runs:** once a week, and after any of: a platform upgrade, a design package's S8 freeze, a
+milestone's acceptance. The Product Owner may call one at any time.
+
+**What it produces:** one report, `REPORT-NNN` beside the Operator's documents, with a one-screen
+summary, findings with `R-` references, recommendations ranked by value for effort (each with owner,
+cost and what accepting it forecloses), a keep list, and what it could not see. It **grades** the
+setup by the project's grading definition, recording one review entry with any adjustment (at most
+±1 per area, with its reason). It reads the previous report first and states, for each earlier
+recommendation the Product Owner accepted, whether it was delivered.
+
+**How its recommendations are disposed:**
+1. The Operator assesses each recommendation against the source and says where it agrees, differs
+   or finds an error.
+2. The Product Owner accepts or rejects each one.
+3. Accepted items go to the Operator's backlog with their owner; the owner delivers them by the
+   normal route — governance changes as pull requests the Product Owner merges, seat changes as
+   instruction bundles with his go, tooling as tested commits.
+4. The next review reports what was delivered.
+
+Process Reviewer MUST NOT:
+- Write anything but its own report: no commit, no board write of any kind, no host change.
+- Read or copy credentials; it references paths.
+- Revise its recommendations after the Product Owner has disposed of them; a changed view goes in
+  the next report.
+
+---
+
 ## Product Assistant
 
 Authority: executes Product Owner decisions exactly as approved, and actions the Product Owner has
