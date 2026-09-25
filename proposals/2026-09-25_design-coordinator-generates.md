@@ -45,7 +45,7 @@ runs this process gets them, not only the one whose decision prompted them.
 
 | Risk | Answer |
 |---|---|
-| The coordinator checks its own work | The Product Owner judges by eye each round; figures are rebuilt by a second seat at S6 (§14.1); the render check is mechanical |
+| The coordinator checks its own work | The Product Owner judges by eye each round; figures are rebuilt by a second seat before the freeze (§14.1, *Rebuild request*); the render check is mechanical |
 | The design drifts from the spec without anyone noticing | DEC-013 clause 4: the reconciliation list in three kinds, and NOT COVERED shown at every judgement |
 | The generator becomes a second codebase | It is package tooling, like `fixture-expected.md`'s calculator: never imported, never adopted. The Architect builds from the accepted package, not from the generator |
 | Per-round cost | Each round is a delta on the generator, not a regeneration. The manifest's round log is the audit |
