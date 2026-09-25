@@ -204,9 +204,11 @@ skills, and the same priming (`40-agent_prompts.md`). Neither decides anything.
 Where a project runs the design delivery process (`90-design-delivery.md`), the seat carries two further
 duties. They are additions to the remit above and nothing else changes.
 
-**The external seat may produce a design package.** For a design package only: the page brief, the
-generation prompts, the requirement coverage table, the assumption audit, the page specification and the
-acceptance criteria. It still writes no code, no tests, no architecture, no instructions, no view model
+**The external seat may produce a design package.** For a design package only: the page brief, **the
+design itself — canvas rounds and the generator that produces them, with the package's check scripts —**,
+the requirement coverage table, the reconciliation list, the rebuild request, the page specification and
+the acceptance criteria; and, when an external design model is used, the generation prompts and the
+assumption audit. The generator and the scripts are package tooling, never product code. It still writes no code, no tests, no architecture, no instructions, no view model
 and no data binding — those remain the Architect's under the project's change-routing decision — and it
 still creates nothing in the tracker.
 
