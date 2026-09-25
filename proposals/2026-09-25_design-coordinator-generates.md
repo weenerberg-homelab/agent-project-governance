@@ -30,7 +30,13 @@
 | **§11 Budgets** | Fixed S5 and S7 delta budgets and a stop rule | **The Product Owner's word ends the loop** (*"it is a wrap"*). There is no count budget; the round log in the manifest shows the cost |
 | **New · Render check** | — | **Every round is rendered before it is published**: desktop width and 360px, with no horizontal overflow, measured board heights, and sticky and hover behaviour verified. A defect found is fixed before publishing, not reported. This needs the Product Owner's standing consent, because the canvas type renders only when asked; he gave it on 2026-09-25 (DC-Q6) |
 | **New · Canvas hygiene** | — | One canvas per package for the candidate. Explorations go on **separate** canvases, so an accepted candidate is never overwritten. Read the live version before every publish; a save from inside the page is merged, never forced |
+| **New · Reconciliation list, kept per round** | — | **Updated every round**, not at the end. Each row carries its kind (CHANGED, ADDED, NOT COVERED), the round that introduced it, and the Product Owner's answer where he gave one. The manifest records the list's state at every visual judgement. An **ADDED or CHANGED row that introduces or changes a computed figure** carries its computation rule, and the figure is rebuilt by a second seat before the freeze (see §14.1 below) |
+| **New · NOT COVERED rows** | — | **Shown at every visual judgement until answered, and answered once.** An answered row is not shown again unless the design changes it. A row the Product Owner neither covers nor removes gets **one** design round to cover it; if it still is not covered, it goes back to him as keep-or-remove, and that answer is final. This bounds how often a frozen design can reopen |
 | **§14.1 Independence** | Figures rebuilt twice, by different seats | **Unchanged, and now load-bearing.** The coordinator both builds and designs, so **every figure it computes for a design is rebuilt by a second seat at S6** (the selection package has two: versatility for unselected players, and the best position per fixture). The visual stays the Product Owner's eye |
+
+**The two NOT COVERED rules and the per-round list come from the design coordinator's review of Coach
+Platform's DEC-013** (REPORT-008, findings F2–F4, M1–M3). They are written here so every project that
+runs this process gets them, not only the one whose decision prompted them.
 
 **Unchanged:** invariants; S8 freeze; S9 page-spec and acceptance criteria; S10 gate; §14.5, under which the built screen is checked against the package; and, on Coach Platform, DEC-013's alignment pass in place of §13's per-change amendment.
 
