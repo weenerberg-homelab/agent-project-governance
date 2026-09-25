@@ -417,7 +417,7 @@ rule, not the agent's diligence, decides what a round is worth.)
 
 The tracker's review limit is set to 3 so the Advisor-gated round does not reach the board first. A
 blocker that repeats one an earlier round already raised is a loop and goes to the board at once. A
-board escalation is one card compiled by the Product Assistant: rounds so far, cost so far, the
+board escalation is one card, posted by the seat running the review ladder: rounds so far, cost so far, the
 blocker, the Advisor's verdict, the reviewer's recommendation, and the options (another round, accept
 with a follow-up, stop). The ladder is revisited if board or Advisor load grows.
 (Decided 2026-09-16.)
@@ -546,7 +546,7 @@ evidence for the rest, and the cost against budget. The Product Owner answers:
 |---|---|
 | Approve | The milestone is accepted. The continuation gates below decide what happens next |
 | Amend, only this milestone | Each amendment becomes a work item. Small ones are carried into the next milestone; others are finished before it starts |
-| Amend, touching later milestones (scope, order, acceptance criteria) | No automatic continuation: the Product Assistant's next-step card |
+| Amend, touching later milestones (scope, order, acceptance criteria) | No automatic continuation: the milestone owner's next-step card |
 | Reject, with reason | Rework in the same milestone; the next one does not start |
 
 **Continuation gates**, all checked after an approval:
@@ -560,14 +560,13 @@ evidence for the rest, and the cost against budget. The Product Owner answers:
 
 All gates pass: the Architect opens the next milestone's parent issue, linked to its goal, with
 `Cost estimate: $<budget>` from the milestone set, and says so in one comment; the Product Owner is
-notified, not asked. Any gate fails: the Architect hands the decision to the Product Assistant, which
-puts the next-step card to the Product Owner. Every milestone has a budget before it starts.
+notified, not asked. Any gate fails: the Architect puts the next-step card to the Product Owner itself. Every milestone has a budget before it starts.
 (Decided 2026-09-17; budgets after M1: M2 $115, M3 $85, M4 $145, M5 $85, pause at 150 %.)
 
 ### Next step after a product milestone
 
 When a product milestone is accepted, or when a technical milestone fails a continuation gate, the
-Product Assistant posts one card: what was completed (cost against budget, largest cost items), what is
+seat that owns the milestone — the Architect — posts one card: what was completed (cost against budget, largest cost items), what is
 open (backlog follow-ups, parked items, unavailable agents), what comes next (scope and budget), and the
 options: start the next milestone as planned; start it with selected backlog follow-ups; a short
 retrospective first; change direction or order (to the Product Strategist); pause.
