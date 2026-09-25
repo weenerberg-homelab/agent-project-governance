@@ -139,6 +139,13 @@ reader to match three sentences to three letters they cannot see. Never renumber
 The same reason one level up. The reader answers `F-P1: a`, and a title without the identifier makes
 that answer a guess.
 
+**Every card title begins with its issue identifier, and question identifiers are numbered within
+the card** — title `WEE-270 — the DEC-002 card owner`, questions `Q1`, `Q2`, answered as
+`WEE-270 Q1 a`. Seats that each ran their own `Qn` series put two `Q102` cards and two `Q105` cards on
+the board within 24 hours, and an answer keyed on a bare number matched both. The issue identifier
+makes the reference unique without a shared counter. Series used off the board keep their own prefix
+(`DC-` for the design coordinator), so a number pasted onto the board cannot collide with a card.
+
 **Every option states the choice in product terms and stands on its own.** `No modals this round
 (DA-6)`, never `Q5 — DA-6`. An internal tag may appear in parentheses; it may not be the whole
 label. An option that cannot be understood without the source document open is not finished.
