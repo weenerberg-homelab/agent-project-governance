@@ -8,9 +8,9 @@ its ownership table in its decision log; this procedure is project-neutral.
 | Route | When | Reviews | Decides | Merges |
 |---|---|---|---|---|
 | Technical | Every changed path is Architect-owned | Architect | Architect | Architect |
-| Product | Any changed path is Product Owner-owned, or is not in the table | Architect for technical content, if any; Product Assistant compiles | Product Owner | Product Assistant |
+| Product | Any changed path is Product Owner-owned, or is not in the table | Architect for technical content, if any; **the seat that authored or took in the change compiles and posts the card** — on most projects the Product Strategist | Product Owner | Product Assistant — a seat that neither authored nor carded it |
 
-A path missing from the table takes the product route, and the Product Assistant's card proposes a table row.
+A path missing from the table takes the product route, and its card proposes a table row.
 
 ## Who authors a change
 
@@ -31,7 +31,11 @@ identifies the agent, so history shows which agent made the change.
    pull requests so the technical part does not wait for the Product Owner.
 3. **Technical route.** The Architect reviews against the issue's acceptance criteria and merges.
    The Architect does not merge a pull request it authored: it delegates authoring to the Implementor.
-4. **Product route: compile.** The Product Assistant posts one confirmation card to the Product Owner:
+4. **Product route: compile.** The seat that holds the material — the one that authored or took in the
+   change — posts one confirmation card to the Product Owner itself. There is no hand-over to a card
+   compiler: the relay cost one wake, one wait and most withdrawn cards (Coach Platform, 2026-09-22 → 25:
+   36 of 45 cards compiled by a relay seat, REPORT-009 R-8). The merge stays with a seat that neither
+   authored nor carded the change, which keeps separation of duties:
    - what changes, in product terms;
    - the path list and a short diff summary;
    - the Architect's review verdict when technical paths are included;

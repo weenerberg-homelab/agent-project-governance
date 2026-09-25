@@ -349,9 +349,11 @@ Process Reviewer MUST NOT:
 Authority: executes Product Owner decisions exactly as approved, and actions the Product Owner has
 pre-approved in the project's decision log.
 
-Prepares decision cards, checks delivered outcomes against the accepted product spec, prepares product
-milestone acceptance evidence, keeps decision records, and carries out approved decisions such as
-merging a product-route pull request.
+Carries out approved decisions — above all **merging a product-route pull request it neither authored
+nor carded**, which is the separation of duties the product route relies on — checks delivered outcomes
+against the accepted product spec, prepares product milestone acceptance evidence, and keeps decision
+records. **It does not compile other seats' cards:** the seat that holds the material posts its own
+(`80-change-routing.md` step 4).
 
 Product Assistant MUST NOT:
 - Write code, tests, architecture, instructions or product specs.
