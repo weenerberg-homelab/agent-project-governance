@@ -421,6 +421,39 @@ once.** An answered row is not shown again unless the design changes it. A row t
 covers nor removes gets **one** design round to cover it; if it still is not covered, it goes back to him
 as keep-or-remove, and that answer is final. This bounds how often a frozen design can reopen.
 
+### 6.5 What the Product Owner is told at every round
+
+**The loop is a conversation between the Product Owner and the coordinator, in the coordinator's chat.
+He says what he wants different; the coordinator makes the next round; they repeat until he is happy.**
+Nothing in it goes through the tracker or another seat. The message that publishes a round says so in
+those words, because on 2026-09-26 a round-1 message that asked him to *"name the element, the defect,
+and what must not change"* and then to *"hand the rebuild request to the internal Product Strategist"*
+read, reasonably, as *check the design against the specification and report discrepancies to another
+seat* — the opposite of the loop — and it cost him an evening to find out.
+
+Every round's message has this shape and no other:
+
+1. **The first line, verbatim with the round number filled in:** *"Round N is ready. Tell me what you
+   want changed — anything: layout, flow, wording, what is missing, what you dislike. I make round N+1
+   from your notes, and we repeat until you are happy."*
+2. **The links** to the published canvas, one per device form, and which form is primary.
+3. **What changed since the last round**, in a few lines. Round 1 says what the design is based on.
+4. **Decide**, only if a real product choice is open — at most three, each with what he would see under
+   each option and a recommendation — and the **NOT COVERED rows** to answer (§6.4). Otherwise nothing.
+5. **The last line, verbatim:** *"When a form is right, say 'accept phone' or 'accept desktop'. That
+   ends the loop for that form."*
+
+**What never appears in it:**
+- **Work for another seat, or anything he must carry.** The rebuild request (§14.1), take-ins and
+  records reach their seats without him: committed with the round, and put on the tracker by the
+  operator or the host automation. They run alongside the rounds and gate only the freeze, so they are
+  not his next step and never read as one.
+- **A Handoff block** (`60-workspace-document-contract.md`). The loop's next action is always his notes.
+  The Handoff block belongs to the deliveries that end a stage: S1, S8 and S9.
+- **The word *defect* for his notes, or any framing of them as a check against the specification.** His
+  notes may overrule the specification: the design he accepts is the authority for what the user sees
+  and does, and a difference is recorded on the reconciliation list, not refused (§13).
+
 ---
 
 ## 7. S1 — the design space and the coverage table
@@ -544,9 +577,10 @@ a desktop acceptance does not cover the phone.
 The decision may be batched with package acceptance rather than becoming another separate exchange, but
 **it must exist**. S8 cannot freeze a screen whose visual decision was never taken.
 
-**How a request is phrased.** Never *make it cleaner*. Name the element, the defect, and what must not
-change. The coordinator asks back when a note is ambiguous, stating what each reading would change on
-screen.
+**His notes are his, in his words.** He is never asked to phrase them in a form. The coordinator turns a
+note into a specific change — which element, what changes, what must stay — and asks back only when two
+readings would change the screen differently, stating what each would change. A note as broad as *make
+it cleaner* is answered with the two or three concrete readings, not refused.
 
 **Every round is a delta** on the generator (§5.7), not a regeneration.
 
@@ -725,8 +759,11 @@ to players the specification had not covered, an order per view, and a best posi
 list (§6.3): one committed prompt per batch, addressed to the second seat (the internal Product
 Strategist unless the project names another). It carries the rule as the Product Owner decided it, the
 views to rebuild, the instruction to rebuild **before** reading the design's figures, and where the result
-goes — the package's expected-figures file, one commit, one comment on the package pull request. **The
-Product Owner or the operator hands it over**; the coordinator has no tracker seat. The rebuild runs
+goes — the package's expected-figures file, one commit, one comment on the package pull request. **It
+reaches the second seat without the Product Owner:** the coordinator commits it under the package's
+`requests/` with the round, and the operator — or the host automation, where it opens tracker issues from
+package pull requests — puts it on the tracker; the coordinator has no tracker seat. It is never listed as
+his action (§6.5). The rebuild runs
 alongside the rounds, **the freeze waits on it**, and a round that changes a rebuilt figure gets a new
 request. **On a mismatch** the second seat changes neither design nor specification: the coordinator
 corrects the design, or takes the rule to the Product Owner.

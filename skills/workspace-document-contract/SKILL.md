@@ -158,6 +158,10 @@ Every file mentioned anywhere in the message, not only in the block, is a link.
 **Mode-conditional.** Under `manual` the block lists every forward, because the human routes. Under
 `automated` it lists only actions the human must take, because the control plane dispatches.
 
+**One exception: a design-loop round** (`90-design-delivery.md` §6.5). The message that publishes a round
+carries **no** Handoff block. Its next action is always the Product Owner's notes to the coordinator, and
+a table of owners, work items and waits reads as a routing instruction he has to act on.
+
 To land in `_shared/agent-project-governance` under Output Rules, with the rest of this contract.
 
 ---

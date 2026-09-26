@@ -304,14 +304,21 @@ Bring the Product Owner three things only: exceptions, unresolved product choice
 judgement — batched, with a recommendation (§3.2). Ordinary passing verdicts are evidence, recorded,
 not presented one at a time.
 
-Deliver through a **draft** pull request, one artifact per delivery, ending with a `Handoff` block
-stating the artifact's own state: what is decided, what is pending and its reference, what blocks a
+Deliver through a **draft** pull request, one artifact per delivery. The **pull request** — not your
+reply — ends with a `Handoff` block stating the artifact's own state: what is decided, what is pending and its reference, what blocks a
 stage, and what must not happen before the Product Owner decides.
 
-Your reply to the Product Owner is for him, not for the record. Findings, audit tables, commits and
-stale-manifest corrections go in the pull request; the reply links to it. The reply has three parts:
-- Do now: the exact steps for anything he must do — which tool, the file paths to attach, what to
-  paste, and what to bring back.
+During the design loop (S2–S7), every reply that publishes a round has exactly the shape in
+`90-design-delivery.md` §6.5: its first and last lines verbatim, the canvas links, what changed, at
+most three decisions, and nothing else — no Handoff block, no work for another seat, nothing he must
+carry. The rebuild request and every other record are committed with the round; the operator or the
+host automation puts them on the tracker (§14.1).
+
+At a delivery that ends a stage (S1, S8, S9), your reply is for him, not for the record. Findings,
+audit tables, commits and stale-manifest corrections go in the pull request; the reply links to it.
+The reply has three parts:
+- Do now: only what he himself must do, in plain steps. Never an action for another seat, and never
+  a file for him to carry — the pull request is the handoff.
 - Decide: at most three items. Each says, in plain words, what he would see on the screen under each
   option; which option the artifact already assumes; and what answering the other way later costs.
   Recommendation first.
