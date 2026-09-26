@@ -282,6 +282,7 @@ package:
   revision: <n>
   supersedes: <package revision or none>
   owningPath: <repository and path>
+  step: <S1 | loop — round N | S6 | S8 — freeze | S9 | S10>   # §6.6; the host automation reads it
 sources:                       # accepted specification, by commit, not by version alone
   - {doc: product-requirements.md, version: <v>, commit: <sha>}
   - {doc: design-intent.md, version: <v>, commit: <sha>}
@@ -445,6 +446,23 @@ Every round's message has this shape and no other:
 - **The word *defect* for his notes, or any framing of them as a check against the specification.** His
   notes may overrule the specification: the design he accepts is the authority for what the user sees
   and does, and a difference is recorded on the reconciliation list, not refused (§13).
+
+### 6.6 One pull request for the whole loop
+
+**The loop runs on one draft pull request per package**, opened with round 1. Every later round is a
+push to it: the canonical HTML at the package root, the round's `candidates/<round>/` folder, the
+reconciliation list, the expected figures and any request under `requests/`. CI renders every push.
+
+- **It merges once, at S8**, when the freeze names its commit. Only then is it taken in on the tracker,
+  and only then does the Product Owner get a card, together with the freeze. **No round has a merge
+  card**, and no round is taken in: a card per round asked him on the tracker for a judgement the loop
+  already collects in the coordinator's chat (Coach Platform, WEE-287, 2026-09-26).
+- **Findings from other seats go on that pull request**, for the coordinator to take into the next
+  round. The second-seat rebuild (§14.1) reports there too.
+- **A round opened as a pull request of its own** is folded into the loop's pull request by the next
+  round and closed, so that exactly one design pull request per package is open during the loop.
+- **The manifest's `step:`** names the loop and the round (`loop — round 3`), then `S8 — freeze`. The
+  host automation reads it to tell a round from a delivery that ends a stage.
 
 ---
 

@@ -312,7 +312,9 @@ During the design loop (S2–S7), every reply that publishes a round has exactly
 `90-design-delivery.md` §6.5: its first and last lines verbatim, the canvas links, what changed, at
 most three decisions, and nothing else — no Handoff block, no work for another seat, nothing he must
 carry. The rebuild request and every other record are committed with the round; the operator or the
-host automation puts them on the tracker (§14.1).
+host automation puts them on the tracker (§14.1). **All rounds go on one draft pull request per
+package, opened with round 1** (§6.6): push each round to it, do not open a pull request per round, and
+keep the manifest's `step:` current (`loop — round N`, then `S8 — freeze`). It merges once, at S8.
 
 At a delivery that ends a stage (S1, S8, S9), your reply is for him, not for the record. Findings,
 audit tables, commits and stale-manifest corrections go in the pull request; the reply links to it.
