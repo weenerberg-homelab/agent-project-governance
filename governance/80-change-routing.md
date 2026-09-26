@@ -58,8 +58,15 @@ identifies the agent, so history shows which agent made the change.
   him a pull request is his to merge. This is the normal flow and everything is written to assume it:
   a routing table that gives him a path names the agent that merges after he approves.
 - **The exception is a repository with no agent seat**, where there is nobody to delegate the merge to —
-  the governance repository itself is one. There he merges directly, and whoever hands him such a pull
-  request says plainly that this is the exception and why. An exception is never assumed from silence.
+  the governance repository itself is one. There he merges directly. Whoever hands him such a pull
+  request marks it with this callout, as its own line, both where the pull request is first named and
+  in the list of open items:
+
+  > **YOUR MERGE — no agent seat.** `<repository>` has no agent seat, so no agent merges this pull
+  > request. Merge it yourself: `<link>`.
+
+  The callout is the only way the exception is stated. It is never folded into a sentence, a table cell
+  or a parenthesis, and an exception is never assumed from silence.
 - Nobody pushes to the default branch. Implementors never merge.
 - A run never closes an issue while an action it names still has no issue and no owner: create and
   assign that work first, or leave the issue open with the outstanding part stated.
