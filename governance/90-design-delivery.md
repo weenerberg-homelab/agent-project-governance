@@ -459,6 +459,10 @@ reconciliation list, the expected figures and any request under `requests/`. CI 
   already collects in the coordinator's chat (Coach Platform, WEE-287, 2026-09-26).
 - **Findings from other seats go on that pull request**, for the coordinator to take into the next
   round. The second-seat rebuild (§14.1) reports there too.
+- **The loop has no tracker issue, and nothing about it is assigned to the Product Owner.** A seat
+  that must wait on the loop waits on the loop's pull request reaching `S8 — freeze`, which opens the
+  take-in by itself. It does not open an issue for his notes, and it never asks him to relay its
+  findings to the coordinator: the pull request carries them (Coach Platform, WEE-289, 2026-09-26).
 - **A round opened as a pull request of its own** is folded into the loop's pull request by the next
   round and closed, so that exactly one design pull request per package is open during the loop.
 - **The manifest's `step:`** names the loop and the round (`loop — round 3`), then `S8 — freeze`. The

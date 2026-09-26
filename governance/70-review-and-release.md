@@ -229,6 +229,13 @@ Before posting, the compiling seat confirms all of these:
 - **Every document, decision or figure the card cites is at its final revision**, not a draft that a
   run is still editing.
 
+  **A cited review is final only when it is complete:** no section reads *pending*, and every blocker
+  or finding the card counts is in that revision, not only in a later comment. Write the complete
+  review revision first, then post the card, and cite the revision by number (`review-2` revision 2).
+  On Coach Platform the WEE-285 escalation card said *"Review 2 carries the evidence"* for five
+  repeated blockers; review-2 revision 1 held one blocker and two sections reading *Pending*, and the
+  full set arrived in a comment a minute after the card (2026-09-26).
+
 If any of these is not true, wait and check again. A card is cheap to delay by ten minutes and
 expensive to withdraw.
 
@@ -425,8 +432,9 @@ rule, not the agent's diligence, decides what a round is worth.)
 The tracker's review limit is set to 3 so the Advisor-gated round does not reach the board first. A
 blocker that repeats one an earlier round already raised is a loop and goes to the board at once. A
 board escalation is one card, posted by the seat running the review ladder: rounds so far, cost so far, the
-blocker, the Advisor's verdict, the reviewer's recommendation, and the options (another round, accept
-with a follow-up, stop). The ladder is revisited if board or Advisor load grows.
+blockers — each one named on the card and present in the complete review revision it cites (*A card is
+posted only when nothing it cites can still move*) — the Advisor's verdict, the reviewer's
+recommendation, and the options (another round, accept with a follow-up, stop). The ladder is revisited if board or Advisor load grows.
 (Decided 2026-09-16.)
 
 ### Open questions block the work that depends on them
