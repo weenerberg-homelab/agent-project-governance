@@ -129,6 +129,34 @@ A board card put to a human is the whole of what that human sees. The instructio
 document it was compiled from and the amendment it serves are all off screen when the buttons are
 pressed. The card carries its own meaning or it carries none.
 
+### The question is laid out to be decided in a minute
+
+**The prompt is a fixed layout of short lines, never a paragraph.** The reader decides from it. If he
+has to read a block of conditions to find the choice, he stops deciding and takes the recommendation on
+trust, and the card has failed as a decision record (Coach Platform, WEE-290, 2026-09-26: one
+140-word paragraph, the recommendation's reason nowhere on the card).
+
+```markdown
+<The decision, as one question of at most 20 words.>
+
+**Recommended: (a).** <Why, in one or two short lines.>
+
+**What changes if you accept:** <one line per effect, in product terms; at most three>
+**If you pick (b) instead:** <what it costs or forecloses, one line>
+
+Details: <link to the pull request or document>
+```
+
+| Rule | Why |
+|---|---|
+| **At most 80 words, the link not counted** | Over that, the reader skims, and skimming picks the recommendation |
+| **The reason for the recommendation is on the card** | A recommendation with no reason is a request to trust, not a decision |
+| **Conditions, rule text, evidence and diffs go in `helpText` or behind the link**, never in the prompt | They are for checking, not for deciding |
+| **Product terms first.** Internal ids (`AC-*`, `RL-*`, trigger numbers) only in parentheses | The reader decides on what changes for him, not on the record's numbering |
+| **Each option description is one or two sentences:** what accepting it writes, and what it forecloses | The option carries its consequence (below) without becoming a second prompt |
+
+A question that cannot fit this layout is two questions, or it is not ready to be asked.
+
 **Every option label begins with its identifier**, exactly as the card instruction numbers it:
 `a — The decision stands, and §8.3 names the cost`. That identifier is what the answer, the
 write-back, the amendment and the pull request are all keyed on. A button that omits it asks the
