@@ -291,6 +291,7 @@ package:
   supersedes: <package revision or none>
   owningPath: <repository and path>
   step: <S1 | loop — round N | S6 | S8 — freeze | S9 | S10>   # §6.6; the host automation reads it
+  pullRequest: <number>        # the package's one open pull request (§6.6); a fresh session reads its comments first
 sources:                       # accepted specification, by commit, not by version alone
   - {doc: product-requirements.md, version: <v>, commit: <sha>}
   - {doc: design-intent.md, version: <v>, commit: <sha>}
