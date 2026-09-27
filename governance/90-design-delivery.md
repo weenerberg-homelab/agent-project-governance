@@ -14,7 +14,10 @@ and the examples are labelled as examples.
 ## 1. What this is
 
 A process for turning a product requirement into a screen that a software agent can implement without
-making design decisions of its own.
+making design decisions of its own, **and, before the screens, for designing the flow between them**
+(S0, §6.7). A package per screen makes each screen right and leaves the path between screens decided by
+nobody; on Coach Platform that path was written in `design-intent.md` §2 and never designed, and the
+Product Owner found the deployed flow poor once the first screens were good (2026-09-28).
 
 It is written for a small product built by a mixed team of one human Product Owner and several agents.
 **The design coordinator generates the design** on a design canvas, round by round, and the Product
@@ -282,7 +285,7 @@ package:
   revision: <n>
   supersedes: <package revision or none>
   owningPath: <repository and path>
-  step: <S1 | loop — round N | S6 | S8 — freeze | S9 | S10>   # §6.6; the host automation reads it
+  step: <S0 — round N | S0 — accepted | S1 | loop — round N | S6 | S8 — freeze | S9 | S10>   # §6.6; the host automation reads it
   pullRequest: <number>        # the package's one open pull request (§6.6); a fresh session reads its comments first
 sources:                       # accepted specification, by commit, not by version alone
   - {doc: product-requirements.md, version: <v>, commit: <sha>}
@@ -358,6 +361,7 @@ survived; the coordinator diffs the artifact and reports what moved that should 
 
 | | Step | Owner | Exit condition |
 |---|---|---|---|
+| **S0** | **The flow wireframe** — once per product or release, before its screen packages (§6.7): every screen, every moment of use as a clickable path, low fidelity | Coordinator generates; **Product Owner judges by clicking** | **The Product Owner accepts the flow** ("accept flow"), recorded as §11 records a design acceptance |
 | **S1** | Brief, design space, applicable criteria, coverage table, round scope | Product Owner + coordinator | Internal strategist records the page **OPEN** |
 | **S2–S5, S7** | **The design loop**: generate → render check → NOT COVERED sweep → publish → the Product Owner's notes, repeated. Alternatives on demand (§8); behaviour and state decisions captured as made (§9.1); the reconciliation list updated every round (§6.3) | Coordinator generates; **Product Owner judges by eye** | **The Product Owner accepts the design for each device form**, desktop and phone named separately, and the acceptance is recorded (§11) |
 | **S6** | Requirement coverage verification, including the arithmetic, on the accepted design (§10) | Coordinator produces, Product Owner accepts exceptions | Every applicable obligation is satisfied or routed through §13 |
@@ -472,6 +476,54 @@ reconciliation list, the expected figures and any request under `requests/`. CI 
   round and closed, so that exactly one design pull request per package is open during the loop.
 - **The manifest's `step:`** names the loop and the round (`loop — round 3`), then `S8 — freeze`. The
   host automation reads it to tell a round from a delivery that ends a stage.
+
+### 6.7 S0 — the flow wireframe
+
+**The flow is designed before the screens.** Once per product, or per release that adds screens or a
+moment of use, the coordinator runs one package whose subject is the whole app at low fidelity: every
+screen, and every moment of use as a path through them. The screen packages that follow fill in a
+structure that is already accepted.
+
+**Inputs.** The requirements' account of use — on Coach Platform the season operating model and the
+coach's rhythm of use (`product-requirements.md` §2.2–2.3) and each job (§5–§12); the navigation model
+(`design-intent.md` §2: destinations, the screen inventory with *reached from*, *Up* and device class,
+and the rules of §2.4); every existing screen, built or designed. **A screen whose package is DECIDED or
+whose design is accepted is a fixed node:** the flow routes to it and does not redesign it.
+
+**The package** is `_docs/design/app-flow/` (or `app-flow-<release>`), with the §5 structure where it
+applies and these artifacts:
+
+| Artifact | Holds |
+|---|---|
+| `flow-map.md` | One row per moment of use: its steps, the screen of each step, the tap count, where the task returns, the device |
+| `screens.md` | The screen inventory as designed: each screen, reached from, *Up*, device class, and which package owns its detail |
+| The wireframe | A clickable low-fidelity HTML prototype at the package root, generated from a committed generator, one board per screen, phone and desktop where the device class says |
+| `reconciliation-list.md` | Every difference from the navigation model and the requirements, CHANGED · ADDED · NOT COVERED (§6.3) |
+
+**Fidelity is deliberately low.** Grey boxes, real labels, invented data. **No figures, no visual
+values, no component appearance**: the figures are the screen packages', the visual values are the
+baseline's (§12.2), components are the extraction pass's (§12.4). A wireframe that grows detail is a
+screen package started early.
+
+**The checks, every round** — the S0 counterpart of the render check and the sweep:
+- every moment of use has a path, and every path ends where the navigation model says a task returns;
+- the navigation rules hold on every path, counted rather than asserted (on Coach Platform: pitchside
+  in at most two taps; a capture screen never navigates away on save; *Up* is the inventory's parent;
+  a task started from *This week* returns to it);
+- every screen is reachable, and none is an orphan.
+
+**The loop is §6.5's, with the first and last lines adapted:** *"Flow round N is ready. Click through
+it and tell me what you want changed — a path, a screen that is missing or in the wrong place, a step
+too many. I make round N+1 from your notes, and we repeat until you are happy."* and *"When the flow is
+right, say 'accept flow'. That ends S0."* One pull request for the whole loop (§6.6); its manifest
+`step:` reads `S0 — round N`, then `S0 — accepted`.
+
+**What the accepted flow is.** Where design leads (Coach Platform DEC-013), the accepted flow is the
+authority for navigation and the screen inventory, and `design-intent.md` §2 is aligned to it at the
+alignment pass, like any accepted design. **Every later screen package's S1 starts from its screen's
+wireframe** and cites the accepted flow's revision in its manifest `sources`. A screen package that
+finds its screen missing from the flow, or needs a path the flow does not have, runs one flow round
+first rather than deciding the path inside a screen.
 
 ---
 

@@ -307,7 +307,9 @@ your own, and a second seat rebuilds every figure your design computes. You writ
 tests, architecture, view model or technical instruction; those are the Architect's. You create
 nothing in the tracker.
 
-State which stage you are running and its exit condition from §6 before you do anything else. If the
+State which stage you are running and its exit condition from §6 before you do anything else. A
+product or release whose flow has not been accepted runs S0, the flow wireframe (§6.7), before any new
+screen package; a screen package starts from its screen's accepted wireframe. If the
 stage you have been asked for cannot run because an earlier stage's artifact is superseded or owed,
 say so and produce the owed artifact instead of running ahead.
 
