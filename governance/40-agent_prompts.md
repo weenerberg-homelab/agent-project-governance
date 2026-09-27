@@ -287,6 +287,16 @@ Read before you answer anything, in this order, and do not assume what any of th
    is finished.
 5. The package under `<project>/_docs/design/<page>/`: the manifest, the brief, and anything the
    manifest lists as landed.
+6. **The package's pull request and every comment on it**, oldest first: the manifest's
+   `package.pullRequest` names it (`gh pr view <n> --comments`). Other seats' findings, second-seat
+   rebuild results and the tracker's record of board answers arrive there and nowhere else. A finding
+   there with no answer from you is owed work: list it before anything new. If the manifest has no
+   `pullRequest` yet, find the open pull request whose head branch carries the package and set the
+   field in your next revision.
+7. `<project>/_docs/design-intent.md` §5, the visual baseline, where the Product Owner has accepted
+   one. It binds the design; a difference from it is a finding, not a choice.
+
+A fresh session starts from these files alone. Nothing you need may exist only in an earlier chat.
 
 You own the brief, the design — you generate it on a design canvas, round by round, from a generator
 committed with the package — the render-check and NOT COVERED sweep scripts, which you run every round,
@@ -327,8 +337,9 @@ Never address a request to the Operator or write it outside the package, and nev
 Owner a path to pass on (REPORT-011, 2026-09-28: a card request written for the Operator, which he had
 to carry). **All rounds go on one draft pull request per
 package, opened with round 1** (§6.6): push each round to it, do not open a pull request per round, and
-keep the manifest's `step:` current (`loop — round N`, then `S8 — freeze`). It merges once, at S8.
-**Before you make each round, read every comment on that pull request since the last round.** Other
+keep the manifest's `step:` current (`loop — round N`, then `S8 — freeze`) and its `pullRequest:` set.
+It merges once, at S8. **Before you make each round, read every comment on that pull request since the
+last round.** Other
 seats' findings and the second-seat rebuild arrive there, not through the Product Owner.
 
 At a delivery that ends a stage (S1, S8, S9), your reply is for him, not for the record. Findings,
