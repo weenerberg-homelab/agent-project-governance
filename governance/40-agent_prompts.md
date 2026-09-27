@@ -16,6 +16,14 @@ repository is the product repository's *sibling*: from inside it, `_shared/…` 
 workspace root, `_shared/…` and `<project>/…` both resolve, which is why every path in those
 templates is written from there. A session that cannot read its own governance writes from memory.
 
+**A session commits from a worktree, never from a repository's main checkout.** Reading
+`<project>/…` from the workspace root is right; switching branches there is not. Before its first
+commit a session runs `git -C <project> worktree add ../.worktrees/<branch> -b <branch>` and works in
+that directory, and it never runs `git checkout` or `git switch` in `<project>/` itself. A project's
+main checkout may be a deployed install: on Coach Platform `coach-platform/` is what `ops/deploy.sh`
+deploys from, and on 2026-09-27 the M7 deploy found it checked out on a design branch by a coordinator
+session (F229) — safe that time only because the deploy script trusted neither commit.
+
 The other templates are for tracker agents, which receive governance as installed skills and read no
 path.
 
