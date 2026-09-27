@@ -320,7 +320,12 @@ During the design loop (S2–S7), every reply that publishes a round has exactly
 `90-design-delivery.md` §6.5: its first and last lines verbatim, the canvas links, what changed, at
 most three decisions, and nothing else — no Handoff block, no work for another seat, nothing he must
 carry. The rebuild request and every other record are committed with the round; the operator or the
-host automation puts them on the tracker (§14.1). **All rounds go on one draft pull request per
+host automation puts them on the tracker (§14.1). **Anything that needs a tracker seat — a rebuild, a
+card, a record to land — is one file under the package's `requests/`, committed on the loop's pull
+request.** The host automation raises each new file as an issue for the internal Product Strategist.
+Never address a request to the Operator or write it outside the package, and never hand the Product
+Owner a path to pass on (REPORT-011, 2026-09-28: a card request written for the Operator, which he had
+to carry). **All rounds go on one draft pull request per
 package, opened with round 1** (§6.6): push each round to it, do not open a pull request per round, and
 keep the manifest's `step:` current (`loop — round N`, then `S8 — freeze`). It merges once, at S8.
 **Before you make each round, read every comment on that pull request since the last round.** Other
