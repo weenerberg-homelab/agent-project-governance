@@ -459,6 +459,10 @@ reconciliation list, the expected figures and any request under `requests/`. CI 
   already collects in the coordinator's chat (Coach Platform, WEE-287, 2026-09-26).
 - **Findings from other seats go on that pull request**, for the coordinator to take into the next
   round. The second-seat rebuild (§14.1) reports there too.
+- **Every request the coordinator makes of a tracker seat is a file under the package's `requests/`**:
+  a rebuild, a card for the Product Owner, a record to land. The host automation opens one issue per new
+  file for the internal Product Strategist, who posts any card itself. A request addressed to the
+  operator, or left outside the package, is one the Product Owner ends up carrying.
 - **The loop has no tracker issue, and nothing about it is assigned to the Product Owner.** A seat
   that must wait on the loop waits on the loop's pull request reaching `S8 — freeze`, which opens the
   take-in by itself. It does not open an issue for his notes, and it never asks him to relay its
