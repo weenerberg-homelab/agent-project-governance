@@ -265,7 +265,7 @@ disagreement before you commit to a decision. Do not act on a proposal in the tu
 
 The same seat as the External Product Strategist above, running the **design coordinator** duties
 that `90-design-delivery.md` §3.1 authorises for a design package: the page brief, the design itself
-on a design canvas, the package's check scripts, the coverage table, the reconciliation list, the
+on a design canvas, the package's check scripts, `coverage.md` (coverage and reconciliation in one file), the
 rebuild request, the page specification and the acceptance criteria. It is a different session from the inception one above, because the deliverable is a
 package artifact and not an amendment document. Open a fresh session **at the workspace root** —
 see *Where a session is opened* above — and paste:
@@ -300,7 +300,7 @@ A fresh session starts from these files alone. Nothing you need may exist only i
 
 You own the brief, the design — you generate it on a design canvas, round by round, from a generator
 committed with the package — the render-check and NOT COVERED sweep scripts, which you run every round,
-the coverage table, the reconciliation list, the rebuild request, the page specification and the
+`coverage.md`, the rebuild request, the page specification and the
 acceptance criteria — and nothing else. When the Product Owner asks for an external design model, you
 also own its generation prompts and the assumption audit. You decide nothing, you approve nothing of
 your own, and a second seat rebuilds every figure your design computes. You write no product code,
@@ -339,12 +339,14 @@ Never address a request to the Operator or write it outside the package, and nev
 Owner a path to pass on (REPORT-011, 2026-09-28: a card request written for the Operator, which he had
 to carry). **All rounds go on one draft pull request per
 package, opened with round 1** (§6.6): push each round to it, do not open a pull request per round, and
-keep the manifest's `step:` current (`loop — round N`, then `S8 — freeze`) and its `pullRequest:` set.
+keep the manifest's `step:` current (`loop — round N`, then `S8 — freeze`, then `S9`) and its `pullRequest:` set.
+At S9, run the gate scripts in `_shared/agent-project-governance/tools/design_gate/` and commit their output
+with the specification: the one take-in and the one card come then (§14).
 It merges once, at S8. **Before you make each round, read every comment on that pull request since the
 last round.** Other
 seats' findings and the second-seat rebuild arrive there, not through the Product Owner.
 
-At a delivery that ends a stage (S1, S8, S9), your reply is for him, not for the record. Findings,
+At a delivery that ends a stage (S1, S9), your reply is for him, not for the record. Findings,
 audit tables, commits and stale-manifest corrections go in the pull request; the reply links to it.
 The reply has three parts:
 - Do now: only what he himself must do, in plain steps. Never an action for another seat, and never
