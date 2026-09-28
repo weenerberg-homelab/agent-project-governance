@@ -214,7 +214,7 @@ and blocks.
 | **Design space** | FIXED · OPEN FOR DESIGN · OUT OF SCOPE, as three explicit lists |
 | **Applicable accepted criteria** | Which of `design-intent.md` §3's criteria bind this page, by id, and which do not, with a reason |
 | **Stack constraints** | The `design-intent.md` §6 constraint brief, as it applies here |
-| **Requirement coverage table** | §7.2 |
+| **`coverage.md`** — the one requirement artifact: the coverage table and the reconciliation list in one file (§7.2, §6.3) | §7.2 |
 | Round scope | What the design loop opens, and what it must not change (§3.2) |
 | Open questions | Each with a status from §4 and whether it blocks |
 
@@ -300,7 +300,7 @@ acceptance:
   gateResult: <record id, or pending>
 designSystem: <version, or none>
 components: [<names>]
-requirements: <path to the coverage table>
+requirements: <path to coverage.md>
 ```
 
 **When a named source commit changes**, the package records the impact and rechecks only the affected
@@ -332,7 +332,7 @@ at least, in the same `tools/` folder:
 | Script | Checks | Run |
 |---|---|---|
 | **Render check** | §6.1: every board rendered at desktop width and at 360px, no horizontal overflow, board heights measured against the canvas, sticky and hover behaviour present | Before every publish. A failure is fixed, not published |
-| **NOT COVERED sweep** | §6.4: every row of the brief's requirement coverage table (§7.2) against the round's candidate; a requirement with no counterpart becomes a NOT COVERED row | Every round. Its output is recorded in the round's `README.md` |
+| **NOT COVERED sweep** | §6.4: every row of `coverage.md` (§7.2) against the round's candidate; a requirement with no counterpart becomes a NOT COVERED row | Every round. Its output is recorded in the round's `README.md` |
 
 A check that depends on somebody choosing to run it is not a control (§2). On the first package run this
 way, the sweep was run once, before the freeze, and found two requirements eighteen rounds of
@@ -362,12 +362,12 @@ survived; the coordinator diffs the artifact and reports what moved that should 
 | | Step | Owner | Exit condition |
 |---|---|---|---|
 | **S0** | **The flow wireframe** — once per product or release, before its screen packages (§6.7): every screen, every moment of use as a clickable path, low fidelity | Coordinator generates; **Product Owner judges by clicking** | **The Product Owner accepts the flow** ("accept flow"), recorded as §11 records a design acceptance |
-| **S1** | Brief, design space, applicable criteria, coverage table, round scope | Product Owner + coordinator | Internal strategist records the page **OPEN** |
-| **S2–S5, S7** | **The design loop**: generate → render check → NOT COVERED sweep → publish → the Product Owner's notes, repeated. Alternatives on demand (§8); behaviour and state decisions captured as made (§9.1); the reconciliation list updated every round (§6.3) | Coordinator generates; **Product Owner judges by eye** | **The Product Owner accepts the design for each device form**, desktop and phone named separately, and the acceptance is recorded (§11) |
-| **S6** | Requirement coverage verification, including the arithmetic, on the accepted design (§10) | Coordinator produces, Product Owner accepts exceptions | Every applicable obligation is satisfied or routed through §13 |
-| **S8** | **Provisional freeze** | Product Owner | A named commit. No NOT COVERED row open (§6.4). Every figure the design computes rebuilt by a second seat, matching (§14.1) |
-| **S9** | `page-spec.md` and `acceptance-criteria.md`, consolidating S4–S7 decisions | Coordinator | Both complete |
-| **S10** | Gate G1–G11, scrutiny if warranted → **check result** | Internal strategist | Product Owner accepts the package → **DECIDED** |
+| **S1** | Brief, design space, applicable criteria, `coverage.md` built from the accepted specification, round scope | Product Owner + coordinator | Internal strategist records the page **OPEN**, having built the forward coverage independently and compared (§14.1) |
+| **S2–S5, S7** | **The design loop**: generate → render check → NOT COVERED sweep → publish → the Product Owner's notes, repeated. Alternatives on demand (§8); behaviour and state decisions captured as made (§9.1); `coverage.md` updated every round (§6.3) | Coordinator generates; **Product Owner judges by eye** | **The Product Owner accepts the design for each device form**, desktop and phone named separately, and the acceptance is recorded (§11) |
+| **S6** | **The loop's last sweep, not a separate pass** (§10): the sweep report at the design's acceptance is the forward and reverse result; the arithmetic is the second-seat rebuild | Coordinator; Product Owner accepts exceptions | Every applicable obligation is satisfied or routed through §13 |
+| **S8** | **Provisional freeze**, with no take-in of its own (the S9 take-in carries it) | Product Owner | A named commit. No NOT COVERED row open (§6.4). Every figure the design computes rebuilt by a second seat, matching (§14.1) |
+| **S9** | `page-spec.md` and `acceptance-criteria.md`, consolidating S4–S7 decisions, and the gate scripts' output (§14) | Coordinator | Both complete, and C1–C3 pass |
+| **S10** | **At the S9 take-in:** the three gate scripts' output read, and G11 read (§14); scrutiny if warranted → **check result**, and **one card** | Internal strategist | Product Owner accepts the package → **DECIDED** |
 
 **The loop replaces S2–S5 and S7; the stage names are kept** so that records citing them still resolve.
 When an external design model is used, the loop runs the same way with the model generating, and §5.7's
@@ -401,7 +401,7 @@ every publish; a save made from inside the page is merged, never forced.
 
 Where a project runs design-first — the design the Product Owner accepts is the authority for what the
 user sees and does, and the requirements align to it after the freeze (Coach Platform DEC-013) — every
-gap between the design and the specification is logged in the package's `reconciliation-list.md`, in
+gap between the design and the specification is logged in the package's `coverage.md` (§7.2), in
 three kinds: **CHANGED** (the design does it differently), **ADDED** (the design does something the
 specification does not) and **NOT COVERED** (a specified requirement with no counterpart in the design).
 
@@ -447,7 +447,7 @@ Every round's message has this shape and no other:
   operator or the host automation. They run alongside the rounds and gate only the freeze, so they are
   not his next step and never read as one.
 - **A Handoff block** (`60-workspace-document-contract.md`). The loop's next action is always his notes.
-  The Handoff block belongs to the deliveries that end a stage: S1, S8 and S9.
+  The Handoff block belongs to the deliveries that end a stage: S1 and S9.
 - **The word *defect* for his notes, or any framing of them as a check against the specification.** His
   notes may overrule the specification: the design he accepts is the authority for what the user sees
   and does, and a difference is recorded on the reconciliation list, not refused (§13).
@@ -458,8 +458,8 @@ Every round's message has this shape and no other:
 push to it: the canonical HTML at the package root, the round's `candidates/<round>/` folder, the
 reconciliation list, the expected figures and any request under `requests/`. CI renders every push.
 
-- **It merges once, at S8**, when the freeze names its commit. Only then is it taken in on the tracker,
-  and only then does the Product Owner get a card, together with the freeze. **No round has a merge
+- **It merges once, at S9**, carrying the freeze, the specification and the gate result. Only then is it
+  taken in on the tracker, and only then does the Product Owner get a card — one card for the package. **No round has a merge
   card**, and no round is taken in: a card per round asked him on the tracker for a judgement the loop
   already collects in the coordinator's chat (Coach Platform, WEE-287, 2026-09-26).
 - **Findings from other seats go on that pull request**, for the coordinator to take into the next
@@ -469,12 +469,12 @@ reconciliation list, the expected figures and any request under `requests/`. CI 
   file for the internal Product Strategist, who posts any card itself. A request addressed to the
   operator, or left outside the package, is one the Product Owner ends up carrying.
 - **The loop has no tracker issue, and nothing about it is assigned to the Product Owner.** A seat
-  that must wait on the loop waits on the loop's pull request reaching `S8 — freeze`, which opens the
-  take-in by itself. It does not open an issue for his notes, and it never asks him to relay its
+  that must wait on the loop waits on the loop's pull request reaching S9, which opens the take-in by
+  itself. It does not open an issue for his notes, and it never asks him to relay its
   findings to the coordinator: the pull request carries them (Coach Platform, WEE-289, 2026-09-26).
 - **A round opened as a pull request of its own** is folded into the loop's pull request by the next
   round and closed, so that exactly one design pull request per package is open during the loop.
-- **The manifest's `step:`** names the loop and the round (`loop — round 3`), then `S8 — freeze`. The
+- **The manifest's `step:`** names the loop and the round (`loop — round 3`), then `S8 — freeze`, then `S9`. The
   host automation reads it to tell a round from a delivery that ends a stage.
 
 ### 6.7 S0 — the flow wireframe
@@ -545,10 +545,22 @@ Round 3's design space was never put through this check. Fixing its structure wa
 §8 allows it — and the defect is that the declaration itself went unexamined, which is what carried a
 position set the grid does not contain into three rounds of work.
 
-### 7.2 The requirement coverage table
+### 7.2 The requirement coverage — `coverage.md`, the one requirement artifact
 
-| Requirement | Source doc, section, version **and commit** | Where it is visible | Verdict |
-|---|---|---|---|
+**One file holds what was two** (since 2026-09-29, proposal `2026-09-29_slim-design-gate.md`): the
+coverage table and the reconciliation list of §6.3. Built at S1, kept current by the sweep every round,
+read by the alignment pass for its CHANGED, NOT COVERED and ADDED rows.
+
+| Requirement | Source doc, section, version **and commit** | Where it is visible | Verdict | Product Owner's answer |
+|---|---|---|---|---|
+| id | folded accepted specification | region id or named specimen | **satisfied** · **CHANGED** · **NOT COVERED** · **not applicable** (reason) | card and date, where he gave one |
+
+Plus one **ADDED** row per thing the design does that the specification does not. A row that introduces
+or changes a computed figure carries its rule, and the figure is rebuilt by a second seat (§14.1).
+
+**The independent build happens here, at the S1 take-in:** the internal strategist builds the forward
+coverage from the accepted specification, not from the brief, and compares (§14.1). After S1 the sweep
+keeps it current; it is not rebuilt at S10.
 
 **Built from the accepted specification, never from a previous brief.** The defect this closes is a
 brief being checked against itself.
@@ -609,6 +621,10 @@ opinion before the design loop ends**, not after the freeze. The opinion is advi
 ---
 
 ## 10. S6 — requirement coverage verification
+
+**Since 2026-09-29 S6 is the loop's last sweep, not a separate pass.** The sweep report at the design's
+acceptance is the forward and reverse result below, read from `coverage.md`; the arithmetic is the
+second-seat rebuild the freeze already waits on (§14.1). What follows says what that result must show.
 
 It answers two questions and no others: **is anything missing, and are the numbers right.**
 
@@ -787,23 +803,30 @@ that read a diff and does not say so reads like a full review and is not one.
 
 ## 14. S10 — the gate
 
-| | |
-|---|---|
-| **G1** | Purpose, primary tasks and non-goals are stated |
-| **G2** | The artifact is identified and recoverable: named viewport, named fixture, named commit |
-| **G3** | Every region maps to a named component with a category |
-| **G4** | Every interactive component has behaviour, including keyboard and cancel |
-| **G5** | Every applicable alternate state is inspectable through a named specimen or reproducible interaction; every inapplicable class is marked so with a reason |
-| **G6** | Layout is stated as rules, including the width at which the layout changes, and every device form an accepted criterion requires is present |
-| **G7** | Accessibility is demonstrated, not asserted: keyboard reach and visible focus inspected in the rendered artifact, and no meaning carried by colour alone |
-| **G8** | Every acceptance criterion points at a region, a specimen, or a rule that exists |
-| **G9** | Every applicable accepted obligation is **satisfied**, or changed or deferred through §13. Every region traces to an obligation or an accepted deliberate extra |
-| **G10** | Every coverage row cites a **folded accepted specification** at a named commit. A draft or merely-merged amendment is not authority |
-| **G11** | **The decisive check.** Do the rendered states and the fixture results satisfy the applicable accepted rules, with no unresolved contradiction and no required behaviour left for an implementer to invent? Evidence linked to the exact artifact revision |
+**Three scripts and one reading** (since 2026-09-29, proposal `2026-09-29_slim-design-gate.md`). The
+scripts live once, in this repository's `tools/design_gate/`, and run at S9; the S9 take-in reads their
+output and does G11. G1–G11 keep their meaning, and each is assigned to the check that carries it:
+
+| | Check | Carried by |
+|---|---|---|
+| **G1** | Purpose, primary tasks and non-goals are stated | **C1 — structure** (script) |
+| **G2** | The artifact is identified and recoverable: named viewport, named fixture, named commit | **C1** |
+| **G3** | Every region maps to a named component with a category | **C1** |
+| **G4** | Every interactive component has behaviour, including keyboard and cancel | **C1** |
+| **G5** | Every applicable alternate state is inspectable through a named specimen or reproducible interaction; every inapplicable class is marked so with a reason | **C1** |
+| **G6** | Layout is stated as rules, including the width at which the layout changes, and every device form an accepted criterion requires is present | **C2 — render** (the existing render check) |
+| **G7** | Accessibility is demonstrated, not asserted: keyboard reach and visible focus inspected in the rendered artifact, and no meaning carried by colour alone | **C2** |
+| **G8** | Every acceptance criterion points at a region, a specimen, or a rule that exists | **C1** |
+| **G9** | Every applicable accepted obligation is **satisfied**, or changed or deferred through §13. Every region traces to an obligation or an accepted deliberate extra | **C3 — coverage** (script over `coverage.md`) |
+| **G10** | Every coverage row cites a **folded accepted specification** at a named commit. A draft or merely-merged amendment is not authority | **C3** |
+| **G11** | **The decisive check.** Do the rendered states and the fixture results satisfy the applicable accepted rules, with no unresolved contradiction and no required behaviour left for an implementer to invent? Evidence linked to the exact artifact revision | **Read by a seat** at the S9 take-in — the one check no script can do |
+
+A script that cannot decide a row reports it as unresolved, and an unresolved row is read at G11, not
+passed.
 
 ### 14.1 The check is independent
 
-The internal strategist builds the forward coverage table **from the accepted specification**, not from
+At the **S1 take-in** (moved from S10 on 2026-09-29), the internal strategist builds the forward coverage **from the accepted specification**, not from
 the brief's copy of it, and compares. This catches a brief whose requirement list was stale when it was
 written. The round-2 brief was checked this way once, by hand, and the check found 26 things; the
 round-3 brief was not, and that is the difference this step removes.

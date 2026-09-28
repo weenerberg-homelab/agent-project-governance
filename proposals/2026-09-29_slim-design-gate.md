@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | **PROPOSED** — for the Product Owner. Nothing in `90-design-delivery.md` changes until he approves; the changes are then applied in one pull request, and this document is kept as the record |
+| **Status** | **APPROVED (a), 2026-09-29** — by the Product Owner, Q146. Applied to `governance/90-design-delivery.md` and `40-agent_prompts.md` in the same pull request; this document is kept as the record. `tools/design_gate/` (C1, C3) follows, written by the coordinator |
 | **Author** | Operator (paperclip_trial), from REPORT-009 **R-43** |
 | **Date** | 2026-09-29 |
 | **Asked by** | The Product Owner, Q145, 2026-09-29 — *"Proposal"* |
