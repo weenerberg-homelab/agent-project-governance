@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| **Status** | **PROPOSED** — for the Product Owner to read and decide (§11). Nothing is applied until he does |
+| **Status** | **APPROVED, 2026-09-30** — by the Product Owner: PH-Q1 (a), PH-Q2 (a), PH-Q3 (a). The governance edits in §7 are applied in the same pull request; the Coach Platform and Paperclip trial changes follow it. This document is kept as the record |
 | **Author** | Operator (paperclip_trial) |
 | **Date** | 2026-09-30 |
 | **Decided so far** | The Product Owner, 2026-09-30. **Q156 (yes):** the exploratory phase is a clickable HTML prototype; *"In the meantime I will continue with the EPS to complete all known views, develop the design system and a clickable prototype to traverse navigation and test the appflow."* **Q157 (a):** *"Wrap up M8 with what we have."* Asked for: *"a proposal for how we fit it in the documentation and how it affects all agents and phases of the project"* |

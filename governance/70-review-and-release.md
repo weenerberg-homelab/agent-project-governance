@@ -129,6 +129,14 @@ A board card put to a human is the whole of what that human sees. The instructio
 document it was compiled from and the amendment it serves are all off screen when the buttons are
 pressed. The card carries its own meaning or it carries none.
 
+**What reaches a card depends on the project's phase** (`20-development_iteration.md`, *Development
+phases*). In **Exploratory** almost nothing does: the coordinator asks in its chat. In **Intermediate** a
+card is only for money above a ceiling, deleting or rewriting data, scope the Product Owner has not
+decided, going against one of his answers, and the approvals the project's routing decision gives him;
+a reversible choice is the seat's own, recorded in one line in its pull request. When every question on
+a card carries a recommendation, the seat posts one confirmation to take them all, and asks one by one
+only if he chooses to revise. In **Finalization** every gate is carded.
+
 ### The question is laid out to be decided in a minute
 
 **The prompt is a fixed layout of short lines, never a paragraph.** The reader decides from it. If he
@@ -406,6 +414,11 @@ checks it before it reaches the Product Owner.
 Under `manual` orchestration the release summary is the same artifact, presented in the same conversation.
 
 ## Reviews, rework and acceptance
+
+**Review strictness follows the phase** (`20-development_iteration.md`). In **Exploratory** the prototype
+has no review; the Product Owner judges it by clicking. In **Intermediate** one review round is the norm,
+and a record-only defect (a citation, a revision number, a commit pointer) never fails a round on its own:
+it rides the next commit. In **Finalization** a record-only defect fails the round.
 
 ### Instruction review requires independent check evidence
 
