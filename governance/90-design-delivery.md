@@ -25,6 +25,11 @@ Owner judges each round by eye. An **external design model** — no memory betwe
 the product's records — stays available when the Product Owner asks for one; §5.7 and §9 say what
 changes then.
 
+**Which parts apply depends on the project's phase** (`20-development_iteration.md`, *Development
+phases*). In **Exploratory** the work is one clickable prototype (§6.8) and the per-screen stages S1–S10
+do not run. From **Intermediate** the stage table in §6 applies to each screen, and in **Finalization**
+it applies strictly.
+
 ### What it is not
 
 - Not a visual style guide.
@@ -369,6 +374,8 @@ survived; the coordinator diffs the artifact and reports what moved that should 
 | **S9** | `page-spec.md` and `acceptance-criteria.md`, consolidating S4–S7 decisions, and the gate scripts' output (§14) | Coordinator | Both complete, and C1–C3 pass |
 | **S10** | **At the S9 take-in:** the three gate scripts' output read, and G11 read (§14); scrutiny if warranted → **check result**, and **one card** | Internal strategist | Product Owner accepts the package → **DECIDED** |
 
+**This table applies from the Intermediate phase.** In Exploratory, §6.8 replaces it.
+
 **The loop replaces S2–S5 and S7; the stage names are kept** so that records citing them still resolve.
 When an external design model is used, the loop runs the same way with the model generating, and §5.7's
 retained file and §9's assumption audit apply.
@@ -526,6 +533,22 @@ finds its screen missing from the flow, or needs a path the flow does not have, 
 first rather than deciding the path inside a screen.
 
 ---
+
+### 6.8 The exploratory prototype
+
+In the **Exploratory** phase the design work is **one clickable HTML prototype of the whole product**,
+built by the coordinator with the Product Owner in its chat. It replaces the per-screen stages S1–S10
+for as long as the phase lasts.
+
+| | |
+|---|---|
+| **What** | The accepted flow (S0) grown into every known view: each screen is a page, the navigation works, invented data shows each screen's states. Screens with a finished package join as pages as designed; drafts continue as pages; screens with no package start as pages from the flow |
+| **Where** | Inside the flow package, generated from a committed generator like every package, on one draft pull request; published as a canvas every round, which the Product Owner can open on a phone |
+| **The design system** | One token set, the shared components and the type, in `_docs/design/system/`, built during the phase (§12). Every page uses it, not its own copy |
+| **Coverage** | `gaps.md` beside the prototype: requirements no page shows yet. Nothing in it is carded; it feeds the alignment pass at the phase's end |
+| **Not run** | Per-screen `coverage.md` upkeep, S8 and S9, `page-spec.md` and `acceptance-criteria.md`, second-seat rebuilds, take-ins, and product amendments. Files under `requests/` only when the Product Owner asks for one |
+| **Round message** | What changed, the canvas link, at most three questions — each about what the product does, never about a pixel. Reversible choices are the coordinator's own |
+| **Exit** | The Product Owner moves the project to Intermediate. Then, once: the alignment pass for the whole prototype (DEC-013 clause 5 on Coach Platform), and each page becomes its screen's package at S9, which the gate (§14) checks |
 
 ## 7. S1 — the design space and the coverage table
 
@@ -710,6 +733,10 @@ same semantics — not on its first with a similar appearance, and not because i
 
 A concept that looks reusable is recorded as **candidate** and stays page-local until a second use
 establishes shared semantics, unless the Product Owner explicitly approves an exception and records why.
+
+**In the Exploratory phase the design system is built directly** in `_docs/design/system/`, alongside
+the prototype (§6.8), rather than extracted after a first implementation. §12.3's candidacy and §12.4's
+extraction apply from Intermediate, to components the build reveals.
 
 ### 12.4 Extraction
 
