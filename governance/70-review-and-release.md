@@ -133,9 +133,18 @@ pressed. The card carries its own meaning or it carries none.
 phases*). In **Exploratory** almost nothing does: the coordinator asks in its chat. In **Intermediate** a
 card is only for money above a ceiling, deleting or rewriting data, scope the Product Owner has not
 decided, going against one of his answers, and the approvals the project's routing decision gives him;
-a reversible choice is the seat's own, recorded in one line in its pull request. When every question on
-a card carries a recommendation, the seat posts one confirmation to take them all, and asks one by one
-only if he chooses to revise. In **Finalization** every gate is carded.
+a reversible choice is the seat's own, recorded in one line in its pull request. **Each decision is its own
+question**, with the recommended option first, so he can answer each one; several decisions are never
+folded into one *take all recommendations* confirmation (the Product Owner, 2026-10-02). In
+**Finalization** every gate is carded.
+
+**A decision the Product Owner made outside the tracker is not asked again** (REPORT-009 R-40, approved
+2026-10-02). When he decides in the design coordinator's chat or the Operator's, the amendment that records
+it quotes his words with the date and the session (the coordinator's DC- reference, or the Operator's
+Q/A reference), and that quotation is the answer the change records — the project's routing decision
+counts it as an answered card. A card on that amendment confirms delivery (*this is what you decided,
+written down*) in one click; it does not put the question to him again. A hunk with no quoted decision
+behind it is still a question and is carded as one.
 
 ### The question is laid out to be decided in a minute
 
