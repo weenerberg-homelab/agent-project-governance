@@ -1,9 +1,20 @@
 """C1 — structure. Carries G1, G2, G3, G4, G5 and G8 of 90-design-delivery.md §14.
 
     python3 tools/design_gate/c1_structure.py <package-dir> [--out report.md]
+    python3 tools/design_gate/c1_structure.py <screen-dir> --prototype <prototype.html> --page <id> [--out report.md]
 
-Reads the package's `page-brief.md`, `page.manifest.yaml`, `page-spec.md`, `acceptance-criteria.md` and
-the rendered HTML at the package root. Standard library only.
+Two inputs, by how the screen was designed:
+
+- **A finished package** (S1–S10): its `page-brief.md`, `page.manifest.yaml`, `page-spec.md`,
+  `acceptance-criteria.md` and the rendered HTML at the package root.
+- **A prototype screen** (§6.8 *Exit*, R-44): the `page-spec.md` and `acceptance-criteria.md` the build writes
+  when it reaches the screen, read against **that screen's page of the frozen prototype** (`--page`, its id,
+  e.g. `week` for `p-week`) instead of a package's HTML. G1 reads the purpose, tasks and non-goals from
+  `page-brief.md` if there is one, else from `page-spec.md`; G2 asks that `page-spec.md` names its prototype
+  page and the prototype's pin (a tag such as `prototype-final-2026-10-02`, or a commit) — there is no
+  manifest.
+
+Standard library only.
 
 Exit 0: every check passes. Exit 1: at least one FAIL. Exit 2: no FAIL, but at least one item the script
 could not decide — an UNRESOLVED item is read at G11 by the S9 take-in, never passed (§14).
@@ -35,11 +46,16 @@ def html_text(pkg: Path) -> str:
     return "\n".join(p.read_text(encoding="utf-8") for p in sorted(pkg.glob("*.html")))
 
 
+SCREEN_MODE = {"on": False}  # set for a prototype screen: its page is the primary state, S-A
+
+
 def has_specimen(s: str, html: str, pkg: Path) -> bool:
     """A specimen id is present when the HTML names it. `S-A` is the primary by convention (process §5.2):
     the canonical page itself, present when `canonical.html` or `candidate.html` exists."""
     if re.search(rf"(?<![\w-]){re.escape(s)}(?![\w-])", html):
         return True
+    if s == "S-A" and SCREEN_MODE["on"]:
+        return bool(html)
     return s == "S-A" and any((pkg / f).exists() for f in ("canonical.html", "candidate.html"))
 
 
@@ -47,10 +63,12 @@ def state_labels(html: str) -> list[str]:
     return [re.sub(r"<[^>]+>", "", m).strip().lower() for m in re.findall(r'class="state-label"[^>]*>(.*?)</', html)]
 
 
-def g1(pkg: Path, r: Report) -> None:
+def g1(pkg: Path, r: Report, screen: bool = False) -> None:
     brief = pkg / "page-brief.md"
+    if not brief.exists() and screen:
+        brief = pkg / "page-spec.md"  # a prototype screen has no brief: its spec states the three
     if not brief.exists():
-        r.add("G1 purpose, tasks, non-goals", "FAIL", "`page-brief.md` is missing")
+        r.add("G1 purpose, tasks, non-goals", "FAIL", f"`{brief.name}` is missing")
         return
     heads = [
         ln.lstrip("#").strip().lower() for ln in brief.read_text(encoding="utf-8").splitlines() if ln.startswith("#")
@@ -64,7 +82,7 @@ def g1(pkg: Path, r: Report) -> None:
         r.add(
             "G1 purpose, tasks, non-goals",
             "PASS" if hit else "FAIL",
-            f"{label}: " + (f"heading *{hit}*" if hit else "no heading in `page-brief.md`"),
+            f"{label}: " + (f"heading *{hit}*" if hit else f"no heading in `{brief.name}`"),
         )
 
 
@@ -95,6 +113,45 @@ def g2(pkg: Path, r: Report) -> None:
         "G2 identified and recoverable",
         "PASS" if vp else "FAIL",
         f"viewport: {vp.group(1) if vp else 'absent or not WxH'}",
+    )
+
+
+PIN = re.compile(r"`?(prototype-final-[\w.-]+|[0-9a-f]{7,40})`?")
+
+
+def prototype_page(proto: Path, page: str) -> str | None:
+    """The markup of one page of the prototype: its `<section class="pg …" id="p-<page>">`, up to the next page."""
+    doc = proto.read_text(encoding="utf-8")
+    m = re.search(rf'<section class="pg[^"]*" id="p-{re.escape(page)}"', doc)
+    if not m:
+        return None
+    nxt = doc.find('<section class="pg', m.end())
+    return doc[m.start() : nxt if nxt > 0 else len(doc)]
+
+
+def g2_screen(pkg: Path, page: str, found: bool, r: Report) -> None:
+    """G2 for a prototype screen: the spec names its page and the prototype's pin, and the page exists."""
+    r.add(
+        "G2 identified and recoverable",
+        "PASS" if found else "FAIL",
+        f"prototype page `p-{page}`" + ("" if found else " — not in the prototype"),
+    )
+    spec = pkg / "page-spec.md"
+    if not spec.exists():
+        r.add("G2 identified and recoverable", "FAIL", "`page-spec.md` is missing, so it names no page and no pin")
+        return
+    text = spec.read_text(encoding="utf-8")
+    names = re.search(rf"(?<![\w-])p-{re.escape(page)}(?![\w-])", text)
+    r.add(
+        "G2 identified and recoverable",
+        "PASS" if names else "FAIL",
+        f"`page-spec.md` names `p-{page}`" if names else f"`page-spec.md` does not name its prototype page `p-{page}`",
+    )
+    pin = PIN.search(text)
+    r.add(
+        "G2 identified and recoverable",
+        "PASS" if pin else "FAIL",
+        f"prototype pin: {pin.group(1)}" if pin else "`page-spec.md` names no prototype pin (a `prototype-final-…` tag or a commit)",
     )
 
 
@@ -258,16 +315,27 @@ def g8(pkg: Path, regions: set[str], html: str, r: Report) -> None:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("package", type=Path)
+    ap.add_argument("package", type=Path, help="a finished package's directory, or a prototype screen's spec directory")
+    ap.add_argument("--prototype", type=Path, help="the frozen prototype's HTML, for a prototype screen")
+    ap.add_argument("--page", help="the screen's prototype page id (e.g. week for p-week)")
     ap.add_argument("--out", type=Path)
     a = ap.parse_args()
+    if bool(a.prototype) != bool(a.page):
+        ap.error("--prototype and --page go together")
     pkg = a.package.resolve()
-    r = Report(f"C1 — structure · `{pkg.name}`")
+    r = Report(f"C1 — structure · `{a.page or pkg.name}`")
     spec_path = pkg / "page-spec.md"
     spec = tables(spec_path) if spec_path.exists() else []
-    html = html_text(pkg)
-    g1(pkg, r)
-    g2(pkg, r)
+    if a.page:
+        SCREEN_MODE["on"] = True
+        page = prototype_page(a.prototype, a.page)
+        html = page or ""
+        g1(pkg, r, screen=True)
+        g2_screen(pkg, a.page, page is not None, r)
+    else:
+        html = html_text(pkg)
+        g1(pkg, r)
+        g2(pkg, r)
     regions = g3(spec, r) if spec else set()
     if not spec:
         r.add("G3 regions map to components", "FAIL", "`page-spec.md` is missing")

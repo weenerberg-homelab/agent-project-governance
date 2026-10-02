@@ -77,7 +77,9 @@ def run(script: str, pkg: Path) -> subprocess.CompletedProcess:
     return subprocess.run([sys.executable, str(HERE / script), str(pkg), *extra], capture_output=True, text=True)
 
 
-class Gate(unittest.TestCase):
+class Repo(unittest.TestCase):
+    """A throwaway git repository with one commit on main."""
+
     def setUp(self) -> None:
         self.tmp = tempfile.TemporaryDirectory()
         self.pkg = Path(self.tmp.name)
@@ -93,6 +95,10 @@ class Gate(unittest.TestCase):
 
     def tearDown(self) -> None:
         self.tmp.cleanup()
+
+
+class Gate(Repo):
+    """A finished package (S1–S10)."""
 
     def write(self, *, cat="domain", kb="Enter", ref="R2; S-B", v3="satisfied", a3="—") -> None:
         p = self.pkg
@@ -143,6 +149,90 @@ class Gate(unittest.TestCase):
         cov.write_text(cov.read_text().replace(self.commit, "deadbee"))
         out = run("c3_coverage.py", self.pkg)
         self.assertNotEqual(out.returncode, 0, out.stdout)
+
+
+SCREEN_SPEC = (
+    "# Page specification — demo\n\nPrototype page `p-demo` at tag `prototype-final-2026-10-02`.\n\n"
+    "## Purpose\n\nx\n\n## Primary tasks\n\nx\n\n## Non-goals\n\nx\n\n"
+)
+PROTOTYPE = (
+    '<!doctype html><section class="pg src" id="p-demo"><section id="view-full"></section>'
+    '<p class="state-label">S-B · empty</p></section><section class="pg src" id="p-other"></section>'
+)
+V1A = textwrap.dedent(
+    """\
+    # The V1a coverage table
+
+    | | |
+    |---|---|
+    | **Specification** | `main` at `{commit}` |
+
+    | Id | Screen | Requirement | Source | Check | Status | Verdict | Product Owner's answer |
+    |---|---|---|---|---|---|---|---|
+    | VR-01 | p-demo | Shows the head | PR §1 | face | DECIDED | satisfied | — |
+    | VR-02 | p-demo, p-other | Lists items | PR §3 | face | DECIDED | {v2} | — |
+    | VR-03 | p-other | Something else | PR §4 | face | OPEN | partial | — |
+    """
+)
+
+
+class Screen(Repo):
+    """A prototype screen (§6.8 Exit, R-44): its spec read against its prototype page; one coverage table."""
+
+    def write_screen(self, *, pin=True, v2="satisfied", table=True) -> Path:
+        d = self.pkg / "screens" / "demo"
+        d.mkdir(parents=True, exist_ok=True)
+        spec = SCREEN_SPEC if pin else SCREEN_SPEC.replace("prototype-final-2026-10-02", "the prototype")
+        (d / "page-spec.md").write_text(spec + SPEC.format(cat="domain", kb="Enter").split("\n", 1)[1])
+        (d / "acceptance-criteria.md").write_text(AC.format(ref="R2; S-B"))
+        (self.pkg / "prototype.html").write_text(PROTOTYPE)
+        if table:
+            t = self.pkg / "_docs" / "design" / "v1a-coverage.md"
+            t.parent.mkdir(parents=True, exist_ok=True)
+            t.write_text(V1A.format(commit=self.commit, v2=v2))
+        return d
+
+    def c1(self, d: Path, page: str = "demo") -> subprocess.CompletedProcess:
+        return subprocess.run(
+            [sys.executable, str(HERE / "c1_structure.py"), str(d), "--prototype", str(self.pkg / "prototype.html"), "--page", page],
+            capture_output=True,
+            text=True,
+        )
+
+    def c3(self, screen: str = "demo") -> subprocess.CompletedProcess:
+        return subprocess.run(
+            [sys.executable, str(HERE / "c3_coverage.py"), str(self.pkg), "--screen", screen, "--main", "main"],
+            capture_output=True,
+            text=True,
+        )
+
+    def test_screen_passes(self) -> None:
+        d = self.write_screen()
+        c1, c3 = self.c1(d), self.c3()
+        self.assertEqual(c1.returncode, 0, c1.stdout)
+        self.assertEqual(c3.returncode, 0, c3.stdout)  # VR-03 is p-other's, not this screen's
+        self.assertIn("2 of 2 checked items pass", c3.stdout)
+
+    def test_c1_screen_needs_page_and_pin(self) -> None:
+        d = self.write_screen(pin=False)
+        out = self.c1(d)
+        self.assertEqual(out.returncode, 1, out.stdout)
+        self.assertIn("names no prototype pin", out.stdout)
+        out = self.c1(d, page="missing")
+        self.assertIn("not in the prototype", out.stdout)
+
+    def test_c3_screen_reads_only_its_rows(self) -> None:
+        self.write_screen(v2="partial")
+        out = self.c3()
+        self.assertEqual(out.returncode, 1, out.stdout)
+        self.assertIn("VR-02", out.stdout)
+        self.assertNotIn("VR-03", out.stdout)
+
+    def test_c3_screen_names_where_it_expects_the_table(self) -> None:
+        self.write_screen(table=False)
+        out = self.c3()
+        self.assertEqual(out.returncode, 1, out.stdout)
+        self.assertIn("_docs/design/v1a-coverage.md", out.stdout)
 
 
 if __name__ == "__main__":

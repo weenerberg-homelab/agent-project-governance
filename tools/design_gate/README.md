@@ -3,13 +3,17 @@
 The design gate's two scripts (`90-design-delivery.md` §14; proposal `2026-09-29_slim-design-gate.md` §5
 step 2). C2 is each package's existing render check. G11 is read by the S9 take-in seat.
 
-| Script | Carries | Reads |
-|---|---|---|
-| `c1_structure.py <package>` | G1, G2, G3, G4, G5, G8 | `page-brief.md`, `page.manifest.yaml`, `page-spec.md`, `acceptance-criteria.md`, `*.html` at the package root |
-| `c3_coverage.py <package> [--main origin/main]` | G9, G10 | `coverage.md`, and `git` for the pinned commits |
+Two kinds of screen are gated, by how they were designed (`90-design-delivery.md` §6.8 *Exit*, R-44):
 
-Both take `--out <file>` to write the report. The coordinator runs them at S9 and commits their output
-with the specification (`page-spec.md` and `acceptance-criteria.md`). Standard library and `git` only.
+| Script | Carries | A finished package (S1–S10) | A prototype screen (Intermediate, R-44) |
+|---|---|---|---|
+| `c1_structure.py` | G1, G2, G3, G4, G5, G8 | `c1_structure.py <package>` — `page-brief.md`, `page.manifest.yaml`, `page-spec.md`, `acceptance-criteria.md`, `*.html` at the package root | `c1_structure.py <spec-dir> --prototype <prototype.html> --page <id>` — the `page-spec.md` and `acceptance-criteria.md` the build writes when it reaches the screen, read against **that page** of the frozen prototype (`p-<id>`). G1 reads `page-spec.md` when there is no brief; G2 asks that `page-spec.md` names `p-<id>` and the prototype's pin (a `prototype-final-…` tag or a commit) |
+| `c3_coverage.py` | G9, G10 | `c3_coverage.py <package> [--main origin/main]` — the package's `coverage.md` | `c3_coverage.py <repo> --screen <id> [--table <file>]` — the **one** requirement-coverage table for the prototype-covered screens (WEE-470 Q1 (a)), only the rows whose *Screen* column names `<id>` (`week` or `p-week`). Default path `_docs/design/v1a-coverage.md` (WEE-479); when it is missing, C3 says where it looked |
+
+Both take `--out <file>` to write the report. For a finished package the coordinator runs them at S9 and
+commits their output with the specification. For a prototype screen they run when the build reaches the
+screen, over the spec its increment carries — saved as `page-spec.md` and `acceptance-criteria.md` in one
+directory if the instruction holds them as documents. Standard library and `git` only.
 
 **Exit codes.** `0` every item passes · `1` at least one FAIL · `2` no FAIL, but items the script could
 not decide. An UNRESOLVED item is read at G11, never passed (§14).
@@ -29,10 +33,11 @@ not decide. An UNRESOLVED item is read at G11, never passed (§14).
 
 ## Checked against
 
-| Package | Head | C1 | C3 |
+| Screen | Head | C1 | C3 |
 |---|---|---|---|
-| fixture-result, revision 41 | `94d4226` | 0 — 33 regions, 30 interactions, 26 states, 64 criteria | 0 — 133 rows, pin `9770520` |
-| selection, revision 6 | `81e1b0c` | 0 — 30 regions, 16 interactions, 44 states, 103 criteria | 1 — no `coverage.md` yet (converts at its next revision, proposal §5 step 3) |
+| fixture-result, revision 41 (package) | coach-platform `main` `ac815a6` | 0 — 33 regions, 30 interactions, 26 states, 64 criteria | 0 — 133 rows, pins on `main` |
+| This week, `p-week` — M9's first screen (`S1`, WEE-456 `build-plan-1`) | `main` `ac815a6`, prototype tag `prototype-final-2026-10-02` | 1 — the page is found in the prototype; `page-spec.md` and `acceptance-criteria.md` are not written yet (R-44: written when the build reaches `S1`) | 1 — the one coverage table is not at `_docs/design/v1a-coverage.md` yet (WEE-479, in progress) |
+| selection, revision 6 (package, earlier run) | `81e1b0c` | 0 — 30 regions, 16 interactions, 44 states, 103 criteria | 1 — no `coverage.md` yet |
 
 The counts for fixture-result agree with the S9 take-in's hand check (`WEE-399-T4`: 33 regions, 64
 criteria, 133 coverage rows).

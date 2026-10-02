@@ -1,6 +1,15 @@
-"""C3 — coverage. Carries G9 and G10 of 90-design-delivery.md §14, over the package's `coverage.md` (§7.2).
+"""C3 — coverage. Carries G9 and G10 of 90-design-delivery.md §14, over a coverage table (§7.2).
 
     python3 tools/design_gate/c3_coverage.py <package-dir> [--main origin/main] [--out report.md]
+    python3 tools/design_gate/c3_coverage.py <repo> --screen <page-id> [--table <file>] [--main origin/main]
+
+Two inputs, by how the screen was designed:
+
+- **A finished package** (S1–S10): the package's own `coverage.md`.
+- **A prototype screen** (§6.8 *Exit*, R-44): the **one** requirement-coverage table for the screens the
+  prototype covers, filtered to the screen being gated (`--screen`, its prototype page id, e.g. `week` for
+  `p-week`). The table carries a *Screen* column; a row belongs to every screen it names. Without
+  `--table`, the table is read at `_docs/design/v1a-coverage.md` in the repository (WEE-479, WEE-470 Q1 (a)).
 
 G9: every applicable row is **satisfied**; a **not applicable** row states its reason; a **CHANGED** or
 **NOT COVERED** row carries the Product Owner's answer. G10: every table's source is pinned at a commit on
@@ -42,7 +51,7 @@ def verdict(t: Table, line: int, cells: list[str], rid: str, r: Report) -> None:
     v = plain(cells[vi]).lower() if vi is not None and vi < len(cells) else ""
     answer = cells[ai] if ai is not None and ai < len(cells) else ""
     kind = plain(cells[ki]).lower() if ki is not None and ki < len(cells) else ""
-    where = f"`coverage.md:{line}` {rid}"
+    where = f"`{t.path.name}:{line}` {rid}"
     if not v:
         r.add("G9 every obligation satisfied or routed", "FAIL", f"{where}: no verdict")
     elif v.startswith("not applicable"):
@@ -78,25 +87,47 @@ def verdict(t: Table, line: int, cells: list[str], rid: str, r: Report) -> None:
         r.add("G9 every obligation satisfied or routed", "UNRESOLVED", f"{where}: verdict not recognised — *{v[:60]}*")
 
 
+V1A_TABLE = Path("_docs/design/v1a-coverage.md")  # WEE-479 proposes it here; the Architect places it
+
+
+def screen_match(cell: str, screen: str) -> bool:
+    """A Screen cell names the screen by its prototype page id, with or without the `p-` prefix."""
+    return re.search(rf"(?<![\w-])(?:p-)?{re.escape(screen)}(?![\w-])", plain(cell)) is not None
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("package", type=Path)
+    ap.add_argument("package", type=Path, help="a finished package's directory, or the repository for a prototype screen")
+    ap.add_argument("--screen", help="the prototype page id of the screen being gated (e.g. week)")
+    ap.add_argument("--table", type=Path, help=f"the one coverage table (default <repo>/{V1A_TABLE})")
     ap.add_argument("--main", default="origin/main", help="the project's main branch ref (default origin/main)")
     ap.add_argument("--out", type=Path)
     a = ap.parse_args()
     pkg = a.package.resolve()
-    r = Report(f"C3 — coverage · `{pkg.name}`")
-    cov = pkg / "coverage.md"
+    repo = Path(git(pkg, "rev-parse", "--show-toplevel").stdout.strip() or pkg)
+    r = Report(f"C3 — coverage · `{a.screen or pkg.name}`")
+    # a package reads its own coverage.md; a prototype screen reads the one table, filtered to its rows
+    cov = a.table.resolve() if a.table else (repo / V1A_TABLE if a.screen else pkg / "coverage.md")
     if not cov.exists():
-        r.add(
-            "G9 every obligation satisfied or routed",
-            "FAIL",
-            "`coverage.md` is missing (process §7.2; a package converts at its next revision)",
-        )
-        print(r.render())
+        if a.table:
+            why = f"`{cov}` is missing"
+        elif a.screen:
+            why = (
+                f"the one coverage table is not at `{V1A_TABLE}` (WEE-479, WEE-470 Q1 (a)); "
+                "pass `--table` if it lives elsewhere"
+            )
+        else:
+            why = (
+                f"`coverage.md` is missing in `{pkg.name}` (process §7.2); for a prototype screen pass "
+                f"`--screen`, which reads the one table at `{V1A_TABLE}`"
+            )
+        r.add("G9 every obligation satisfied or routed", "FAIL", why)
+        text = r.render()
+        print(text)
+        if a.out:
+            a.out.write_text(text + "\n", encoding="utf-8")
         return r.code()
     all_tables = tables(cov)
-    repo = Path(git(pkg, "rev-parse", "--show-toplevel").stdout.strip() or pkg)
 
     # G10 — the pin. A header-table row naming the specification, or a column header, carries the commit.
     pins: set[str] = set()
@@ -109,7 +140,7 @@ def main() -> int:
                 if cells and "specification" in plain(cells[0]).lower():
                     pins.update(HEX.findall(" ".join(cells[1:])))
     if not pins:
-        r.add("G10 cites a folded specification at a commit", "FAIL", "no specification commit pinned in `coverage.md`")
+        r.add("G10 cites a folded specification at a commit", "FAIL", f"no specification commit pinned in `{cov.name}`")
     for c in sorted(pins):
         ok = on_main(repo, c, a.main)
         r.add(
@@ -125,9 +156,19 @@ def main() -> int:
         if t.col("verdict") is None:
             continue
         si = t.col("source")
+        sc = t.col("screen", "page")
+        if a.screen and sc is None:
+            r.add(
+                "G9 every obligation satisfied or routed",
+                "FAIL",
+                f"`{cov.name}:{t.line}`: a requirement table with no *Screen* column, so no row can be filtered to `{a.screen}`",
+            )
+            continue
         for line, cells in t.rows:
             rid = plain(cells[0]) if cells else ""
             if not ROW_ID.match(rid):
+                continue
+            if a.screen and not (sc < len(cells) and screen_match(cells[sc], a.screen)):
                 continue
             n += 1
             verdict(t, line, cells, rid, r)
@@ -138,20 +179,22 @@ def main() -> int:
                     r.add(
                         "G10 cites a folded specification at a commit",
                         "FAIL",
-                        f"`coverage.md:{line}` {rid}: source cites a draft — *{plain(src)[:60]}*",
+                        f"`{cov.name}:{line}` {rid}: source cites a draft — *{plain(src)[:60]}*",
                     )
                 for c in HEX.findall(src):
                     if c not in pins and on_main(repo, c, a.main) is False:
                         r.add(
                             "G10 cites a folded specification at a commit",
                             "FAIL",
-                            f"`coverage.md:{line}` {rid}: `{c}` is not on `{a.main}`",
+                            f"`{cov.name}:{line}` {rid}: `{c}` is not on `{a.main}`",
                         )
     if n == 0:
         r.add(
             "G9 every obligation satisfied or routed",
             "FAIL",
-            "no requirement rows found (no table with a Verdict column)",
+            f"no requirement rows for `{a.screen}` in `{cov.name}`"
+            if a.screen
+            else "no requirement rows found (no table with a Verdict column)",
         )
     text = r.render()
     print(text)
