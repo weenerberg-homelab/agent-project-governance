@@ -151,7 +151,9 @@ def g2_screen(pkg: Path, page: str, found: bool, r: Report) -> None:
     r.add(
         "G2 identified and recoverable",
         "PASS" if pin else "FAIL",
-        f"prototype pin: {pin.group(1)}" if pin else "`page-spec.md` names no prototype pin (a `prototype-final-…` tag or a commit)",
+        f"prototype pin: {pin.group(1)}"
+        if pin
+        else "`page-spec.md` names no prototype pin (a `prototype-final-…` tag or a commit)",
     )
 
 

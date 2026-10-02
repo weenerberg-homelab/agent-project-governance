@@ -194,7 +194,15 @@ class Screen(Repo):
 
     def c1(self, d: Path, page: str = "demo") -> subprocess.CompletedProcess:
         return subprocess.run(
-            [sys.executable, str(HERE / "c1_structure.py"), str(d), "--prototype", str(self.pkg / "prototype.html"), "--page", page],
+            [
+                sys.executable,
+                str(HERE / "c1_structure.py"),
+                str(d),
+                "--prototype",
+                str(self.pkg / "prototype.html"),
+                "--page",
+                page,
+            ],
             capture_output=True,
             text=True,
         )

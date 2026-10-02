@@ -97,7 +97,9 @@ def screen_match(cell: str, screen: str) -> bool:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("package", type=Path, help="a finished package's directory, or the repository for a prototype screen")
+    ap.add_argument(
+        "package", type=Path, help="a finished package's directory, or the repository for a prototype screen"
+    )
     ap.add_argument("--screen", help="the prototype page id of the screen being gated (e.g. week)")
     ap.add_argument("--table", type=Path, help=f"the one coverage table (default <repo>/{V1A_TABLE})")
     ap.add_argument("--main", default="origin/main", help="the project's main branch ref (default origin/main)")
