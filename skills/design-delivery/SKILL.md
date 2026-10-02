@@ -553,10 +553,11 @@ for as long as the phase lasts.
 | **What** | The accepted flow (S0) grown into every known view: each screen is a page, the navigation works, invented data shows each screen's states. Screens with a finished package join as pages as designed; drafts continue as pages; screens with no package start as pages from the flow |
 | **Where** | Inside the flow package, generated from a committed generator like every package, on one draft pull request; published as a canvas every round, which the Product Owner can open on a phone |
 | **The design system** | One token set, the shared components and the type, in `_docs/design/system/`, built during the phase (§12). Every page uses it, not its own copy |
-| **Coverage** | `gaps.md` beside the prototype: requirements no page shows yet. Nothing in it is carded; it feeds the alignment pass at the phase's end |
+| **Coverage** | `gaps.md` beside the prototype: requirements no page shows yet, and what the prototype does that the requirements do not. Nothing in it is carded; it feeds the alignment pass at the phase's end |
+| **Rolling alignment** | **A `gaps.md` row the Product Owner settles in the coordinator's chat is marked at once** — *decided, round n*, with his answer in his words — in a status column the coordinator keeps. At the phase's end only the rows still open go to the Product Owner, batched; the decided rows are carried into the specification as recorded answers, without a card (on Coach Platform, DEC-002 class 3) |
 | **Not run** | Per-screen `coverage.md` upkeep, S8 and S9, `page-spec.md` and `acceptance-criteria.md`, second-seat rebuilds, take-ins, and product amendments. Files under `requests/` only when the Product Owner asks for one |
 | **Round message** | What changed, the canvas link, at most three questions — each about what the product does, never about a pixel. Reversible choices are the coordinator's own |
-| **Exit** | The Product Owner moves the project to Intermediate. Then, once: the alignment pass for the whole prototype (DEC-013 clause 5 on Coach Platform), and each page becomes its screen's package at S9, which the gate (§14) checks |
+| **Exit** | The Product Owner moves the project to Intermediate. Then, once: the alignment pass for the whole prototype (DEC-013 clause 5 on Coach Platform), starting from `gaps.md` and carding only its open rows; then the prototype is taken in **once, as one package**, and each page's `page-spec.md` and `acceptance-criteria.md` are written from it as the build reaches that screen, checked by the gate (§14) then. One take-in for the prototype, not one per page (REPORT-013 R-44) |
 
 ## 7. S1 — the design space and the coverage table
 

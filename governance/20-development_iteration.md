@@ -95,6 +95,6 @@ pull request, and moves on.
 
 | Transition | When | What happens once, at the boundary |
 |---|---|---|
-| **Exploratory → Intermediate** | The Product Owner says so, when he has seen the system as a whole | One alignment pass for the whole prototype (the specification aligns to it once); each screen's prototype page becomes its package at S9 (`90-design-delivery.md` §6); the Architect plans the build from the packages |
+| **Exploratory → Intermediate** | The Product Owner says so, when he has seen the system as a whole | One alignment pass for the whole prototype, carding only the `gaps.md` rows not already decided (`90-design-delivery.md` §6.8, *Rolling alignment*); one take-in for the prototype as a whole; each page's specification and criteria are written as the build reaches it; the Architect plans the build |
 | **Intermediate → Finalization** | He says so, before real use | The outstanding non-functional requirements are listed and planned; the image check turns strict; the demo data reset stops |
 | **Back** | He may move back a phase at any time | The phase's rules apply from then on; nothing built is undone |
