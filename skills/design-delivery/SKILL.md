@@ -766,6 +766,23 @@ component decisions were real; it is not what reveals which colour was right.
 
 A package references these. It never becomes a second home for any of them.
 
+### 12.6 What a delivery hands the build
+
+A design is finished when the build can take it as it stands, not when it reads well. Each rule below
+comes from a defect the build paid for in one week (Coach Platform, 2026-10-02 → 03), and each applies to
+every page a delivery adds or changes, the exploratory prototype included.
+
+| # | Rule | The defect it prevents |
+|---|---|---|
+| 1 | **Page styles ship as files.** Every page-specific rule lives in a per-page stylesheet the build can pin by blob identity, beside the design system's tokens and components; none lives only inline in a page. | The prototype held about 2,000 page-scoped rules in 14 groups and the build had only tokens and components: a faithfully built This week rendered unstyled and cost a review round (WEE-564 `F1`). |
+| 2 | **The copy is final.** Every string the user reads is the text that ships; a placeholder is marked as one. The build's text comparison holds the build to it. | Five strings differed between the built page and the design, caught only by a reviewer (WEE-564 `F5`–`F8`). |
+| 3 | **One invented data set.** The design reads its invented records from one data file that the app's demo loader also reads, so a built page and its design show the same content. | The app's demo set had no training sessions, so a section the design showed could not appear on the host (Coach Platform F44). |
+| 4 | **A form lists its fields** against the specification's field list for that record, and draws every field it names, or says which field the specification should lose. | A form page drew neither of two fields the specification required; the coverage table had checked regions, not fields (WEE-546). |
+| 5 | **Every action has an exit.** An action that can leave the page or a pending change incomplete (a chain with a gap, an empty list, a refused save) has a drawn way out. | A substitution chain with a player off and nobody on could not be applied or kept, only discarded (WEE-555). |
+
+Rules 4 and 5 apply to pages added or changed after 2026-10-03; a frozen prototype is not reopened for
+them. The page's manifest records each rule as met, with the file or the field table that shows it.
+
 ---
 
 ## 13. When a design round produces a product change
