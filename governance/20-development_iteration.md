@@ -80,7 +80,7 @@ the one home of the phase rules; other documents refer to it. Adopted on 2026-09
 | **Non-functional requirements** | Only what protects data and security in the deployed app | Plus phone width, keyboard reach, visible focus | All: performance, offline, full accessibility |
 | **Tests** | None for the prototype. The deployed app's suite stays green | The logic that computes figures, and the criteria per state | Every criterion, and conformance |
 | **Reviews** | None for the prototype. The Product Owner judges by clicking | One round normally; a record-only defect rides the next commit | Strict: a record-only defect fails the round |
-| **Cards to the Product Owner** | Almost none. The coordinator asks in its chat | Money above a ceiling, data, undecided scope, against one of his answers, and the approvals the project's routing decision gives him. Each decision its own question, the recommendation first | Every gate |
+| **Cards to the Product Owner** | Almost none. The coordinator asks in its chat | Money above a ceiling, data, undecided scope, against one of his answers, and the approvals the project's routing decision gives him. Each decision its own question, the recommendation first. Never a design-answered difference, a record-only correction, a small reversible choice, or a routine deploy under a standing approval (`70-review-and-release.md`, *Board cards*) | Every gate |
 | **Deploy** | The prototype is published every round. The app: fixes only | Any time he says, with a demo data set | Real data, no reset |
 
 **In every phase:** no loss of real data, no secret exposed, the deployed app's CI green, and a figure the

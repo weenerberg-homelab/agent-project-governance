@@ -64,11 +64,29 @@ pressed. The card carries its own meaning or it carries none.
 **What reaches a card depends on the project's phase** (`20-development_iteration.md`, *Development
 phases*). In **Exploratory** almost nothing does: the coordinator asks in its chat. In **Intermediate** a
 card is only for money above a ceiling, deleting or rewriting data, scope the Product Owner has not
-decided, going against one of his answers, and the approvals the project's routing decision gives him;
-a reversible choice is the seat's own, recorded in one line in its pull request. **Each decision is its own
-question**, with the recommended option first, so he can answer each one; several decisions are never
-folded into one *take all recommendations* confirmation (the Product Owner, 2026-10-02). In
-**Finalization** every gate is carded.
+decided, going against one of his answers, and the approvals the project's routing decision gives him.
+**Each decision is its own question**, with the recommended option first, so he can answer each one;
+several decisions are never folded into one *take all recommendations* confirmation (the Product Owner,
+2026-10-02). In **Finalization** every gate is carded.
+
+**Four things are never a card in Intermediate** (Coach Platform, 2026-10-03, Q184–Q187: of 49 cards in a
+week, about 19 needed him; he took 91% of all recommendations, and more than half of the week's spend
+went on the records and reviews around the cards rather than on the build):
+
+1. **The accepted design is the answer.** Where an accepted design and the specification differ, the
+   specification follows the design and the change is recorded without a card — a narrowing included,
+   where the project's routing decision had required a removal box for it. A card is owed only where a
+   requirement has no trace in any accepted design **and** the build cannot proceed without a choice.
+2. **A record-only correction** — a decision entry's body, an index cell, stale wording, a pointer, a
+   recorded reading of the host — is made by a seat and checked by a second seat. A decision he gave in a
+   chat is recorded with his quoted words and needs no confirming card.
+3. **A small reversible product choice** — a field's cap, an optional box, a default — is the seat's own.
+   It is marked *Decided by* the seat's name, *reversible* in the pull request and listed in the weekly report,
+   where he can undo it.
+4. **A routine deploy**, where the project's routing decision grants a standing approval: an increment that
+   is reviewed and green on the default branch, with nothing changed in the deployment scripts,
+   composition or environment, is deployed by the Operator, who posts what the Product Owner will see and
+   what is unchanged. Host changes and migrations that delete data are still carded.
 
 **A decision the Product Owner made outside the tracker is not asked again** (REPORT-009 R-40, approved
 2026-10-02). When he decides in the design coordinator's chat or the Operator's, the amendment that records
