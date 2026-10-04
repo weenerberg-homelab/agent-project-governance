@@ -421,6 +421,34 @@ it bites. A review that finds only non-blockers accepts.
 (Decided 2026-09-16, with cost as the primary constraint: an agent has no stake in its own rounds, so the
 rule, not the agent's diligence, decides what a round is worth.)
 
+### A review starts on green gates
+
+The reviewer is woken only when every mechanical gate is green on the exact head: CI, the acceptance
+checks, and the design-evidence check where the project has one. A red gate goes back to the builder
+with its output, and no review run is spent on it. Reading a failure the checks already report costs a
+review round and finds nothing a machine had not found.
+(Decided 2026-10-05, `A276`: in the Coach Platform trial a round-1 review was spent reporting a red CI run.)
+
+### Every review states its yield
+
+A review document ends with one line: `Yield: <n> blockers · <m> non-blockers · <k> record-only`.
+A review is worth its cost when it finds blockers. A seat whose reviews of one kind of work find no
+blockers over several deliveries is a candidate for a lighter review of that kind, and the tally is
+what the milestone retrospective reads to decide it. The tally counts findings; it does not grade the
+builder.
+(Decided 2026-10-05, `A276`. The Product Owner: *"Reviews that almost only find small, non-blocking
+errors are useless. We need to find the sweetspot between correctness and price."*)
+
+### Independent review of a recorded answer follows the phase
+
+A pull request that only records answers the Product Owner already gave gets an independent revision
+review in **Finalization**, not in **Intermediate**. In Intermediate the merging seat checks that every
+hunk traces to a quoted answer and that CI is green, and merges; a mis-recording is found when the
+record is next used and corrected there. Any hunk that states a rule, figure or requirement no answer
+gave is a question, and goes to the Product Owner as before.
+(Decided 2026-10-05, `A276`. In one week of the Coach Platform trial, twelve such reviews cost about
+$230; most of their findings were record-only.)
+
 ### Review-round ladder
 
 | Round | Who may send the work back |
@@ -578,6 +606,14 @@ All gates pass: the Architect opens the next milestone's parent issue, linked to
 notified, not asked. Any gate fails: the Architect puts the next-step card to the Product Owner itself. Every milestone has a budget before it starts.
 (Decided 2026-09-17; budgets after M1: M2 $115, M3 $85, M4 $145, M5 $85, pause at 150 %.)
 
+**What a milestone budget holds (2026-10-05, `A275`).** A milestone's budget is the sum of its
+increments' estimates **plus 15 %** for coordinating the milestone and closing the specification gaps
+its build finds. Work on the process or its tooling — gates, checks, evidence tools, the review
+machinery — is **not** charged to a product milestone: it is filed under its own *Process* parent
+issue with its own estimate, so a milestone's spend measures the product it builds.
+(In the Coach Platform trial, M10 spent $150 on design-check tooling and $89 on coordination, neither
+in its $570 estimate.)
+
 ### Next step after a product milestone
 
 When a product milestone is accepted, or when a technical milestone fails a continuation gate, the
@@ -591,6 +627,12 @@ retrospective first; change direction or order (to the Product Strategist); paus
 The Product Assistant prepares one row per checkpoint 1 acceptance criterion: evidence, location, holds or not.
 The Product Owner accepts, accepts with conditions (each a work item), or rejects with reason. No cycle
 limit: the Product Owner drives this loop (M5).
+
+**The Product Owner tests at the gates (2026-10-05, `A276`).** Automation carries the work between
+gates; the Product Owner tests by hand **at each product milestone**, and tests extensively **at each
+major release**. For both, the milestone owner hands over a test script — what to try, in which order,
+and what each step should show — and the list of known differences from the accepted design. A
+difference found there goes back into the next milestone as work, not into another review round.
 
 **Evidence from use.** Product milestone acceptance includes human testing in the real setting; for
 `football` V1a, a field session at the pitch. When use shows the outcome is not met although every
