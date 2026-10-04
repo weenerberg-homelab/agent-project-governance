@@ -783,6 +783,25 @@ every page a delivery adds or changes, the exploratory prototype included.
 Rules 4 and 5 apply to pages added or changed after 2026-10-03; a frozen prototype is not reopened for
 them. The page's manifest records each rule as met, with the file or the field table that shows it.
 
+### 12.7 The page contract
+
+**From a project's next release after 2026-10-04 (Coach Platform: V1b), every page a delivery adds or changes
+ships a page contract beside its drawing** (the Product Owner's Q190, 2026-10-04). Most defects the build paid
+for came from translation, not from building: the design says what a page shows, the architect re-derives
+the data, the implementor retypes the markup, and details drop out on the way (a fixture card with no time,
+venue or format; five copy differences; two missing form fields).
+
+| Part | What it is | Who owns it |
+|---|---|---|
+| **View model** | The exact data the page displays, named and typed, with an example taken from the one invented data set (§12.6 rule 3). In a server-rendered app it is the template context | The coordinator states *what* is shown; the architect decides *how* each field is computed, and may refuse one that breaks an invariant |
+| **Actions** | Every control that writes or navigates: its fields, its outcomes, its exits (§12.6 rule 5) | The coordinator states the behaviour; the architect owns the write path |
+| **Template** | The page's markup as a template that consumes the view model, so the build takes it over close to verbatim instead of retyping it | The coordinator |
+
+The build produces the view model and accepts the actions; a check renders the contract's template and the
+built page from the same data and compares them. Nothing here moves the domain, persistence or invariants
+out of the architect's hands. A frozen prototype is not retrofitted; a project may pilot the contract on one
+page of the current release first.
+
 ---
 
 ## 13. When a design round produces a product change
