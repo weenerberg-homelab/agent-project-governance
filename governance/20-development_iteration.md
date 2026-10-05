@@ -55,6 +55,30 @@ At least one real governed writable-target run is required before claiming opera
 Avoid repeating unchanged context. Report new behaviour, concrete findings,
 validation, and the next decision only.
 
+## Product delivery order
+
+A product version goes from idea to build in six steps. Each step's output is the next step's input,
+and nothing is written in detail before the step that settles it.
+
+| # | Step | Who | Output |
+|---|---|---|---|
+| 1 | **Exploration** | Product Owner with the External Product Strategist | A product **brief**: vision, philosophy, users, features, the rules and invariants the product must keep. **No screen behaviour** |
+| 2 | **Feasibility of the risks** | Architect | One pass over what could make the brief infeasible or expensive: the data model's shape, integrations, scale and commercial constraints. No full architecture, and no review rounds |
+| 3 | **Design, with the specification in the same loop** | Design Coordinator with the Product Owner; the Internal Product Strategist folds each accepted round into the specification as it lands | The accepted design decides what the user sees and does. The specification holds what a drawing cannot: rules, figures, invariants, edge cases. It does not restate screens |
+| 4 | **Architecture, written once** | Architect; one Architecture Advisor review | Architecture, data model, API and page contracts, derived from the accepted design and specification |
+| 5 | **Implementation** | Implementors, in increments | Code behind the mechanical gates and the Architect's review (`70-review-and-release.md`) |
+| 6 | **The Product Owner's test** | Product Owner | A hand test at each product milestone, an extensive one at each major release. What it finds returns to step 3 as amendments |
+
+**Why this order** (decided 2026-10-05, `A281`, from the Coach Platform trial). A full specification
+written before design described screens the design then changed, and every difference had to be
+reconciled — alignment passes, fold-ins, an independent review of each, and a card per difference.
+Review rounds on a specification that design later rewrites are paid for twice. Architecture drafted
+before design is written a second time after it. The brief keeps step 1 to what design cannot settle,
+and steps 3 and 4 write each fact once, in the artifact that owns it.
+
+A project already past step 3 finishes its current version on the order it started with; this order
+applies from its next version's exploration.
+
 ## Development phases
 
 A project runs in one of three phases. The phase sets how much rigour every seat applies. This section is
