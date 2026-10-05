@@ -39,9 +39,9 @@ do not run. From **Intermediate** the stage table in §6 applies to each screen,
 it applies strictly.
 
 **Where design sits.** Design is step 3 of the product delivery order (`20-development_iteration.md`,
-*Product delivery order*): it starts from the product brief and the Architect's feasibility pass, and the
-Internal Product Strategist folds each accepted round into the specification in the same loop, so the
-specification never describes a screen the design has not drawn.
+*Product delivery order*): it starts from the product brief and the Architect's feasibility opinion, and
+the full specification is written from the converged prototype at step 4, so the specification never
+describes a screen the design has not drawn.
 
 ### What it is not
 

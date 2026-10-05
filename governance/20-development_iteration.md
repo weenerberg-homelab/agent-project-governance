@@ -57,26 +57,32 @@ validation, and the next decision only.
 
 ## Product delivery order
 
-A product version goes from idea to build in six steps. Each step's output is the next step's input,
-and nothing is written in detail before the step that settles it.
+A product version goes from idea to release in eight steps, run inside the development phases below.
+Each step names its output; nothing is written in detail before the step that settles it, and each fact
+is written once, in the artifact that owns it.
 
-| # | Step | Who | Output |
-|---|---|---|---|
-| 1 | **Exploration** | Product Owner with the External Product Strategist | A product **brief**: vision, philosophy, users, features, the rules and invariants the product must keep. **No screen behaviour** |
-| 2 | **Feasibility of the risks** | Architect | One pass over what could make the brief infeasible or expensive: the data model's shape, integrations, scale and commercial constraints. No full architecture, and no review rounds |
-| 3 | **Design, with the specification in the same loop** | Design Coordinator with the Product Owner; the Internal Product Strategist folds each accepted round into the specification as it lands | The accepted design decides what the user sees and does. The specification holds what a drawing cannot: rules, figures, invariants, edge cases. It does not restate screens |
-| 4 | **Architecture, written once** | Architect; one Architecture Advisor review | Architecture, data model, API and page contracts, derived from the accepted design and specification |
-| 5 | **Implementation** | Implementors, in increments | Code behind the mechanical gates and the Architect's review (`70-review-and-release.md`) |
-| 6 | **The Product Owner's test** | Product Owner | A hand test at each product milestone, an extensive one at each major release. What it finds returns to step 3 as amendments |
+| # | Phase | Step | Who | Output |
+|---|---|---|---|---|
+| 1 | Exploratory | **Exploration** | Product Owner with the External Product Strategist | The **product brief**: vision, philosophy, users, the version's scope and features, the rules and invariants the product must keep. It is the draft of the specification, without screen behaviour |
+| 2 | Exploratory | **Feasibility of the risks** | Architect | One opinion on what could make the brief infeasible or expensive: the data model's shape, integrations, scale, commercial constraints. No architecture and no review rounds |
+| 3 | Exploratory | **Prototype and design** | Design coordinator with the Product Owner | The clickable prototype and design system (`90-design-delivery.md`), and `gaps.md`: the rules the drawings raise and do not settle |
+| 4 | Exploratory → Intermediate | **The full product specification** | Internal Product Strategist; one Product Advisor review; the Product Owner accepts | The brief, the prototype and the `gaps.md` answers folded into one specification: every requirement, rule, figure, invariant and acceptance criterion, with screens referred to the accepted design rather than restated. This is the boundary's alignment pass. Each page's package and criteria are completed as the build reaches it |
+| 5 | Intermediate | **Architecture and the build plan** | Architect; one Architecture Advisor review; the Product Owner releases it | Architecture, data model, API and page contracts derived from the specification and the design, and the milestone set with a budget per milestone (`70-review-and-release.md`, *What a milestone budget holds*) |
+| 6 | Intermediate | **Implementation** | Implementors in increments; the Architect reviews; the Operator deploys | Code behind the mechanical gates (`70-review-and-release.md`, *Reviews, rework and acceptance*) |
+| 7 | Intermediate | **The Product Owner's test** | Product Owner, with the Product Assistant's acceptance evidence | A hand test at each product milestone, from a test script and the known-differences list. Findings return as amendments to step 3 (the design) or step 4 (the specification), never as another review round |
+| 8 | Finalization | **Release** | All seats; the Product Owner accepts | The non-functional requirements, the strict checks, real data, and his extensive test of the major release |
 
-**Why this order** (decided 2026-10-05, `A281`, from the Coach Platform trial). A full specification
-written before design described screens the design then changed, and every difference had to be
-reconciled — alignment passes, fold-ins, an independent review of each, and a card per difference.
-Review rounds on a specification that design later rewrites are paid for twice. Architecture drafted
-before design is written a second time after it. The brief keeps step 1 to what design cannot settle,
-and steps 3 and 4 write each fact once, in the artifact that owns it.
+The next version starts again at step 1 with its own brief, which carries forward what the released
+version settled.
 
-A project already past step 3 finishes its current version on the order it started with; this order
+**Why this order** (decided 2026-10-05, `A281`, from the Coach Platform trial). There, a full
+specification written before the design described screens the design then changed: every difference
+cost an alignment pass, a fold-in, an independent review of each, and a card. Review rounds on a
+specification the design later rewrites are paid for twice, and architecture drafted before the design is
+written again after it. So the brief holds only what the design cannot settle, the full specification is
+written once the prototype has converged, and the architecture is written once, from both.
+
+A project already past step 4 finishes its current version on the order it started with; this order
 applies from its next version's exploration.
 
 ## Development phases
