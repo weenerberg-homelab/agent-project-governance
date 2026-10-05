@@ -429,7 +429,7 @@ The project's phase (`20-development_iteration.md`, *Development phases*) change
 | **Product Owner** | Clicks through the prototype, gives notes in the coordinator's chat, sets the phase | Judges each built screen by eye; answers the few cards | Accepts the release |
 | **Design coordinator** (External Product Strategist) | Builds and revises the prototype and the design system; keeps `gaps.md` | Turns prototype pages into packages; revises designs on build findings | Pixel-level corrections |
 | **Product Strategist** (internal) | Idle, except records the coordinator asks for. No take-ins, no amendments | The alignment pass at entry; take-ins at S9; the amendment chain | The same, strictly |
-| **Architect** | Keeps the deployed app running; plans nothing new; gives a feasibility opinion on the prototype when asked | Plans and reviews the build from the packages | The same, plus the non-functional requirements |
+| **Architect** | Keeps the deployed app running; plans nothing new; gives one feasibility opinion on the next version's brief, and on the prototype when asked | Plans and reviews the build from the packages | The same, plus the non-functional requirements |
 | **Implementor** | Defects in the deployed app only | Builds | Builds, and fixes to the strict check |
 | **Advisors** | Idle | Review, one round normally | Review, strictly |
 | **Product Assistant** | Merges what the routing decision gives it | The same | The same |
@@ -441,6 +441,13 @@ The Product Owner typically authors or owns these documents under:
 - `_docs/specs/<pack>/10-product/to_architect/`
 
 Usually mandatory:
+- `05-product-brief.md`, one per version, written at step 1 of the product delivery order
+  (`20-development_iteration.md`)
+  - vision and philosophy
+  - users
+  - the version's scope and features
+  - the rules and invariants the product must keep
+  - no screen behaviour: the design settles it, and the full specification is written from both
 - `10-product-spec.md`
   - goals
   - non-goals
