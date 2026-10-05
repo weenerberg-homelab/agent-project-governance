@@ -38,6 +38,11 @@ phases*). In **Exploratory** the work is one clickable prototype (§6.8) and the
 do not run. From **Intermediate** the stage table in §6 applies to each screen, and in **Finalization**
 it applies strictly.
 
+**Where design sits.** Design is step 3 of the product delivery order (`20-development_iteration.md`,
+*Product delivery order*): it starts from the product brief and the Architect's feasibility opinion, and
+the full specification is written from the converged prototype at step 4, so the specification never
+describes a screen the design has not drawn.
+
 ### What it is not
 
 - Not a visual style guide.
