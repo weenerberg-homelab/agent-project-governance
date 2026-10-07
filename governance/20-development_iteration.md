@@ -65,11 +65,11 @@ is written once, in the artifact that owns it.
 |---|---|---|---|---|
 | 1 | Exploratory | **Exploration** | Product Owner with the External Product Strategist | The **product brief** (`10-agents_workflow.md`, *Typical Product Owner documents*): vision, philosophy, users, the version's scope and features, the rules and invariants the product must keep. It is the draft of the specification, without screen behaviour. Committed by the external seat through a pull request; the Product Owner accepts it |
 | 2 | Exploratory | **Feasibility of the risks** | Architect | One opinion on what could make the brief infeasible or expensive: the data model's shape, integrations, scale, commercial constraints. No architecture and no review rounds. Asked again on the prototype only when the Product Owner asks |
-| 3 | Exploratory | **Flow, prototype and design** | Design coordinator with the Product Owner | The accepted flow (S0, `90-design-delivery.md` §6.7), the clickable prototype and design system (§6.8), and `gaps.md`: the rules the drawings raise and do not settle |
-| 4 | Exploratory → Intermediate | **The full product specification** | Internal Product Strategist; one Product Advisor review; the Product Owner accepts | The brief, the prototype and the `gaps.md` answers folded into one specification: every requirement, rule, figure, invariant and acceptance criterion, with screens referred to the accepted design rather than restated. This is the boundary's alignment pass. Each page's package and criteria are completed as the build reaches it |
-| 5 | Intermediate | **Architecture and the build plan** | Architect; one Architecture Advisor review; the Product Owner releases it on the one-page release summary (`70-review-and-release.md`, *Release*) | Architecture, data model, API and page contracts derived from the specification and the design, the roadmap's milestone order, and the milestone set with a budget per milestone (`70-review-and-release.md`, *What a milestone budget holds*) |
-| 6 | Intermediate | **Implementation** | Implementors in increments; the Architect reviews; the Operator deploys | Code behind the mechanical gates (`70-review-and-release.md`, *Reviews, rework and acceptance*) |
-| 7 | Intermediate | **The Product Owner's test** | Product Owner, with the Product Assistant's acceptance evidence | A hand test at each product milestone, from a test script and the known-differences list. Findings return as amendments to step 3 (the design) or step 4 (the specification), never as another review round |
+| 3 | Exploratory | **Flow and the complete functional prototype** | Design coordinator with the Product Owner | The accepted flow (S0, `90-design-delivery.md` §6.7) and, for a product with a GUI, **the complete functional prototype** (§6.9): every screen and action clickable, every calculation implemented, one generated data set that exercises every functional requirement, its data marked as template slots. The Product Owner accepts it by clicking through it |
+| 4 | Exploratory → Intermediate | **The specification of what the prototype cannot show** | Internal Product Strategist; one Product Advisor review; the Product Owner accepts | For a product with a GUI, **the accepted prototype is the specification of every screen, behaviour and calculation**, and the written specification holds only what a prototype cannot show: persistence, users and roles, security and data protection, the non-functional requirements, integrations and the invariants. It restates no screen and no figure. A product without a GUI gets the full specification here: every requirement, rule, figure, invariant and acceptance criterion |
+| 5 | Intermediate | **Architecture and the build plan** | Architect; one Architecture Advisor review; the Product Owner releases it on the one-page release summary (`70-review-and-release.md`, *Release*) | Architecture, the data model derived from the prototype's data set, one endpoint per prototype action, the roadmap's milestone order, and the milestone set with a budget per milestone (`70-review-and-release.md`, *What a milestone budget holds*) |
+| 6 | Intermediate | **Implementation: the prototype transplanted** | Implementors in increments; the Architect reviews; the Operator deploys | The prototype's own markup, styles and UI scripts, taken over as they are; the implementor fills the slots, writes the endpoints and moves persistence and the calculations to the server, and writes no markup (`90-design-delivery.md` §6.9). Behind the mechanical gates (`70-review-and-release.md`, *Reviews, rework and acceptance*) |
+| 7 | Intermediate | **The Product Owner's test** | Product Owner, with the Product Assistant's acceptance evidence | A hand test at each product milestone, from a test script and the known-differences list. Findings return as amendments to step 3 (the prototype) or step 4 (the specification), never as another review round |
 | 8 | Finalization | **Release** | All seats; the Product Owner accepts | The non-functional requirements, the strict checks, real data, and his extensive test of the major release |
 
 The next version starts again at step 1 with its own brief, which carries forward what the released
@@ -88,9 +88,20 @@ and review rounds on that specification were paid for again when the design rewr
 only what the design cannot settle, the full specification is written once the prototype has converged,
 and the architecture is written once, from both.
 
+**Why the prototype is the specification** (decided 2026-10-07, `A297`). The Product Owner, after building
+a complete clickable Coach Platform in about ten hours of interactive work against roughly 400 agent-hours
+of tracked build: *"If having a GUI the process should always include creating of a complete clickable
+prototype. Calculations and test data should be complete and allow executing the complete set of functional
+requirements"*, and of the build: *"Ideally it should take the whole artifact, stripped from serverside logic
+and just fill in the blanks."* The trial's record agrees: templates retyped from a design drifted (WEE-601,
+fourteen visible differences; S1b, three review rounds), while stylesheets copied from the frozen prototype
+matched at once (A250). A finished, working prototype settles screens, behaviour and figures before anyone
+specifies or builds them, so nothing is translated twice.
+
 A project already past step 4 finishes its current version on the order it started with; this order
-applies from its next version's exploration. On Coach Platform that is V2: V1a and V1b finish on the
-order they started with.
+applies from its next version's exploration. On Coach Platform the functional prototype applies from **V1b**
+(`Q199` (a), 2026-10-07), with the Product Owner's club demo as its starting prototype; V1a's last milestones
+finish on their design packages.
 
 ## Development phases
 
@@ -119,6 +130,12 @@ the one home of the phase rules; other documents refer to it. Adopted on 2026-09
 | **Reviews** | None for the prototype. The Product Owner judges by clicking | One round normally; a record-only defect rides the next commit | Strict: a record-only defect fails the round |
 | **Cards to the Product Owner** | Almost none. The coordinator asks in its chat | Money above a ceiling, data, undecided scope, against one of his answers, and the approvals the project's routing decision gives him. Each decision its own question, the recommendation first. Never a design-answered difference, a record-only correction, a small reversible choice, or a routine deploy under a standing approval (`70-review-and-release.md`, *Board cards*) | Every gate |
 | **Deploy** | The prototype is published every round. The app: fixes only | Any time he says, with a demo data set | Real data, no reset |
+
+**Under the functional prototype** (`90-design-delivery.md` §6.9) the Intermediate and Finalization cells
+read accordingly: a built screen is the transplanted prototype page, so **fidelity is the DOM comparison**
+against the prototype on the same data, not an image check with a tolerance; **requirement coverage is the
+prototype's data set and its working actions**, not the per-screen gate; and the design coordinator revises
+the prototype instead of turning pages into packages.
 
 **In every phase:** no loss of real data, no secret exposed, the deployed app's CI green, and a figure the
 product computes is never shown wrong without a test saying so.

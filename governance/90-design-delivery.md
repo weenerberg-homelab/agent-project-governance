@@ -31,9 +31,9 @@ do not run. From **Intermediate** the stage table in §6 applies to each screen,
 it applies strictly.
 
 **Where design sits.** Design is step 3 of the product delivery order (`20-development_iteration.md`,
-*Product delivery order*): it starts from the product brief and the Architect's feasibility opinion, and
-the full specification is written from the converged prototype at step 4, so the specification never
-describes a screen the design has not drawn.
+*Product delivery order*): it starts from the product brief and the Architect's feasibility opinion. For a
+product with a GUI, its output is **the complete functional prototype** (§6.9), which is the specification of
+every screen, behaviour and calculation; the written specification holds only what a prototype cannot show.
 
 ### What it is not
 
@@ -379,7 +379,7 @@ survived; the coordinator diffs the artifact and reports what moved that should 
 | **S9** | `page-spec.md` and `acceptance-criteria.md`, consolidating S4–S7 decisions, and the gate scripts' output (§14) | Coordinator | Both complete, and C1–C3 pass |
 | **S10** | **At the S9 take-in:** the three gate scripts' output read, and G11 read (§14); scrutiny if warranted → **check result**, and **one card** | Internal strategist | Product Owner accepts the package → **DECIDED** |
 
-**This table applies from the Intermediate phase.** In Exploratory, §6.8 replaces it.
+**This table applies from the Intermediate phase.** In Exploratory, §6.8 replaces it. For a product with a GUI from its next version after 2026-10-07, §6.9 replaces it in every phase.
 
 **The loop replaces S2–S5 and S7; the stage names are kept** so that records citing them still resolve.
 When an external design model is used, the loop runs the same way with the model generating, and §5.7's
@@ -554,7 +554,24 @@ for as long as the phase lasts.
 | **Rolling alignment** | **A `gaps.md` row the Product Owner settles in the coordinator's chat is marked at once** — *decided, round n*, with his answer in his words — in a status column the coordinator keeps. At the phase's end only the rows still open go to the Product Owner, batched; the decided rows are carried into the specification as recorded answers, without a card (on Coach Platform, DEC-002 class 3) |
 | **Not run** | Per-screen `coverage.md` upkeep, S8 and S9, `page-spec.md` and `acceptance-criteria.md`, second-seat rebuilds, take-ins, and product amendments. Files under `requests/` only when the Product Owner asks for one |
 | **Round message** | What changed, the canvas link, at most three questions — each about what the product does, never about a pixel. Reversible choices are the coordinator's own |
-| **Exit** | The Product Owner moves the project to Intermediate. Then, once: the alignment pass for the whole prototype (DEC-013 clause 5 on Coach Platform), starting from `gaps.md` and carding only its open rows; then the prototype is taken in **once, as one package**, and each page's `page-spec.md` and `acceptance-criteria.md` are written from it as the build reaches that screen, checked by the gate (§14) then. One take-in for the prototype, not one per page (REPORT-013 R-44) |
+| **Exit** | The Product Owner moves the project to Intermediate. Then, once: the alignment pass for the whole prototype (DEC-013 clause 5 on Coach Platform), starting from `gaps.md` and carding only its open rows; then the prototype is taken in **once, as one package**, and each page's `page-spec.md` and `acceptance-criteria.md` are written from it as the build reaches that screen, checked by the gate (§14) then. One take-in for the prototype, not one per page (REPORT-013 R-44). **Under §6.9 the exit is his acceptance of the functional prototype**, and no per-page package is written |
+
+### 6.9 The complete functional prototype is the specification (products with a GUI)
+
+**From a project's next version after 2026-10-07 (Coach Platform: V1b, `Q199` (a)), a product with a GUI is
+designed as one complete functional prototype, and the build transplants it** (`A297`, the Product Owner).
+
+| | |
+|---|---|
+| **What** | One clickable HTML application of the whole version: every screen, every state a user reaches on the common path, and **every action working** — saves, edits, deletes, navigation, timers, flows — with the browser holding the state and a *Reset* control |
+| **Data** | **One generated data set** that exercises every functional requirement of the version: a realistic history long enough for every figure, list and statistic to show real values. Invented people only. The app's demo loader reads the same set (§12.6 rule 3) |
+| **Calculations** | **Every figure the product computes is implemented** in the prototype's scripts, by the rules of the brief. They are the reference: the server's figures must equal them on the same data |
+| **Slots** | The prototype's markup marks every datum as a template slot and every action with its name, so one generator emits both the clickable prototype (filled from the data set) and the app's templates (with the slots open) |
+| **Acceptance** | The Product Owner accepts the prototype by clicking through it. What he accepts is the product's behaviour; the written specification does not restate it (`20-development_iteration.md`, step 4) |
+| **The transplant** | The build takes the prototype's markup, styles and UI scripts **as they are**. The implementor writes the view model that fills the slots, one endpoint per action, persistence and the server's calculations, and **no markup or styles** |
+| **Checks, replacing look reviews** | (1) A template may differ from the prototype's generated template only at slot markers; any other markup change fails CI. (2) The built page, rendered from the data set, gives the same DOM as the prototype page. (3) Every computed figure equals the prototype's on the same data |
+| **Not run** | The per-screen stages S1–S10, `page-spec.md`, `acceptance-criteria.md` and the gate of §14; the render-beside image check and its known-differences list; the page contract of §12.7, which the slots and actions replace. §12.6's rules still hold |
+| **Changes** | A finding from the Product Owner's test returns as a change to the prototype, regenerated and transplanted again, never as a hand edit of a template |
 
 ## 7. S1 — the design space and the coverage table
 
