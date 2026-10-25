@@ -216,7 +216,7 @@ owns the client end to end and works beside the tracker as a builder of its own 
 | | Owner |
 |---|---|
 | The client: design, UI, presentation, the client's domain layer, its tests and tooling | **EPS** |
-| Each milestone's requirements, written per area with the Product Owner | **EPS** |
+| The client's requirements per area as R1 drafts, and requirement changes filed for the Product Strategist to fold in (the Product Strategist owns the requirements document; the Architect reviews) | **EPS** |
 | Client releases: a tag per release, with its contract impact stated (none, additive or breaking) | **EPS** |
 | Demo or test servers for the client, where the project gives them to the EPS | **EPS** |
 | The contract, the API, the backend, including the write outbox on the wire | Architect |
@@ -225,15 +225,18 @@ owns the client end to end and works beside the tracker as a builder of its own 
 
 **What the EPS never does:**
 - Change the contract, the API or the backend. A client need there is a finding for the Architect.
-- Change the store adapter the API lane owns, or merge a pull request into the product repository.
+- Change the store adapter the API lane owns, or merge a pull request into the product repository —
+  except a client sync pull request it opened outside the tracker, per the project's decision record
+  (Coach Platform: DEC-002, the `client/` row).
 - Answer a card or decide for the Product Owner. It records his answers given in its own chat, with
   his words and the date.
 
 **How it works with the tracker:**
-- **Questions and findings travel through the Operator,** in both directions: the EPS messages the
-  Operator, and a seat's question for the EPS goes in one comment on its issue for the Operator to relay.
-- **It may file tracker issues for its own lane's needs:** a requirement change to the internal
-  Product Strategist, a technical gap to the Architect. It tells the Operator the issue identifier.
+- **The EPS files issues and comments on issues that concern its lane** (a client release, a contract
+  gap, a requirement change) directly, and tells the Operator the identifier. A seat's question for the
+  EPS goes in one comment on its issue; the Operator relays it. The Operator is the route for process,
+  hosts and deploys, not for content.
+- **It merges an Implementor's minimal production-breaking `client/` fix back into its design branch.**
 - **Requirement changes are batched** (Coach Platform `Q262` (a), 2026-10-25): one fold-in issue per
   day, or when an area's build is about to be ordered. A change goes at once only when a build is
   waiting on it. Each fold-in costs a Strategist run, a review and a merge, whatever its size.
@@ -332,7 +335,7 @@ operates or builds gives the Product Owner one reading twice.
 
 Product Strategist MUST NOT:
 - Write code, tests, architecture or instructions. Where the app is the product's client, the EPS writes
-  the client's code and tests, and nothing else.
+  the client's code and tests, and the code and tests of the demo servers the project gives it.
 - Decide, accept or release anything.
 
 ---
