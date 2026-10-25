@@ -199,6 +199,62 @@ run with minutes of latency, which is the wrong shape for it. So:
 Both seats share this role definition, the `exploratory-dialogue` and `workspace-document-contract`
 skills, and the same priming (`40-agent_prompts.md`). Neither decides anything.
 
+**Which text applies.** A project either runs **the app as the product's client** or it does not. The
+project's decision record says which (Coach Platform: DEC-018, 2026-10-23).
+
+| Project | The external seat follows |
+|---|---|
+| Runs the app as the product's client | *Where the app is the product's client*, below. It overrides the external-seat limits in the rest of this section |
+| Does not | The rest of this section, and *Design delivery, where a project runs it* |
+
+### Where the app is the product's client
+
+The client — a working app, not a prototype — is **the specification for what the user sees and does**.
+Requirement text then binds only data rules, invariants and calculations. The external seat (the EPS)
+owns the client end to end and works beside the tracker as a builder of its own lane.
+
+| | Owner |
+|---|---|
+| The client: design, UI, presentation, the client's domain layer, its tests and tooling | **EPS** |
+| Each milestone's requirements, written per area with the Product Owner | **EPS** |
+| Client releases: a tag per release, with its contract impact stated (none, additive or breaking) | **EPS** |
+| Demo or test servers for the client, where the project gives them to the EPS | **EPS** |
+| The contract, the API, the backend, including the write outbox on the wire | Architect |
+| The store adapter the API lane builds inside the client, and the sync pull request | Tracker seats |
+| The tracker, the hosts, the runners, the deploy | Operator |
+
+**What the EPS never does:**
+- Change the contract, the API or the backend. A client need there is a finding for the Architect.
+- Change the store adapter the API lane owns, or merge a pull request into the product repository.
+- Answer a card or decide for the Product Owner. It records his answers given in its own chat, with
+  his words and the date.
+
+**How it works with the tracker:**
+- **Questions and findings travel through the Operator,** in both directions: the EPS messages the
+  Operator, and a seat's question for the EPS goes in one comment on its issue for the Operator to relay.
+- **It may file tracker issues for its own lane's needs:** a requirement change to the internal
+  Product Strategist, a technical gap to the Architect. It tells the Operator the issue identifier.
+- **Requirement changes are batched** (Coach Platform `Q262` (a), 2026-10-25): one fold-in issue per
+  day, or when an area's build is about to be ordered. A change goes at once only when a build is
+  waiting on it. Each fold-in costs a Strategist run, a review and a merge, whatever its size.
+- **The sync pull request** copies a tagged release into the product repository. A tracker seat opens it;
+  the agent whose issue carries it merges it on green. A release the EPS declares breaking, or one CI
+  labels for review, goes to the Architect.
+
+**The product release flow:**
+
+| Step | Who |
+|---|---|
+| Tag the release on the design branch, with its contract impact | EPS |
+| The sync pull request into the product repository | A tracker seat |
+| The copy walk: the release walked on a throwaway copy, functional and non-functional, at 360 and 1280 px | Operator |
+| Acceptance on the demo card, once per release | Product Owner |
+| The deploy, in the next Operator session, with no deploy card | Operator |
+
+**Project details live in the project's own EPS practice file,** which every seat reads before it
+works with the EPS (Coach Platform: `_docs/design/club-demo/EPS-PRACTICE.md` on `design/club-demo-2`):
+branches and worktrees, how the EPS tests and deploys its servers, its draft formats and its references.
+
 ### Design delivery, where a project runs it
 
 Where a project runs the design delivery process (`90-design-delivery.md`), the seat carries two further
@@ -275,7 +331,8 @@ The two seats should not share a session with another role: a seat held by the m
 operates or builds gives the Product Owner one reading twice.
 
 Product Strategist MUST NOT:
-- Write code, tests, architecture or instructions.
+- Write code, tests, architecture or instructions. Where the app is the product's client, the EPS writes
+  the client's code and tests, and nothing else.
 - Decide, accept or release anything.
 
 ---
@@ -427,7 +484,7 @@ The project's phase (`20-development_iteration.md`, *Development phases*) change
 | Role | Exploratory | Intermediate | Finalization |
 |---|---|---|---|
 | **Product Owner** | Clicks through the prototype, gives notes in the coordinator's chat, sets the phase | Judges each built screen by eye; answers the few cards | Accepts the release |
-| **Design coordinator** (External Product Strategist) | Builds and revises the prototype and the design system; keeps `gaps.md` | Turns prototype pages into packages; revises designs on build findings | Pixel-level corrections |
+| **Design coordinator** (External Product Strategist) | Builds and revises the prototype and the design system; keeps `gaps.md` | Turns prototype pages into packages; revises designs on build findings. Where the app is the product's client: builds and releases the client instead | Pixel-level corrections |
 | **Product Strategist** (internal) | Idle, except records the coordinator asks for. No take-ins, no amendments | The alignment pass at entry; take-ins at S9; the amendment chain | The same, strictly |
 | **Architect** | Keeps the deployed app running; plans nothing new; gives one feasibility opinion on the next version's brief, and on the prototype when asked | Plans and reviews the build from the packages | The same, plus the non-functional requirements |
 | **Implementor** | Defects in the deployed app only | Builds | Builds, and fixes to the strict check |
