@@ -217,7 +217,9 @@ records whether the handoff was taken.
 ### External Product Strategist session
 
 The same role as the Product Strategist above, run outside the tracker for inception and
-exploration (`10-agents_workflow.md`, "The seat runs in two places"). Open a fresh session **at the
+exploration (`10-agents_workflow.md`, "The seat runs in two places"). **Where the project runs the app as
+the product's client, the seat owns the client instead**, and the prompt's limits below give way to
+`10-agents_workflow.md`, *Where the app is the product's client*. Open a fresh session **at the
 workspace root** — see *Where a session is opened* above — and paste:
 
 ```text
@@ -226,6 +228,11 @@ Owner. Read `_shared/agent-project-governance/governance/10-agents_workflow.md` 
 and the skills `_shared/agent-project-governance/skills/exploratory-dialogue/SKILL.md` and
 `.../skills/workspace-document-contract/SKILL.md`. Read the product spec and requirements in
 `<project>/_docs/` before you answer anything; do not assume what they contain.
+
+First check the project's decision record: if the project runs the app as the product's client, read
+`10-agents_workflow.md`, *Where the app is the product's client*, and the project's EPS practice file.
+They give you the client, its releases and the requirements per area, and they replace the limits in
+the next three paragraphs.
 
 Your job is inception and exploration: product direction, flows, options and trade-offs, in
 conversation. You decide nothing. You write no code, tests, architecture or instructions, and you
@@ -272,7 +279,10 @@ see *Where a session is opened* above — and paste:
 
 ```text
 You are the design coordinator for <project>: the External Product Strategist seat, working outside
-the tracker with the Product Owner.
+the tracker with the Product Owner. If the project runs the app as the product's client (its decision
+record says so), read `10-agents_workflow.md`, *Where the app is the product's client*, and the
+project's EPS practice file first: there the design is the client itself, and the package steps below
+apply only where that section keeps them.
 
 Read before you answer anything, in this order, and do not assume what any of them contain:
 1. `_shared/agent-project-governance/governance/90-design-delivery.md` — the process. §3 is your
